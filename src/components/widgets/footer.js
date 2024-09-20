@@ -75,9 +75,10 @@ const Footer = () => {
                                 <div className="insideBox">
                                     <h6>Projects</h6>
                                     <ul className="list-inline">
-                                        <li><a href="#">Luxury</a></li>
+                                        {/* <li><Link to="/projects/luxury">Luxury</Link></li> */}
                                         <li><Link to='/projects/commercial'>Commercial</Link></li>
                                         <li><Link to='/projects/residential'>Residential</Link></li>
+                                        <li><Link to="/projects/new-launch">New Launches</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -86,8 +87,8 @@ const Footer = () => {
                                     <h6>Company</h6>
                                     <ul className="list-inline">
                                         <li><Link to='/about-us'>About Star Estate</Link></li>
-                                        <li><Link to='/about-us'>Mission &amp; Vision</Link></li>
-                                        <li><Link to='/about-us'>Who We Are</Link></li>
+                                        {/* <li><Link to='/about-us'>Mission &amp; Vision</Link></li>
+                                        <li><Link to='/about-us'>Who We Are</Link></li> */}
                                         <li><Link to='/clients-speak'>Client's Speak</Link></li>
                                         <li><Link to='/faq'>FAQs</Link></li>
                                     </ul>
@@ -113,7 +114,7 @@ const Footer = () => {
                                         <li><Link to='/contact-us'>Contact Us</Link></li>
                                         <li><Link to='/buyer-guide/'>Buyer Guide</Link></li>
                                         <li><Link to='/'>Desclaimer</Link></li>
-                                        <li><Link to='/'>Privacy Policy</Link></li>
+                                        <li><Link to='/privacy-policy'>Privacy Policy</Link></li>
                                         <li><Link to='/sitemap'>Sitemap</Link></li>
                                     </ul>
                                 </div>

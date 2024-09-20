@@ -31,3 +31,13 @@ export const fetchProjects = async (id) => {
         throw err;
     }
 };
+
+export const fetchProjectsByConfig = async (slug) => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/addProjects/projectsConfig/${slug}`);
+        return response.data;
+    } catch (err) {
+        console.error('Unexpected error:', err);
+        throw err;
+    }
+};

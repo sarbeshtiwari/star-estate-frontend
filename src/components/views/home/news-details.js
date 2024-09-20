@@ -72,13 +72,13 @@ function NewsDetails() {
                                         </div>
                                         <div className="blogTextarea w-100">
                                             <div className="img-fluid">
-                                                <img src={`${axiosInstance.defaults.globalURL}${news.newsImage}`} alt={news.heading || 'Blog Image'} />
+                                                <img src={`${axiosInstance.defaults.globalURL}${news.newsImage}`} alt={news.heading || 'News Image'} />
                                                 <em>{news.heading}</em>
                                             </div>
                                             <p dangerouslySetInnerHTML={{ __html: news.content }} /> </div>
                                     </div>
                                 </div>
-                                <div className="col-xl-4 col-lg-5 position-relative pageAside">
+                                {recentNews.length === 0 ? ('') : <div className="col-xl-4 col-lg-5 position-relative pageAside">
                                     <div className="aside-inner" style={{ top: "60px" }}>
                                         <aside className="topRatedProjectShowcase common-border mt-0">
                                             <div className="heading ml-0">
@@ -89,7 +89,7 @@ function NewsDetails() {
                                                     <div key={idx} className="topRatedProjectBox">
                                                         <div className="inner">
                                                             <div className="img-fluid">
-                                                                <img src={`${axiosInstance.defaults.globalURL}${recentNews.newsImage}`} alt={recentNews.heading || 'Blog Image'} />
+                                                                <img src={`${axiosInstance.defaults.globalURL}${recentNews.newsImage}`} alt={recentNews.heading || 'News Image'} />
                                                             </div>
                                                             <div className="boxDetails">
                                                                 <Link to={`/news/${recentNews.slugURL}`}>
@@ -102,7 +102,8 @@ function NewsDetails() {
                                             </div>
                                         </aside>
                                     </div>
-                                </div>
+                                </div>}
+                                
                             </React.Fragment>
                         ))}
                     </div>

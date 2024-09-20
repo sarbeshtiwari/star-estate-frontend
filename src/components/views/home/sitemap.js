@@ -92,7 +92,6 @@ export default function SiteMap() {
       const handleLinkClick = (type, label, city) => {
         // Create a slug from the type, label, and city
         const slug = `${label.toLowerCase().replace(/\s+/g, '-')}-in-${city.toLowerCase().replace(/\s+/g, '-')}`;
-        
         // Navigate to the constructed URL
         navigate(`/projects/${slug}`);
       };
@@ -124,7 +123,7 @@ export default function SiteMap() {
                             <div className="row">
                                 <div className="col-lg-4 col-sm-6 sitemapBox">
                                     <ul className="list">
-                                        <li><Link to="/Linkbout-us">About Us</Link></li>
+                                        <li><Link to="/about-us">About Us</Link></li>
                                         <li><Link to="/clients-speak">Client's Speak</Link></li>
                                         <li><Link to="/careers">Careers</Link></li>
                                         <li><Link to="/contact-us">Contact Us</Link></li>
@@ -132,21 +131,21 @@ export default function SiteMap() {
                                 </div>
                                 <div className="col-lg-4 col-sm-6 sitemapBox">
                                     <ul className="list">
-                                        <li><Link to="#">FAQs</Link></li>
+                                        <li><Link to="/faq">FAQs</Link></li>
                                         <li><Link to="/buyer-guide">Buyer Guide</Link></li>
-                                        <li><Link to="#">Terms &amp; Conditions</Link></li>
-                                        <li><Link to="/sitemap">Sitemap</Link></li>
+                                        <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                                        {/* <li><Link to="/sitemap">Sitemap</Link></li> */}
                                     </ul>
                                 </div>
                                 <div className="col-lg-4 col-sm-6 sitemapBox">
                                     <ul className="list">
                                         <li><b>Media</b></li>
                                         <ul className="list">
-                                            <li><Link to="/Linkwards">Awards</Link></li>
+                                            <li><Link to="/awards">Awards</Link></li>
                                             <li><Link to="/news">News</Link></li>
                                             <li><Link to="/events">Events</Link></li>
                                             <li><Link to="/blogs">Blogs</Link></li>
-                                            <li><Link to="/Linkdvertisements">Advertisements</Link></li>
+                                            <li><Link to="/advertisements">Advertisements</Link></li>
                                         </ul>
                                     </ul>
                                 </div>
@@ -248,18 +247,19 @@ export default function SiteMap() {
                                         </div>
                                         <div className="col-12">
                                             <div className="readmore d-flex mt-0 flex-wrap w-100">
-                                            {property.labels.map((label, index) => (
-                                                <a
-                                                href="#"
-                                                key={index}
-                                                className="button gray me-2 mb-2"
-                                                onClick={() => handleLinkClick(property.type, label, city.location)}
-                                                >
-                                                {label} in {city.location}
-                                                </a>
-                                            ))}
+                                                {property.labels.map((label, index) => (
+                                                    <button
+                                                        key={index}
+                                                        className="button gray me-2 mb-2"
+                                                        onClick={() => handleLinkClick(property.type, label, city.location)}
+                                                        style={{ cursor: 'pointer' }} // Optional: to indicate it's clickable
+                                                    >
+                                                        {label} in {city.location}
+                                                    </button>
+                                                ))}
                                             </div>
                                         </div>
+
                                     </div>
                                 ))}
                                 </div>

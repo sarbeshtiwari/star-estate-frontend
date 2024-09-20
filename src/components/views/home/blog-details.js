@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axiosInstance from '../utils/axiosInstance';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
+
 function BlogDetails() {
     const { slugURL } = useParams();
     const [blogDetails, setBlogDetails] = useState([]);
     const [recentBlogs, setRecentBlogs] = useState([]);
     const [error, setError] = useState([]);
+    const footerRef = useRef(null);
+    const [isSticky, setIsSticky] = useState(false);
+
     useEffect(() => {
         const fetchBlogDetailsData = async () => {
             try {
@@ -15,21 +17,21 @@ function BlogDetails() {
                 const fetchedData = response.data;
                 setBlogDetails([fetchedData]);
             } catch (error) {
-                setError('Error fetching main project data');
-                console.error('Error fetching main project data:', error);
+                setError('Error fetching blog data');
+                console.error('Error fetching blog data:', error);
             }
         };
         fetchBlogDetailsData();
     }, [slugURL]);
+
     useEffect(() => {
         const fetchRecentBlogs = async () => {
             try {
                 const response = await axiosInstance.get('/blogs/getBlog');
                 const fetchedBlogs = response.data;
                 const recentBlogsFiltered = fetchedBlogs
-                    .filter(blog => blog.slugURL !== slugURL)
+                    .filter(blog => blog.slugURL !== slugURL && blog.status !== false)
                     .slice(0, 5);
-                // console.log(recentBlogsFiltered)
                 setRecentBlogs(recentBlogsFiltered);
             } catch (error) {
                 setError('Error fetching recent blogs');
@@ -38,9 +40,25 @@ function BlogDetails() {
         };
         fetchRecentBlogs();
     }, [slugURL]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsSticky(!entry.isIntersecting);
+        }, { threshold: 1.0 });
+
+        if (footerRef.current) {
+            observer.observe(footerRef.current);
+        }
+
+        return () => {
+            if (footerRef.current) {
+                observer.unobserve(footerRef.current);
+            }
+        };
+    }, []);
+
     return (
         <div>
-            {/* <Header /> */}
             <div className="emptyBox"></div>
             <div className="w-100">
                 <div className="container-lg">
@@ -75,11 +93,20 @@ function BlogDetails() {
                                                 <img src={`${axiosInstance.defaults.globalURL}${blogs.blogsImage}`} alt={blogs.blogsName || 'Blog Image'} />
                                                 <em>{blogs.blogsName}</em>
                                             </div>
-                                            <p dangerouslySetInnerHTML={{ __html: blogs.content }} /> </div>
+                                            <p dangerouslySetInnerHTML={{ __html: blogs.content }} />
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="col-xl-4 col-lg-5 position-relative pageAside">
-                                    <div className="aside-inner" style={{ top: "60px" }}>
+                                <div
+                                    className="col-xl-4 col-lg-5 position-relative pageAside"
+                                    style={{
+                                        position: isSticky ? 'sticky' : 'relative',
+                                        top: isSticky ? '20px' : 'auto',
+                                        transition: 'top 0.3s', // Smooth transition for sticky effect
+                                        height: 'fit-content', // Ensure the height fits the content
+                                    }}
+                                >
+                                    {recentBlogs.length === 0 ? ('') : <div className="aside-inner" style={{ top: "60px" }}>
                                         <aside className="topRatedProjectShowcase common-border mt-0">
                                             <div className="heading ml-0">
                                                 <h6 className="mb-0 text-primary">Recent Posts</h6>
@@ -101,15 +128,19 @@ function BlogDetails() {
                                                 ))}
                                             </div>
                                         </aside>
-                                    </div>
+                                    </div>}
+                                    
                                 </div>
                             </React.Fragment>
                         ))}
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
+            <footer ref={footerRef}>
+                {/* Footer content goes here */}
+            </footer>
         </div>
-    )
+    );
 }
-export default BlogDetails
+
+export default BlogDetails;

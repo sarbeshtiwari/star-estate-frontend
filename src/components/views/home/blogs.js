@@ -9,7 +9,7 @@ function Blogs() {
         const fetchAwards = async () => {
             try {
                 const response = await axiosInstance.get(`/blogs/getBlog`);
-                const filteredBlogs = response.data.filter(blog => blog.status === true);
+                const filteredBlogs = response.data.filter(blog => blog.status === true && blog.blogsCategory === 'blog');
                 // const filteredBlogsByDate = filteredBlogs.filter(blog => blog.blogsDate.sort());
                 setBlogs(filteredBlogs);
             } catch (error) {

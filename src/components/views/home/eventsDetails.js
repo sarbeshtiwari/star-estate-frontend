@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { Link, useParams } from 'react-router-dom';
-
-// import ReactFancyBox from 'react-fancybox'
-// import 'react-fancybox/lib/fancybox.css'
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'; // Import CSS for lightbox
 
 import Header from '../../widgets/header';
 import Footer from '../../widgets/footer';
+
 function EventDetails() {
     const { slugURL } = useParams();
     const [eventDetails, setEventDetails] = useState([]);
-    const [error, setError] = useState([]);
+    const [eventImages, setEventImages] = useState([]);
+    const [error, setError] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
     useEffect(() => {
         const fetchEventDetailsData = async () => {
             try {
                 const response = await axiosInstance.get(`events/getEventBySlugURL/${slugURL}`);
+                const response1 = await axiosInstance.get(`images/getEventImages/${slugURL}`);
                 const fetchedData = response.data;
+                const showImages = response1.data.images;
+
+                setEventImages(showImages);
                 setEventDetails([fetchedData]);
             } catch (error) {
                 setError('Error fetching main project data');
@@ -24,28 +32,34 @@ function EventDetails() {
         };
         fetchEventDetailsData();
     }, [slugURL]);
-    
+
+    // Function to handle image click and show lightbox
+    const handleImageClick = (index) => {
+        setCurrentIndex(index);
+        setIsOpen(true);
+    };
+
     return (
         <div>
-            {/* <Header /> */}
+            <Header />
             <div className="insideBanner">
                 <picture>
-                    <source media="(max-width: 820px)" srcset="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
+                    <source media="(max-width: 820px)" srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
                     <img src="/star-estate-react/assets/images/banner-emi-calculator.jpg" className="h-100 object-cover" alt="Star Estate" />
                 </picture>
             </div>
             <div className="w-100">
                 <div className="container-lg">
-                {eventDetails.map((events, index) => (
-                    <div key={index} className="breadcrumbContainer" aria-label="breadcrumb">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="index.php">Home</a></li>
-                            <li className="breadcrumb-item">Media</li>
-                            <li className="breadcrumb-item active"><Link to='/events'>Events</Link></li>
-                            <li className="breadcrumb-item active">{events.eventName}</li>
-                        </ol>
-                    </div>
-                       ))}
+                    {eventDetails.map((events, index) => (
+                        <div key={index} className="breadcrumbContainer" aria-label="breadcrumb">
+                            <ol className="breadcrumb">
+                                <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                                <li className="breadcrumb-item">Media</li>
+                                <li className="breadcrumb-item active"><Link to="/events">Events</Link></li>
+                                <li className="breadcrumb-item active">{events.eventName}</li>
+                            </ol>
+                        </div>
+                    ))}
                 </div>
             </div>
             <div className="w-100 padding">
@@ -53,26 +67,48 @@ function EventDetails() {
                     <div className="heading mx-sm-auto text-sm-center">
                         <h3 className="mb-0">Events</h3>
                     </div>
-                    <div className="row gap-row">
-                        {eventDetails.map((events, index) => (
-                            // Fancy Box for image modal
-                            // <div key={index} className="col-lg-4 col-sm-6 award-slide">
-                            //    <ReactFancyBox
-                            //         thumbnail={`${axiosInstance.defaults.globalURL}${events.eventImage}`}
-                            //         image={`${axiosInstance.defaults.globalURL}${events.eventImage}`}/>
-                            // </div>
-                            
-                            <div key={index} className="col-lg-4 col-sm-6 award-slide">
-                                <a href={`${axiosInstance.defaults.globalURL}${events.eventImage}`} alt={events.eventName || 'Events Image'} data-magnify="magnify" data-caption="Awards & Recognitions" className="inner p-3 d-block common-border">
-                                    <img src={`${axiosInstance.defaults.globalURL}${events.eventImage}`} alt={events.eventName || 'Events Image'} />
-                                </a>
+                    <div className="row">
+                        {eventImages.map((event, index) => (
+                            <div key={index} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                <div className="image-container" onClick={() => handleImageClick(index)} style={{ cursor: 'pointer' }}>
+                                    <img 
+                                        src={`${axiosInstance.defaults.globalURL}${event.imagePath}`} 
+                                        alt={event.eventId || 'Event Image'} 
+                                        className="img-fluid" 
+                                        style={{ width: '100%', height: '200px', objectFit: 'cover' }} 
+                                    />
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
+
+            {isOpen && (
+                <Lightbox
+                    mainSrc={`${axiosInstance.defaults.globalURL}${eventImages[currentIndex].imagePath}`}
+                    nextSrc={`${axiosInstance.defaults.globalURL}${eventImages[(currentIndex + 1) % eventImages.length].imagePath}`}
+                    prevSrc={`${axiosInstance.defaults.globalURL}${eventImages[(currentIndex + eventImages.length - 1) % eventImages.length].imagePath}`}
+                    onCloseRequest={() => setIsOpen(false)}
+                    onMovePrevRequest={() =>
+                        setCurrentIndex((currentIndex + eventImages.length - 1) % eventImages.length)
+                    }
+                    onMoveNextRequest={() =>
+                        setCurrentIndex((currentIndex + 1) % eventImages.length)
+                    }
+                    reactModalStyle={{
+                        overlay: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)' // Light black overlay
+                        }
+                    }}
+                    imageTitle={eventImages[currentIndex].eventName}
+                    imageCaption={`Image ${currentIndex + 1} of ${eventImages.length}`}
+                />
+            )}
+
+            <Footer />
         </div>
-    )
+    );
 }
-export default EventDetails
+
+export default EventDetails;

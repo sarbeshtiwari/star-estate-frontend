@@ -65,6 +65,7 @@ function Builder() {
     const toggleReadMore = () => {
         setShowMore(!showMore);
     };
+    const briefContent = cityProjectsDetail?.briefContent || '';
     const description = cityProjectsDetail?.description || '';
     return (
         <div>
@@ -92,13 +93,13 @@ function Builder() {
                     <div className="heading mx-auto">
                         <h3 className="mb-3 text-center">{cityProjectsDetail.developerName || 'Developer'}</h3>
                         <div key={cityProjectsDetail._id} className="text-center">
-                            {description.length > 700 ? (
+                            {/* {description.length > 700 ? ( */}
                                 <React.Fragment>
                                     <article
                                         dangerouslySetInnerHTML={{
                                             __html: showMore
                                                 ? description
-                                                : description.substring(0, 700) + '...'
+                                                : briefContent
                                         }}
                                     ></article>
                                     <button onClick={openDetailModal} className="project-readmore-button">
@@ -128,9 +129,9 @@ function Builder() {
                                         </div>
                                     </div>
                                 </React.Fragment>
-                            ) : (
-                                <span dangerouslySetInnerHTML={{ __html: description }} />
-                            )}
+                            {/* // ) : (
+                            //     <span dangerouslySetInnerHTML={{ __html: description }} />
+                            // )} */}
                         </div>
 
                     </div>

@@ -3,19 +3,23 @@ import axiosInstance from '../views/utils/axiosInstance';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from '../widgets/header';
 import Footer from '../widgets/footer';
-import { fetchCategories, fetchCities, fetchProjects } from '../../apis/home-page-api';
+import { fetchCategories, fetchCities, fetchProjects, fetchProjectsByConfig } from '../../apis/home-page-api';
 import axios from 'axios';
+
 function CommercialProjects() {
     const [projectName, setprojectName] = useState('');
     const [commercialProjects, setCommercialProjects] = useState([]);
     const [commercialDetails, setCommercialDetails] = useState([]);
     const [cityProjects, setCityProjects] = useState([]);
     const [cityProjectsDetail, setCityProjectsDetail] = useState([]);
+    const [configurationDetails, setConfigurationDetails] = useState([]);
     const [location, setLocation] = useState();
     const [breadcrumbName, setBreadcrumbName] = useState('');
     const { id } = useParams();
     const { slugURL } = useParams();
     useEffect(() => {
+        console.log(slugURL, "slugURl")
+        console.log(id, "id")
         const fetchCommercialDetails = async () => {
             try {
                 const response = await axiosInstance.get(`/categories/getCategoryDetails/${id}`);
@@ -160,6 +164,16 @@ function CommercialProjects() {
         if (slugURL) {
             fetchCityProjects();
             fetchCityProjectsDetail();
+        }
+        const fetch = async (id) => {
+            const response = await fetchProjectsByConfig(id);
+            setBreadcrumbName(id)
+            setConfigurationDetails(response.cityData ? response.cityData : ' ')
+            setCommercialProjects(response.projects ? response.projects : ' ')
+
+        }
+        if (id !== 'commercial' && id !== 'residential' && id !== 'luxury' && id !== 'new-launch' && id !== undefined ) {
+            fetch(id)
         }
     }, [id, slugURL]);
     const capitalizeFirstLetter = (string) => {
@@ -349,8 +363,8 @@ function CommercialProjects() {
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to='/'>Home</Link></li>
                             <li className="breadcrumb-item">
-                                <Link to={id === 'commercial' || id === 'residential' || id === 'new-launch' || id === 'luxury' ? '/projects' : `/city`}>
-                                    {id === 'commercial' || id === 'residential' || id === 'new-launch' || id === 'luxury' ? 'Projects' : 'City'}
+                                <Link to={id === 'commercial' || id === 'residential' || id === 'new-launch' || id === 'luxury' || (id !== 'commercial' && id !== 'residential' && id !== 'luxury' && id !== 'new-launch' )? '/projects' : `/city`}>
+                                    {id === 'commercial' || id === 'residential' || id === 'new-launch' || id === 'luxury' || (id !== 'commercial' && id !== 'residential'  && id !== 'luxury' && id !== 'new-launch') ? 'Projects' : 'City'}
                                 </Link>
                             </li>
                             <li className="breadcrumb-item active">{breadcrumbName}</li>
@@ -359,222 +373,270 @@ function CommercialProjects() {
                 </div>
             </div>
             <div className="w-100 padding">
-                <div className="container-lg">
-                    <div className="heading mx-auto">
-                        <h3 className="mb-3 text-center">
-                            {slugURL ? `Projects in ${location}` : ''}
-                        </h3>
-                    </div>
-                    {slugURL ? (
-                        cityProjects.length > 0 && (
-                            <React.Fragment>
-                                {cityProjects.some(cityProject => cityProject.location_type === "common") && (
-                                    <React.Fragment>
-                                        {/* <h3 className="mb-3 text-center">{cityProjects.location}</h3> */}
-                                        <div className="text-container" style={{ position: 'relative' }}>
-                                            {cityProjects
-                                                .filter(cityProject => cityProject.location_type === "common")
-                                                .map((cityProject, index) => (
-                                                    <div key={cityProject._id} className="text-center">
-                                                        {cityProject.ctcontent.length > 700 ? (
-                                                            <React.Fragment>
-                                                                <article
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html: showMore
-                                                                            ? cityProject.ctcontent
-                                                                            : cityProject.ctcontent.substring(0, 700) + '...'
-                                                                    }}
-                                                                ></article>
-                                                                <button onClick={openDetailModal} className="project-readmore-button">
-                                                                    {showMore ? 'Read less' : 'Read more'}
-                                                                </button>
-                                                            </React.Fragment>
-                                                        ) : (
-                                                            <span dangerouslySetInnerHTML={{ __html: cityProject.ctcontent }} />
-                                                        )}
-                                                    </div>
-                                                ))
-                                            }
+    <div className="container-lg">
+        <div className="heading mx-auto">
+            <h3 className="mb-3 text-center">
+                {slugURL ? `Projects in ${location}` : ''}
+            </h3>
+        </div>
+
+        {slugURL ? (
+            cityProjects.length > 0 && (
+                <React.Fragment>
+                    {cityProjects.some(cityProject => cityProject.location_type === "common") && (
+                        <React.Fragment>
+                            <div className="text-container" style={{ position: 'relative' }}>
+                                {cityProjects
+                                    .filter(cityProject => cityProject.location_type === "common")
+                                    .map((cityProject) => (
+                                        <div key={cityProject._id} className="text-center">
+                                            {/* {cityProject.ctcontent.length > 700 ? ( */}
+                                                <React.Fragment>
+                                                    <article
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: showMore
+                                                                ? cityProject.briefContent
+                                                                : cityProject.briefContent
+                                                        }}
+                                                    ></article>
+                                                    <button onClick={openDetailModal} className="project-readmore-button">
+                                                        {showMore ? 'Read less' : 'Read more'}
+                                                    </button>
+                                                </React.Fragment>
+                                            {/* ) : (
+                                                <span dangerouslySetInnerHTML={{ __html: cityProject.ctcontent }} />
+                                            )} */}
                                         </div>
-                                    </React.Fragment>
-                                )}
-                                <div ref={modalRef} className="projectOverview-modal">
-                                    <div className="inner">
-                                        <div className="projectModal-header">
-                                            <h6 className="mb-0">City Details</h6>
-                                            {/* Using the close function to remove the "active" class */}
-                                            <button className="projectOverview-close" onClick={closeDetailModal}>
-                                                &times;
-                                            </button>
-                                        </div>
-                                        {cityProjects && Array.isArray(cityProjects) && cityProjects.length > 0 ? (
-                                            cityProjects
-                                            .filter(cityProject => cityProject.location_type === "common")
-                                            .map((item, index) => (
-                                                <div key={index} className="projectOverview-details scroller">
-                                                    <p dangerouslySetInnerHTML={{ __html: item.ctcontent }} />
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <p>No data available</p>
-                                        )}
-                                    
-                                    </div>
-                                </div>
-                            </React.Fragment>
-                            
-                        )
-                    ) : (
-                        commercialProjects.length > 0 && (
-                            <React.Fragment>
-                                <h3 className="mb-3 text-center">
-                                {id === 'new-launch'
-                                    ? 'New Launch' : id === 'luxury' ? 'Luxury'
-                                    : commercialProjects[0].property_type === 'residential'
-                                    ? 'Residential'
-                                    : 'Commercial'
+                                    ))
                                 }
-                                </h3>
+                            </div>
+                        </React.Fragment>
+                    )}
 
-                            {commercialDetails.length > 0 ? (
-                                commercialDetails.map((projectDetails) => {
-                                    // Determine the content to show based on the id
-                                    let displayContent;
-                                    if (id === 'new-launch') {
-                                    
-                                        displayContent = 'Here you will find the residential properties that are newly launched and not ready to move-in flats. You can choose your units as per your needs, and the builder will give you exciting early offers that will not be available for late buyers. You can avail of these properties at a price that will be lower than the ready-to-move-in properties.'; // Replace with your default content
-                                    
-                                    } else if (id === 'luxury') {
-                                        displayContent = '<p>Luxury content here</p>'; // Replace with your luxury content
-                                    } 
-                                    else {
-                                        displayContent = projectDetails.content;
-                                    }
-
-                                    return (
-                                        <p key={projectDetails._id} className="text-center">
-                                            <span>
-                                                {displayContent.length > 400 ? (
-                                                    <React.Fragment>
-                                                        <span
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: showMore
-                                                                    ? displayContent
-                                                                    : displayContent.substring(0, 400) + '...'
-                                                            }}
-                                                        />
-                                                        <button onClick={openDetailModal} className="project-readmore-button">
-                                                            {showMore ? 'Read less' : 'Read more'}
-                                                        </button>
-                                                    </React.Fragment>
-                                                ) : (
-                                                    <span dangerouslySetInnerHTML={{ __html: displayContent }} />
-                                                )}
-                                            </span>
-                                        </p>
-                                    );
-                                })
+                    {/* Modal for City Details */}
+                    <div ref={modalRef} className="projectOverview-modal">
+                        <div className="inner">
+                            <div className="projectModal-header">
+                                <h6 className="mb-0">City Details</h6>
+                                <button className="projectOverview-close" onClick={closeDetailModal}>
+                                    &times;
+                                </button>
+                            </div>
+                            {cityProjects.length > 0 ? (
+                                cityProjects
+                                    .filter(cityProject => cityProject.location_type === "common")
+                                    .map((item, index) => (
+                                        <div key={index} className="projectOverview-details scroller">
+                                            <p dangerouslySetInnerHTML={{ __html: item.ctcontent }} />
+                                        </div>
+                                    ))
                             ) : (
-                                <div></div>
+                                <p>No data available</p>
                             )}
+                        </div>
+                    </div>
+                </React.Fragment>
+            )
+        ) : (
+            id !== 'commercial' && id !== 'residential' && id !== 'luxury' && id !== 'new-launch' && configurationDetails.length > 0 ? (
+                <>
+                    {configurationDetails.map((details) => {
+                        const displayContent = details.ctcontent;
+                        
+                        return (
+                            <p key={details._id} className="text-center">
+                                <span>
+                                    {displayContent.length > 400 ? (
+                                        <React.Fragment>
+                                            <span
+                                                dangerouslySetInnerHTML={{
+                                                    __html: showMore
+                                                        ? displayContent
+                                                        : displayContent.substring(0, 400) + '...'
+                                                }}
+                                            />
+                                            <button onClick={openDetailModal} className="project-readmore-button">
+                                                {showMore ? 'Read less' : 'Read more'}
+                                            </button>
+                                        </React.Fragment>
+                                    ) : (
+                                        <span dangerouslySetInnerHTML={{ __html: displayContent }} />
+                                    )}
+                                </span>
+                            </p>
+                        );
+                    })}
 
+                    {/* Modal for Configuration Details */}
+                    <div ref={modalRef} className="projectOverview-modal">
+                        <div className="inner">
+                            <div className="projectModal-header">
+                                <h6 className="mb-0">City Details</h6>
+                                <button className="projectOverview-close" onClick={closeDetailModal}>
+                                    &times;
+                                </button>
+                            </div>
+                            {configurationDetails.length > 0 ? (
+                                configurationDetails.map((item, index) => (
+                                    <div key={index} className="projectOverview-details scroller">
+                                        <p dangerouslySetInnerHTML={{ __html: item.ctcontent }} />
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No data available</p>
+                            )}
+                        </div>
+                    </div>
+                </>
+            ) : (
+                commercialProjects.length > 0 && (
+                    <React.Fragment>
+                        <h3 className="mb-3 text-center">
+                            {id === 'new-launch' ? 'New Launch' :
+                             id === 'luxury' ? 'Luxury' :
+                                id !== 'commercial' && id !== 'residential' && id !== 'luxury' && id !== 'new-launch' ? 'Projects':
+                              commercialProjects[0].property_type === 'residential' ? 'Residential' : 'Commercial'}
+                        </h3>
 
-                                    <div ref={modalRef} className="projectOverview-modal">
-                                        <div className="inner">
-                                            <div className="projectModal-header">
-                                                <h6 className="mb-0">Details</h6>
-                                                {/* Using the close function to remove the "active" class */}
-                                                <button className="projectOverview-close" onClick={closeDetailModal}>
-                                                    &times;
-                                                </button>
-                                            </div>
-                                            {commercialDetails && Array.isArray(commercialDetails) && commercialDetails.length > 0 ? (
-                                                commercialDetails.map((item, index) => (
-                                                    <div key={index} className="projectOverview-details scroller">
-                                                        <p dangerouslySetInnerHTML={{ __html: item.content }} />
-                                                    </div>
-                                                ))
-                                            ) : (
-                                                <p>No data available</p>
-                                            )}
-                                            
+                        {commercialDetails.length > 0 ? (
+                            commercialDetails.map((projectDetails) => {
+                                let displayContent;
+                                if (id === 'new-launch') {
+                                    displayContent = 'Here you will find the residential properties that are newly launched...';
+                                } else if (id === 'luxury') {
+                                    displayContent = 'Luxury content here...';
+                                } else {
+                                    displayContent = projectDetails.briefContent;
+                                }
+
+                                return (
+                                    <p key={projectDetails._id} className="text-center">
+                                        <span>
+                                            {/* {displayContent.length > 400 ? ( */}
+                                                <React.Fragment>
+                                                    <span
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: showMore
+                                                                ? displayContent
+                                                                : displayContent
+                                                        }}
+                                                    />
+                                                    <button onClick={openDetailModal} className="project-readmore-button">
+                                                        {showMore ? 'Read less' : 'Read more'}
+                                                    </button>
+                                                </React.Fragment>
+                                            {/* ) : (
+                                                <span dangerouslySetInnerHTML={{ __html: displayContent }} />
+                                            )} */}
+                                        </span>
+                                    </p>
+                                );
+                            })
+                        ) : (
+                            <div></div>
+                        )}
+
+                        {/* Modal for Commercial Details */}
+                        <div ref={modalRef} className="projectOverview-modal">
+                            <div className="inner">
+                                <div className="projectModal-header">
+                                    <h6 className="mb-0">Details</h6>
+                                    <button className="projectOverview-close" onClick={closeDetailModal}>
+                                        &times;
+                                    </button>
+                                </div>
+                                {commercialDetails.length > 0 ? (
+                                    commercialDetails.map((item, index) => (
+                                        <div key={index} className="projectOverview-details scroller">
+                                            <p dangerouslySetInnerHTML={{ __html: item.content }} />
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No data available</p>
+                                )}
+                            </div>
+                        </div>
+                    </React.Fragment>
+                )
+            )
+        )}
+
+        <div className="row gap-row">
+            {(id && commercialProjects.length) > 0 ? (
+                commercialProjects.map(project => (
+                    <div key={project.id} className="col-lg-4 col-sm-6 project_box">
+                        <Link to={`/${project.slugURL}`} className="project_box_inner">
+                            <div className="Project_box_img">
+                                <div className="reraBox position-absolute">
+                                    <div className="qr_img"><img src={`${axiosInstance.defaults.globalURL}${project.rera_qr}`} alt="QR Code" /></div>
+                                    <div className="rera_num">
+                                        <small className="mb-0"><strong className="text-primary">Projects RERA No: </strong>{project.rera_no}<br />
+                                            <small className="small text-primary"><i className="fa fa-link"></i> {project.reraWebsite}</small></small>
+                                    </div>
+                                </div>
+                                <div className="img-fluid"><img src={`${axiosInstance.defaults.globalURL}${project.project_thumbnail}`} alt={project.name} /></div>
+                            </div>
+                            <div className="project_box_details">
+                                <div className="project_developer_detail">
+                                    <Link to={`/${project.slugURL}`} className="project_name">
+                                        <h4 className="mb-0 project_name">{project.projectName}</h4>
+                                    </Link>
+                                    <h6 className="mb-0 project_price">
+                                        {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon'
+                                            ? `${project.projectPrice}`
+                                            : <><i className="fa fa-indian-rupee-sign"></i>{project.projectPrice}*</>}
+                                    </h6>
+                                </div>
+                                <div className="project_status_detail">
+                                    <span className="project_box_location"><i className="fa fa-map-marker-alt"></i>{project.projectAddress}</span>
+                                    <span className="project_box_status"><i className="fa-brands fa-font-awesome"></i> {project.project_status}</span>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                ))
+            ) : (
+                slugURL && cityProjectsDetail.length > 0 ? (
+                    cityProjectsDetail.map(project => (
+                        <div key={project.id} className="col-lg-4 col-sm-6 project_box">
+                            <Link to={`/${project.slugURL}`} className="project_box_inner">
+                                <div className="Project_box_img">
+                                    <div className="reraBox position-absolute">
+                                        <div className="qr_img"><img src={`${axiosInstance.defaults.globalURL}${project.rera_qr}`} alt="QR Code" /></div>
+                                        <div className="rera_num">
+                                            <small className="mb-0"><strong className="text-primary">Projects RERA No: </strong>{project.rera_no}<br />
+                                                <small className="small text-primary"><i className="fa fa-link"></i> {project.reraWebsite}</small></small>
                                         </div>
                                     </div>
-                                </React.Fragment>
-                                
-                            )
-                        )}
-                    <div className="row gap-row">
-                        {(id && commercialProjects.length > 0) ? (
-                            commercialProjects.map(project => (
-                                <div key={project.id} className="col-lg-4 col-sm-6 project_box">
-                                    <Link to={`/${project.slugURL}`} className="project_box_inner">
-                                        <div className="Project_box_img">
-                                            <div className="reraBox position-absolute">
-                                                <div className="qr_img"><img src={`${axiosInstance.defaults.globalURL}${project.rera_qr}`} alt="QR Code" /></div>
-                                                <div className="rera_num">
-                                                    <small className="mb-0"><strong className="text-primary">Projects RERA No: </strong>{project.rera_no}<br />
-                                                        <small className="small text-primary"><i className="fa fa-link"></i> {project.reraWebsite}</small></small>
-                                                </div>
-                                            </div>
-                                            <div className="img-fluid"><img src={`${axiosInstance.defaults.globalURL}${project.project_thumbnail}`} alt={project.name} /></div>
-                                        </div>
-                                        <div className="project_box_details">
-                                            <div className="project_developer_detail">
-                                                <Link to={`/${project.slugURL}`} className="project_name">
-                                                    <h4 className="mb-0 project_name">{project.projectName}</h4>
-                                                </Link>
-                                                <h6 className="mb-0 project_price">
-                                                    {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon' ? `${project.projectPrice}` : <><i className="fa fa-indian-rupee-sign"></i>{project.projectPrice}*</>}
-                                                </h6>
-                                            </div>
-                                            <div className="project_status_detail">
-                                                <span className="project_box_location"><i className="fa fa-map-marker-alt"></i>{project.projectAddress}</span>
-                                                <span className="project_box_status"><i className="fa-brands fa-font-awesome"></i> {project.project_status}</span>
-                                            </div>
-                                        </div>
-                                    </Link>
+                                    <div className="img-fluid"><img src={`${axiosInstance.defaults.globalURL}${project.project_thumbnail}`} alt={project.name} /></div>
                                 </div>
-                            ))
-                        ) : (slugURL && cityProjectsDetail.length > 0) ? (
-                            cityProjectsDetail.map(project => (
-                                <div key={project.id} className="col-lg-4 col-sm-6 project_box">
-                                    <Link to={`/${project.slugURL}`} className="project_box_inner">
-                                        <div className="Project_box_img">
-                                            <div className="reraBox position-absolute">
-                                                <div className="qr_img"><img src={`${axiosInstance.defaults.globalURL}${project.rera_qr}`} alt="QR Code" /></div>
-                                                <div className="rera_num">
-                                                    <small className="mb-0"><strong className="text-primary">Projects RERA No: </strong>{project.rera_no}<br />
-                                                        <small className="small text-primary"><i className="fa fa-link"></i> {project.reraWebsite}</small></small>
-                                                </div>
-                                            </div>
-                                            <div className="img-fluid"><img src={`${axiosInstance.defaults.globalURL}${project.project_thumbnail}`} alt={project.name} /></div>
-                                        </div>
-                                        <div className="project_box_details">
-                                            <div className="project_developer_detail">
-                                                <Link to={`/${project.slugURL}`} className="project_name">
-                                                    <h4 className="mb-0 project_name">{project.projectName}</h4>
-                                                </Link>
-                                                <h6 className="mb-0 project_price">
-                                                    {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon' ? `${project.projectPrice}` : <><i className="fa fa-indian-rupee-sign"></i>{project.projectPrice}*</>}
-                                                </h6>
-                                            </div>
-                                            <div className="project_status_detail">
-                                                <span className="project_box_location"><i className="fa fa-map-marker-alt"></i>{project.projectAddress}</span>
-                                                <span className="project_box_status"><i className="fa-brands fa-font-awesome"></i> {project.project_status}</span>
-                                            </div>
-                                        </div>
-                                    </Link>
+                                <div className="project_box_details">
+                                    <div className="project_developer_detail">
+                                        <Link to={`/${project.slugURL}`} className="project_name">
+                                            <h4 className="mb-0 project_name">{project.projectName}</h4>
+                                        </Link>
+                                        <h6 className="mb-0 project_price">
+                                            {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon'
+                                                ? `${project.projectPrice}`
+                                                : <><i className="fa fa-indian-rupee-sign"></i>{project.projectPrice}*</>}
+                                        </h6>
+                                    </div>
+                                    <div className="project_status_detail">
+                                        <span className="project_box_location"><i className="fa fa-map-marker-alt"></i>{project.projectAddress}</span>
+                                        <span className="project_box_status"><i className="fa-brands fa-font-awesome"></i> {project.project_status}</span>
+                                    </div>
                                 </div>
-                            ))
-                        ) : (
-                            <div className="col-12">
-                                <p>No projects found.</p>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
+                            </Link>
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-center">No data available</p>
+                )
+            )}
+        </div>
+    </div>
+</div>
+
             {/* <Footer /> */}
         </div>
     )

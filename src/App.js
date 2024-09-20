@@ -113,6 +113,7 @@ import Header from './components/widgets/header';
 import Footer from './components/widgets/footer';
 import CPRegistration from './components/widgets/channelPartner';
 import Faq from './components/views/home/faq';
+import PrivacyPolicy from './components/views/home/privacy-policy';
 
 function AppContent() {
   const location = useLocation();
@@ -137,7 +138,8 @@ function AppContent() {
     '/buyer-guide',
     '/sitemap',
     '/channel-partner-registration',
-    '/faq'
+    '/faq',
+    '/privacy-policy'
   ].includes(location.pathname);
 
   return (
@@ -172,6 +174,7 @@ function AppContent() {
         <Route path='/sitemap' element={<SiteMap />} />
         <Route path='/channel-partner-registration' element={<CPRegistration />} />
         <Route path='/faq' element={<Faq />} />
+        <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
       </Routes>
       {!isProjectDetailsPage && <Footer />}
     </>

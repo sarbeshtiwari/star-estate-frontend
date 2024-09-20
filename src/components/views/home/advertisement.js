@@ -3,27 +3,21 @@ import Header from '../../widgets/header';
 import Footer from '../../widgets/footer';
 import axiosInstance from '../utils/axiosInstance';
 import { Link } from 'react-router-dom';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'; // Import CSS for lightbox
 
 function Advertisement() {
     const [activeType, setActiveType] = useState('print');
     const [ads, setAds] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    useEffect(() => {
-        const toggleWrappers = document.querySelectorAll('.toggleWrapper');
-        toggleWrappers.forEach(wrapper => {
-            wrapper.style.display = 'none';
-        });
-        const activeWrapper = document.getElementById(`toggleWrapper-${activeType}`);
-        if (activeWrapper) {
-            activeWrapper.style.display = 'block';
-        }
-    }, [activeType]);
-
+    // Fetch Ads based on status
     useEffect(() => {
         const fetchAds = async () => {
             try {
                 const response = await axiosInstance.get(`advertisement/getAdvertisements`);
-                const filteredAds = response.data.filter(ads => ads.status === true);
+                const filteredAds = response.data.filter(ad => ad.status === true);
                 setAds(filteredAds);
             } catch (error) {
                 console.error('Failed to fetch advertisements', error);
@@ -33,14 +27,22 @@ function Advertisement() {
         fetchAds();
     }, []);
 
+    // Set the active ad type (Print, Outdoor, Radio)
     const handleToggleClick = (type) => {
         setActiveType(type);
     };
 
+    // Open lightbox with the selected image
+    const handleImageClick = (index) => {
+        setCurrentIndex(index);
+        setIsOpen(true);
+    };
+
+    // Render ads based on their type (print, outdoor, radio)
     const renderAds = (type) => {
         return ads
             .filter(ad => ad.advertisementType === type)
-            .map((ad) => {
+            .map((ad, index) => {
                 if (type === 'radio') {
                     return (
                         <div className="col-lg-4 col-sm-6 blogBox newsBox" key={ad._id}>
@@ -73,12 +75,10 @@ function Advertisement() {
                 } else {
                     return (
                         <div className="col-lg-4 col-sm-6 blogBox newsBox" key={ad._id}>
-                            <a
-                                href={`${axiosInstance.defaults.globalURL}${ad.advertisementImage}`}
-                                data-magnify="magnify"
-                                data-group={type}
-                                data-caption={`${ad.advertisementType} Ad`}
+                            <div
+                                onClick={() => handleImageClick(index)}
                                 className="inner d-block common-border"
+                                style={{ cursor: 'pointer' }}
                             >
                                 <div className="img-fluid">
                                     <img
@@ -88,25 +88,27 @@ function Advertisement() {
                                     />
                                 </div>
                                 <div className="blog-details">
-                                    <ul className="list-inline">
-                                        <li>
-                                            <i className="fa fa-calendar-alt"></i>{' '}
-                                            <span>{ad.advertisementDate}</span>
-                                        </li>
-                                        <li>
-                                            <i className="fa fa-tag"></i> <span>{ad.advertisementLocation}</span>
-                                        </li>
-                                    </ul>
-                                    <h6 className="h6">{ad.advertisementTitle || 'Luxury Property Show 2023'}</h6>
+                                    {ad.advertisementType === 'outdoor' ? '' : (
+                                        <>
+                                            <ul className="list-inline">
+                                                <li>
+                                                    <i className="fa fa-calendar-alt"></i>{' '}
+                                                    <span>{ad.advertisementDate}</span>
+                                                </li>
+                                            </ul>
+                                            <h6 className="h6">{ad.advertisementTitle || 'Luxury Property Show 2023'}</h6>
+                                        </>
+                                    )}
                                     <div className="continue-reading">Click to View</div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     );
                 }
             });
     };
 
+    // Modal setup for radio ads
     useEffect(() => {
         const radioModal = document.getElementById('radioModal');
         if (radioModal) {
@@ -121,12 +123,18 @@ function Advertisement() {
                 modalTitle.textContent = title;
                 radioVideo.src = src;
             });
+
+            // Clear video source when modal is closed
+            radioModal.addEventListener('hidden.bs.modal', function () {
+                const radioVideo = radioModal.querySelector('#radioVideo');
+                radioVideo.src = '';
+            });
         }
     }, []);
 
     return (
         <div>
-            {/* <Header /> */}
+            <Header />
             <div className="insideBanner">
                 <picture>
                     <source media="(max-width: 820px)" srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
@@ -175,21 +183,19 @@ function Advertisement() {
                         </button>
                     </div>
 
-                    <div className="ads-container toggleWrapper show" id="toggleWrapper-print">
+                    <div className="ads-container toggleWrapper show" style={{ display: activeType === 'print' ? 'block' : 'none' }}>
                         <div className="row gap-row">{renderAds('print')}</div>
                     </div>
 
-                    <div className="ads-container toggleWrapper" id="toggleWrapper-outdoor">
+                    <div className="ads-container toggleWrapper" style={{ display: activeType === 'outdoor' ? 'block' : 'none' }}>
                         <div className="row gap-row">{renderAds('outdoor')}</div>
                     </div>
 
-                    <div className="ads-container toggleWrapper" id="toggleWrapper-radio">
+                    <div className="ads-container toggleWrapper" style={{ display: activeType === 'radio' ? 'block' : 'none' }}>
                         <div className="row gap-row">{renderAds('radio')}</div>
                     </div>
                 </div>
             </div>
-
-            {/* <Footer /> */}
 
             {/* Modal for radio ads */}
             <div className="modal fade" id="radioModal" tabIndex="-1" aria-labelledby="radioModalLabel" aria-hidden="true">
@@ -201,12 +207,30 @@ function Advertisement() {
                         </div>
                         <div className="modal-body">
                             <div className="ratio ratio-16x9">
-                            <iframe id="radioVideo"  width="100%" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                                <iframe id="radioVideo" width="100%" height="315" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Lightbox for image ads */}
+            {isOpen && (
+                <Lightbox
+                    mainSrc={`${axiosInstance.defaults.globalURL}${ads[currentIndex].advertisementImage}`}
+                    nextSrc={`${axiosInstance.defaults.globalURL}${ads[(currentIndex + 1) % ads.length].advertisementImage}`}
+                    prevSrc={`${axiosInstance.defaults.globalURL}${ads[(currentIndex + ads.length - 1) % ads.length].advertisementImage}`}
+                    onCloseRequest={() => setIsOpen(false)}
+                    onMovePrevRequest={() =>
+                        setCurrentIndex((currentIndex + ads.length - 1) % ads.length)
+                    }
+                    onMoveNextRequest={() =>
+                        setCurrentIndex((currentIndex + 1) % ads.length)
+                    }
+                />
+            )}
+            
+            <Footer />
         </div>
     );
 }
