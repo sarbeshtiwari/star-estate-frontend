@@ -300,6 +300,10 @@ function CommercialProjects() {
         <div>
             {/* <Header /> */}
             <div className="insideBanner">
+            <picture>
+            <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/new/banner-office-m.jpg" />
+                    <img src="/star-estate-react/assets/images/banner-commercial.jpg" className="h-100 object-cover object-position-bottom" alt="Star Estate" />
+                </picture>
                 <div className="bannerContainer">
                     <div className="container-lg">
                         <div className="search-filter">
@@ -353,9 +357,9 @@ function CommercialProjects() {
                         </div>
                     </div>
                 </div>
-                <picture>
+                {/* <picture>
                     <img src="/star-estate-react/assets/images/banner-commercial.jpg" className="h-100 object-cover object-position-bottom" alt="Star Estate" />
-                </picture>
+                </picture> */}
             </div>
             <div className="w-100">
                 <div className="container-lg">
@@ -441,27 +445,27 @@ function CommercialProjects() {
             id !== 'commercial' && id !== 'residential' && id !== 'luxury' && id !== 'new-launch' && configurationDetails.length > 0 ? (
                 <>
                     {configurationDetails.map((details) => {
-                        const displayContent = details.ctcontent;
+                        const displayContent = details.briefContent;
                         
                         return (
                             <p key={details._id} className="text-center">
                                 <span>
-                                    {displayContent.length > 400 ? (
+                                    {/* {displayContent.length > 400 ? ( */}
                                         <React.Fragment>
                                             <span
                                                 dangerouslySetInnerHTML={{
                                                     __html: showMore
                                                         ? displayContent
-                                                        : displayContent.substring(0, 400) + '...'
+                                                        : displayContent
                                                 }}
                                             />
                                             <button onClick={openDetailModal} className="project-readmore-button">
                                                 {showMore ? 'Read less' : 'Read more'}
                                             </button>
                                         </React.Fragment>
-                                    ) : (
+                                    {/* ) : (
                                         <span dangerouslySetInnerHTML={{ __html: displayContent }} />
-                                    )}
+                                    )} */}
                                 </span>
                             </p>
                         );

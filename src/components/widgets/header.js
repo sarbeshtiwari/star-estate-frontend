@@ -177,7 +177,7 @@ const Header = () => {
                                 <i className="fa fa-user"></i>
                             </Link>
 
-                            {/* <CPRegistrationModal showModal={isModalOpen} closeModal={closeModal} /> */}
+                           
                             <button className="searchBtn" title="Search Property" onClick={handleShowSearchModal}>
                                 <span className="d-none d-lg-inline">Search Property</span>
                                 <i className="fa fa-search"></i>
@@ -212,7 +212,7 @@ const Header = () => {
                                 <ul className="list-inline">
                                     {cities.map((city) => (
                                         <li key={city._id}>
-                                            <Link to={`/city/${city.slugURL}`}>{city.location}</Link>
+                                            <Link to={`/city/${city.slugURL}`} onClick={closeMenu}>{city.location}</Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -224,7 +224,7 @@ const Header = () => {
                                 <ul className="list-inline">
                                     {developers.map((developer, index) => (
                                         <li key={index}>
-                                            <Link to={`/builder/${developer.slugURL}`}>{developer.developerName}</Link>
+                                            <Link to={`/builder/${developer.slugURL}` } onClick={closeMenu}>{developer.developerName}</Link>
                                         </li>
                                     ))}
                                 </ul>
@@ -234,21 +234,21 @@ const Header = () => {
                             <a href="javascript:;">Projects <i className="fa fa-caret-down"></i></a>
                             <div className="dropdown">
                                 <ul className="list-inline">
-                                    <li><Link to="/projects/luxury">Luxury</Link></li>
-                                    <li><Link to='/projects/residential'>Residential</Link></li>
-                                    <li><Link to='/projects/commercial'>Commercial</Link></li>
-                                    <li><Link to="/projects/new-launch">New Launches</Link></li>
+                                    <li><Link to="/projects/luxury" onClick={closeMenu}>Luxury</Link></li>
+                                    <li><Link to='/projects/residential' onClick={closeMenu}>Residential</Link></li>
+                                    <li><Link to='/projects/commercial' onClick={closeMenu}>Commercial</Link></li>
+                                    <li><Link to="/projects/new-launch" onClick={closeMenu}>New Launches</Link></li>
                                 </ul>
                             </div>
                         </li>
                         <li className="hasDropChild"><a href="javascript:;">Media <i className="fa fa-caret-down"></i></a>
                             <div className="dropdown">
                                 <ul className="list-inline">
-                                    <li><Link to='/awards'>Awards</Link></li>
-                                    <li><Link to='/news'>News</Link></li>
-                                    <li><Link to='/blogs'>Blogs</Link></li>
-                                    <li><Link to='/events'>Events</Link></li>
-                                    <li><Link to='/advertisements'>Advertisements</Link></li>
+                                    <li><Link to='/awards' onClick={closeMenu}>Awards</Link></li>
+                                    <li><Link to='/news' onClick={closeMenu}>News</Link></li>
+                                    <li><Link to='/blogs' onClick={closeMenu}>Blogs</Link></li>
+                                    <li><Link to='/events' onClick={closeMenu}>Events</Link></li>
+                                    <li><Link to='/advertisements' onClick={closeMenu}>Advertisements</Link></li>
                                 </ul>
                             </div>
                         </li>

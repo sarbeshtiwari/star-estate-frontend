@@ -52,14 +52,14 @@ function AboutUs() {
                 <picture>
                     <source 
                         media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/banner-per.jpg" 
+                        srcSet="/star-estate-react/assets/images/about-us.jpg" 
                     />
                     <source 
                         media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/banner-per-m.jpg" 
+                        srcSet="/star-estate-react/assets/images/about-us-m.jpg" 
                     />
                     <img 
-                        src="/star-estate-react/assets/images/banner-per-m.jpg" 
+                        src="/star-estate-react/assets/images/about-us-m.jpg" 
                         className="h-100 object-cover object-position-bottom rounded" 
                         alt="Star Estate" 
                     />

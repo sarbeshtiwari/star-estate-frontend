@@ -15,6 +15,8 @@ import {
     getProjectAmenities
 } from './amenities';
 
+
+
 export const sendProjectQuery = async (formData) => {
     console.log(formData)
     try {
@@ -33,6 +35,18 @@ function ProjectDetails() {
     const { slugURL } = useParams();
     const modalRef = useRef(null);
     // Functions to open and close the modal
+
+    const [activeIndex, setActiveIndex] = useState(null);
+
+    const handleToggle = (index) => {
+        // If the clicked item is already active, deactivate it by setting the activeIndex to null
+        if (activeIndex === index) {
+            setActiveIndex(null);
+        } else {
+            setActiveIndex(index);
+        }
+    };
+
     const openDetailModal = () => {
         if (modalRef.current) {
             modalRef.current.classList.add("active");
@@ -122,6 +136,7 @@ function ProjectDetails() {
     const [Faqs, setFaqs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
     useEffect(() => {
         const initializeSwipers = () => {
             new Swiper('.ameninity-slider', {
@@ -183,6 +198,8 @@ function ProjectDetails() {
             }
         });
     }, []);
+
+
     useEffect(() => {
         const fetchMainProjectData = async () => {
             try {
@@ -295,12 +312,36 @@ function ProjectDetails() {
         fetchGalleryData();
     }, [slugURL]);
     const [bannerImages, setBannerImages] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0); // State for current index
+ 
+    // useEffect(() => {
+    //     const fetchBannerImages = async () => {
+    //         try {
+    //             const response = await axiosInstance.get(`projectBannerImages/get/${slugURL}`);
+    //             if (Array.isArray(response.data) && response.data.length > 0) {
+    //                 // Filter images whose status is true
+    //                 const filteredImages = response.data.filter(image => image.status === true);
+    //                 setBannerImages(filteredImages);
+    //             } else {
+    //                 console.error('Unexpected response structure or no images found:', response.data);
+    //                 setBannerImages([]);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching banner images:', error);
+    //             setBannerImages([]);
+    //         }
+    //     };
+        
+    //     fetchBannerImages();
+    // }, [slugURL]);
+
     useEffect(() => {
         const fetchBannerImages = async () => {
             try {
                 const response = await axiosInstance.get(`projectBannerImages/get/${slugURL}`);
                 if (Array.isArray(response.data) && response.data.length > 0) {
-                    setBannerImages(response.data);
+                    const filteredImages = response.data.filter(image => image.status === true);
+                    setBannerImages(filteredImages);
                 } else {
                     console.error('Unexpected response structure or no images found:', response.data);
                     setBannerImages([]);
@@ -308,10 +349,21 @@ function ProjectDetails() {
             } catch (error) {
                 console.error('Error fetching banner images:', error);
                 setBannerImages([]);
+            } finally {
+                setLoading(false); // Set loading to false after fetching
             }
         };
+
         fetchBannerImages();
     }, [slugURL]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex(prevIndex => (prevIndex + 1) % bannerImages.length);
+        }, 3000); // Change slide every 3 seconds
+
+        return () => clearInterval(interval); // Cleanup on unmount
+    }, [bannerImages]);
     // Fetch Project Amenities and All Amenities
     useEffect(() => {
         const fetchAmenities = async () => {
@@ -464,6 +516,27 @@ function ProjectDetails() {
                     ))}
                 </div>
                 <div className="carousel-inner h-100">
+            {loading ? (
+                <div className="carousel-item h-100 active">
+                    <p>Loading images...</p>
+                </div>
+            ) : bannerImages.length > 0 ? (
+                bannerImages.map((image, index) => (
+                    <div key={index} className={`carousel-item h-100 ${index === currentIndex ? 'active' : ''}`}>
+                        <picture>
+                            <source media="(max-width: 520px)" srcSet={image.mobile_image_url} />
+                            <source media="(min-width: 521px) and (max-width: 1024px)" srcSet={image.tablet_image_url} />
+                            <img src={image.desktop_image_url} className="d-block w-100 h-100 object-cover" alt={image.alt_tag_desktop} />
+                        </picture>
+                    </div>
+                ))
+            ) : (
+                <div className="carousel-item h-100 active">
+                    <p>No images available</p>
+                </div>
+            )}
+        </div>
+                {/* <div className="carousel-inner h-100">
                     {bannerImages.length > 0 ? (
                         bannerImages.map((image, index) => (
                             <div key={index} className={`carousel-item h-100 ${index === 0 ? 'active' : ''}`}>
@@ -479,7 +552,7 @@ function ProjectDetails() {
                             <p>No images available</p>
                         </div>
                     )}
-                </div>
+                </div> */}
                 {mainData.length > 0 && quickDetails.length > 0 && mainData.map((data, index) => {
                     let projectType = "";
                     let unitType = "";
@@ -515,7 +588,7 @@ function ProjectDetails() {
                                     </h6>
                                 </div>
                                 <ul className="list-inline hero-pointers">
-                                    <li><strong>Price:</strong> <span>{data.projectPrice}*</span></li>
+                                    <li><strong>Price:</strong> <span> {data.projectPrice === 'On Request' || data.projectPrice === 'Revealing Soon' ? `${data.projectPrice}` : <><i className="fa fa-indian-rupee-sign"></i> {data.projectPrice}*</>}</span></li>
                                     {unitType && (
                                         <li>
                                             <span>{unitType}</span>
@@ -774,45 +847,60 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div>
-            <div id="amenities" className="w-100 padding position-relative overflow-hidden section-amenities bg-image2" style={{ backgroundImage: "url(./images/lodha-bellevue/banner-lodha-bellevue1.webp)" }}>
-                <div className="container-lg">
-                    <div className="heading mx-auto text-sm-center text-white">
-                        <h2 className="mb-3">Amenities</h2>
-                        <p
-                            className="mb-0"
-                            dangerouslySetInnerHTML={{
-                                __html: amenitiesContent && amenitiesContent.length > 0 && amenitiesContent[0].amenityContent
-                                    ? amenitiesContent[0].amenityContent
-                                    : '',
-                            }}
-                        ></p>
-
-                    </div>
-                    <div className="swiper ameninity-slider amenitiesContainer">
-                        <div className="swiper-wrapper">
-                            {amenities.length > 0 ? (
-                                amenities.map((amenity) => (
-                                    <div className="swiper-slide amenBox" key={amenity._id}>
-                                        <div className="inner">
-                                            <div className="img-fluid">
-                                                <img src={`${axiosInstance.defaults.globalURL}${amenity.image}`} className="filter-white" alt={amenity.alt_tag} />
-                                            </div>
-                                            <p className="mb-0" >{amenity.title}</p>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <div>No amenities available</div>
-                            )}
-                        </div>
-                        <div className="swiper-controls">
-                            <div className="swiper-button-prev bg-white" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-e1188335f59e7940"></div>
-                            <div className="readmore mt-0"><a href="#formModal" onClick={handleShow} data-bs-toggle="modal" className="button light">View All</a></div>
-                            <div className="swiper-button-next bg-white" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-e1188335f59e7940"></div>
-                        </div>
-                    </div>
+            <div   id="amenities" 
+  className="w-100 padding position-relative overflow-hidden section-amenities" 
+  style={{ 
+    backgroundImage: `url(${
+      galleryData.some(data => data.amenityImage)
+        ? `${axiosInstance.defaults.globalURL}${galleryData.find(data => data.displayHome).desktopImage}`
+        : '/star-estate-react/assets/images/lodha-bellevue/gallery/1.webp' // Your default background image
+    })` 
+  }}
+>
+  <div className="container-lg">
+    <div className="heading mx-auto text-sm-center text-white">
+      <h2 className="mb-3">Amenities</h2>
+      <p
+        className="mb-0"
+        dangerouslySetInnerHTML={{
+          __html: amenitiesContent && amenitiesContent.length > 0 && amenitiesContent[0].amenityContent
+            ? amenitiesContent[0].amenityContent
+            : '',
+        }}
+      ></p>
+    </div>
+    <div className="swiper ameninity-slider amenitiesContainer">
+      <div className="swiper-wrapper">
+        {amenities.length > 0 ? (
+          amenities.map((amenity) => (
+            <div className="swiper-slide amenBox" key={amenity._id}>
+              <div className="inner">
+                <div className="img-fluid">
+                  <img 
+                    src={`${axiosInstance.defaults.globalURL}${amenity.image}`} 
+                    className="filter-white" 
+                    alt={amenity.alt_tag} 
+                  />
                 </div>
+                <p className="mb-0">{amenity.title}</p>
+              </div>
             </div>
+          ))
+        ) : (
+          <div>No amenities available</div>
+        )}
+      </div>
+      <div className="swiper-controls">
+        <div className="swiper-button-prev bg-white" tabIndex="0" role="button" aria-label="Previous slide"></div>
+        <div className="readmore mt-0">
+          <a href="#formModal" onClick={handleShow} data-bs-toggle="modal" className="button light">View All</a>
+        </div>
+        <div className="swiper-button-next bg-white" tabIndex="0" role="button" aria-label="Next slide"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
             <div id="floorplan" className="w-100 padding section-floorplan">
                 <div className="container-lg">
                     <div className="heading mx-auto text-center">
@@ -1028,25 +1116,28 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div >
+
+            {/* FAQs */}
             <div className="w-100 padding bg-gray-gradient-box section-faq">
-                {Faqs.length > 0 && ( //used when no data available it should it the whole container
-                    <div className="container-lg">
-                        <div className="heading mx-auto text-center">
-                            <h2 className="mb-0">FAQs</h2>
-                        </div>
+            {Faqs.length > 0 && (
+                <div className="container-lg">
+                    <div className="heading mx-auto text-center">
+                        <h2 className="mb-0">FAQs</h2>
+                    </div>
                     <div className="touchFormWrapper">
                         <div className="accordion" id="myAccordion">
                             {Faqs.map((faq, index) => {
                                 const faqIndex = index + 1;
+                                const isActive = activeIndex === faqIndex; // Check if this item is active
+
                                 return (
                                     <div className="accordion-item" key={faqIndex}>
                                         <h2 className="accordion-header" id={`heading${faqIndex}`}>
                                             <button
-                                                className="accordion-button collapsed"
+                                                className={`accordion-button ${isActive ? "" : "collapsed"}`}
                                                 type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target={`#collapse${faqIndex}`}
-                                                aria-expanded="false"
+                                                onClick={() => handleToggle(faqIndex)}
+                                                aria-expanded={isActive ? "true" : "false"}
                                                 aria-controls={`collapse${faqIndex}`}
                                             >
                                                 Q{faqIndex}: {faq.faqQuestion}
@@ -1054,7 +1145,7 @@ function ProjectDetails() {
                                         </h2>
                                         <div
                                             id={`collapse${faqIndex}`}
-                                            className="accordion-collapse collapse"
+                                            className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
                                             aria-labelledby={`heading${faqIndex}`}
                                             data-bs-parent="#myAccordion"
                                         >
@@ -1072,8 +1163,10 @@ function ProjectDetails() {
                         </div>
                     </div>
                 </div>
-                )}
-            </div>
+            )}
+        </div>
+
+            {/* Marketing Partner */}
             <div className="w-100 padding bg-lightgray section-partner">
                 <div className="container-lg">
                     <div className="row">
@@ -1101,7 +1194,9 @@ function ProjectDetails() {
                         </div>
                     </div>
                 </div>
+           
             </div>
+             {/* Similar Projects */}
 
                 <div className="w-100 padding section-similar-projects">
                     <div className="container-lg">
@@ -1154,16 +1249,9 @@ function ProjectDetails() {
                                 ))}
                             </div>
                             <div className="swiper-controls h-auto mr-auto">
-                                <div
-                                    className="swiper-button-prev"
-                                    role="button"
-                                    aria-label="Previous slide"
-                                ></div>
-                                <div
-                                    className="swiper-button-next"
-                                    role="button"
-                                    aria-label="Next slide"
-                                ></div>
+                                <div className="swiper-button-prev" role="button" aria-label="Previous slide"></div>
+                                <div className="readmore w-auto mt-0"></div>
+                                <div className="swiper-button-next" role="button" aria-label="Next slide"></div>
                             </div>
                         </div>
                     </div>

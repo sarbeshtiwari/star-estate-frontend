@@ -7,7 +7,8 @@ import Footer from "../../widgets/footer";
 export const fetchCities = async () => {
     try {
         const response = await axiosInstance.get(`/city/getCities`);
-        return response.data;
+        const filteredCity = response.data.filter(city => city.status === true);
+        return filteredCity;
     } catch (error) {
         console.error('Error fetching cities:', error);
         throw error;
@@ -17,12 +18,19 @@ export const fetchCities = async () => {
 export const fetchDevelopers = async () => {
     try {
         const response = await axiosInstance.get(`/developers/getDeveloper`);
-        return response.data;
+        const filteredDeveloper = response.data.filter(developer => developer.status === true);
+        return filteredDeveloper;
     } catch (error) {
         console.error('Error fetching developers:', error);
         throw error;
     }
 };
+
+export const fetchSubCity = async () => {
+    try {
+        const response = await axiosInstance.get(`/`)
+    } catch {}
+}
 
 export default function SiteMap() {
     const [cities, setCities] = useState([]);
@@ -166,7 +174,12 @@ export default function SiteMap() {
                                             </Link>
                                         ))
                                     ) : (
-                                        <p>Loading cities...</p>
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <div className="spinner-border text-primary" role="status">
+                                                <span className="sr-only">Loading...</span>
+                                            </div>
+                                            <span className="ml-2">Loading...</span>
+                                        </div>
                                     )}
                                 </div>
                             </div>
@@ -186,13 +199,17 @@ export default function SiteMap() {
                                             </Link>
                                         ))
                                     ) : (
-                                        <p>Loading developers...</p>
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <div className="spinner-border text-primary" role="status">
+                                                <span className="sr-only">Loading...</span>
+                                            </div>
+                                            <span className="ml-2">Loading...</span>
+                                        </div>
                                     )}
                                 </div>
                             </div>
                         </div>
                         
-                        {/* Other sections remain the same */}
                         <div className="sitemapContainer">
                             <div className="heading">
                                 <h6 className="mb-0 text-primary">Our Projects</h6>
@@ -206,6 +223,7 @@ export default function SiteMap() {
                                 </ul>
                             </div>
                         </div>
+                        {/* Studio Apartments */}
                         <div className="sitemapContainer">
                             <div className="heading">
                                 <h6 className="mb-0 text-primary">Studio Apartments</h6>
@@ -227,6 +245,7 @@ export default function SiteMap() {
                                 </ul>
                             </div>
                         </div>
+                        {/* Property by city */}
                         <div className="sitemapContainer">
                             {cities.map((city) => (
                                 <div key={city._id} className="mb-4">

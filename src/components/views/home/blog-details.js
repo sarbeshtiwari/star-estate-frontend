@@ -6,7 +6,9 @@ function BlogDetails() {
     const { slugURL } = useParams();
     const [blogDetails, setBlogDetails] = useState([]);
     const [recentBlogs, setRecentBlogs] = useState([]);
-    const [error, setError] = useState([]);
+    const [error, setError] = useState('');
+    const [loadingBlog, setLoadingBlog] = useState(true);
+    const [loadingRecent, setLoadingRecent] = useState(true);
     const footerRef = useRef(null);
     const [isSticky, setIsSticky] = useState(false);
 
@@ -19,6 +21,8 @@ function BlogDetails() {
             } catch (error) {
                 setError('Error fetching blog data');
                 console.error('Error fetching blog data:', error);
+            } finally {
+                setLoadingBlog(false);
             }
         };
         fetchBlogDetailsData();
@@ -36,6 +40,8 @@ function BlogDetails() {
             } catch (error) {
                 setError('Error fetching recent blogs');
                 console.error('Error fetching recent blogs:', error);
+            } finally {
+                setLoadingRecent(false);
             }
         };
         fetchRecentBlogs();
@@ -62,22 +68,41 @@ function BlogDetails() {
             <div className="emptyBox"></div>
             <div className="w-100">
                 <div className="container-lg">
-                    {blogDetails.map((blogs, index) => (
-                        <div key={index} className="breadcrumbContainer" aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><Link to='/'>Home</Link></li>
-                                <li className="breadcrumb-item">Media</li>
-                                <li className="breadcrumb-item"><Link to='/blogs'>Blogs</Link></li>
-                                <li className="breadcrumb-item active">{blogs.blogsName}</li>
-                            </ol>
+                    {loadingBlog ? (
+                        <div className="d-flex justify-content-center align-items-center">
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="sr-only">Loading...</span>
                         </div>
-                    ))}
+                        <span className="ml-2">Loading...</span>
+                    </div>
+                    ) : error ? (
+                        <div className="alert alert-danger">{error}</div>
+                    ) : (
+                        blogDetails.map((blogs, index) => (
+                            <div key={index} className="breadcrumbContainer" aria-label="breadcrumb">
+                                <ol className="breadcrumb">
+                                    <li className="breadcrumb-item"><Link to='/'>Home</Link></li>
+                                    <li className="breadcrumb-item">Media</li>
+                                    <li className="breadcrumb-item"><Link to='/blogs'>Blogs</Link></li>
+                                    <li className="breadcrumb-item active">{blogs.blogsName}</li>
+                                </ol>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
+
             <div className="w-100 padding">
                 <div className="container-lg">
                     <div className="row gap-row">
-                        {blogDetails.map((blogs, index) => (
+                        {loadingBlog ? (
+                           <div className="d-flex justify-content-center align-items-center">
+                           <div className="spinner-border text-primary" role="status">
+                               <span className="sr-only">Loading...</span>
+                           </div>
+                           <span className="ml-2">Loading...</span>
+                       </div>
+                        ) : blogDetails.map((blogs, index) => (
                             <React.Fragment key={index}>
                                 <div className="col-xl-8 col-lg-7 blogTextContainer">
                                     <div className="inner pr-lg-3">
@@ -97,45 +122,55 @@ function BlogDetails() {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div
                                     className="col-xl-4 col-lg-5 position-relative pageAside"
                                     style={{
                                         position: isSticky ? 'sticky' : 'relative',
                                         top: isSticky ? '20px' : 'auto',
-                                        transition: 'top 0.3s', // Smooth transition for sticky effect
-                                        height: 'fit-content', // Ensure the height fits the content
+                                        transition: 'top 0.3s',
+                                        height: 'fit-content',
                                     }}
                                 >
-                                    {recentBlogs.length === 0 ? ('') : <div className="aside-inner" style={{ top: "60px" }}>
-                                        <aside className="topRatedProjectShowcase common-border mt-0">
-                                            <div className="heading ml-0">
-                                                <h6 className="mb-0 text-primary">Recent Posts</h6>
-                                            </div>
-                                            <div className="topRatedProjectsContainer">
-                                                {recentBlogs.map((recentBlog, idx) => (
-                                                    <div key={idx} className="topRatedProjectBox">
-                                                        <div className="inner">
-                                                            <div className="img-fluid">
-                                                                <img src={`${axiosInstance.defaults.globalURL}${recentBlog.blogsImage}`} alt={recentBlog.blogsName || 'Blog Image'} />
-                                                            </div>
-                                                            <div className="boxDetails">
-                                                                <Link to={`/blogs/${recentBlog.slugURL}`}>
-                                                                    {recentBlog.blogsName}
-                                                                </Link>
+                                    {loadingRecent ? (
+                                        <div className="d-flex justify-content-center align-items-center">
+                                        <div className="spinner-border text-primary" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                        <span className="ml-2">Loading...</span>
+                                    </div>
+                                    ) : recentBlogs.length > 0 && (
+                                        <div className="aside-inner" style={{ top: "60px" }}>
+                                            <aside className="topRatedProjectShowcase common-border mt-0">
+                                                <div className="heading ml-0">
+                                                    <h6 className="mb-0 text-primary">Recent Posts</h6>
+                                                </div>
+                                                <div className="topRatedProjectsContainer">
+                                                    {recentBlogs.map((recentBlog, idx) => (
+                                                        <div key={idx} className="topRatedProjectBox">
+                                                            <div className="inner">
+                                                                <div className="img-fluid">
+                                                                    <img src={`${axiosInstance.defaults.globalURL}${recentBlog.blogsImage}`} alt={recentBlog.blogsName || 'Blog Image'} />
+                                                                </div>
+                                                                <div className="boxDetails">
+                                                                    <Link to={`/blogs/${recentBlog.slugURL}`}>
+                                                                        {recentBlog.blogsName}
+                                                                    </Link>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </aside>
-                                    </div>}
-                                    
+                                                    ))}
+                                                </div>
+                                            </aside>
+                                        </div>
+                                    )}
                                 </div>
                             </React.Fragment>
                         ))}
                     </div>
                 </div>
             </div>
+
             <footer ref={footerRef}>
                 {/* Footer content goes here */}
             </footer>

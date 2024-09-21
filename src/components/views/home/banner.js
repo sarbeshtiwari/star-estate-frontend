@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Carousel } from 'react-bootstrap';
 import Typed from 'typed.js';
 import { fetchCategories, fetchCities, fetchProjects } from '../../../apis/home-page-api';
-import './banner.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../widgets/header';
 import axiosInstance from '../utils/axiosInstance';
@@ -126,14 +125,14 @@ const Banner = () => {
   const [index, setIndex] = useState(0);
   useEffect(() => {
     const typed = new Typed('#typed', {
-      strings: ['Apartment', 'Villa', 'Mall', 'Office Space'],
+      strings: ['Apartment', 'Villa', 'Retail Space', 'Office Space'],
       typeSpeed: 160,
       backDelay: 1500,
       backSpeed: 50,
       loop: true,
       preStringTyped: (arrayPos, self) => {
         const typedText = self.strings[arrayPos].trim();
-        const items = ['Apartment', 'Villa', 'Mall', 'Office Space'];
+        const items = ['Apartment', 'Villa', 'Retail Space', 'Office Space'];
         const foundIndex = items.indexOf(typedText);
         if (foundIndex !== -1) {
           setIndex(foundIndex);
@@ -265,7 +264,7 @@ const Banner = () => {
                     </div>
                   </div>
                 </form>
-                <div className="filter-property-type d-none d-md-flex">
+                <div className="filter-property-type flex-column flex-sm-row">
                   <Link to="/projects/new-launch">New Launches</Link>
                   <Link to='/projects/commercial'>Commercial Properties</Link>
                   <Link to='/projects/residential'>Residential Properties</Link>

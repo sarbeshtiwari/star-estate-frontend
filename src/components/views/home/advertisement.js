@@ -11,16 +11,20 @@ function Advertisement() {
     const [ads, setAds] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     // Fetch Ads based on status
     useEffect(() => {
         const fetchAds = async () => {
+            setLoading(true);
             try {
-                const response = await axiosInstance.get(`advertisement/getAdvertisements`);
+                const response = await axiosInstance.get('advertisement/getAdvertisements');
                 const filteredAds = response.data.filter(ad => ad.status === true);
                 setAds(filteredAds);
             } catch (error) {
                 console.error('Failed to fetch advertisements', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -40,72 +44,76 @@ function Advertisement() {
 
     // Render ads based on their type (print, outdoor, radio)
     const renderAds = (type) => {
-        return ads
-            .filter(ad => ad.advertisementType === type)
-            .map((ad, index) => {
-                if (type === 'radio') {
-                    return (
-                        <div className="col-lg-4 col-sm-6 blogBox newsBox" key={ad._id}>
-                            <a
-                                href="#radioModal"
-                                className="inner d-block common-border"
-                                data-bs-toggle="modal"
-                                data-title={ad.advertisementTitle || 'Radio Ad'}
-                                data-src={ad.videoURL}
-                            >
-                                <div className="img-fluid">
-                                    <img
-                                        src={`${axiosInstance.defaults.globalURL}${ad.advertisementImage}`}
-                                        alt="Radio Ad"
-                                        title="Radio Ad"
-                                    />
-                                </div>
-                                <div className="blog-details">
-                                    <ul className="list-inline">
-                                        <li>
-                                            <i className="fa fa-tag"></i> <span>{ad.advertisementLocation || 'Red FM'}</span>
-                                        </li>
-                                    </ul>
-                                    <h6 className="h6">{ad.advertisementTitle || 'Luxury Property Show 2023'}</h6>
-                                    <div className="continue-reading">Click to View</div>
-                                </div>
-                            </a>
-                        </div>
-                    );
-                } else {
-                    return (
-                        <div className="col-lg-4 col-sm-6 blogBox newsBox" key={ad._id}>
-                            <div
-                                onClick={() => handleImageClick(index)}
-                                className="inner d-block common-border"
-                                style={{ cursor: 'pointer' }}
-                            >
-                                <div className="img-fluid">
-                                    <img
-                                        src={`${axiosInstance.defaults.globalURL}${ad.advertisementImage}`}
-                                        alt={`${ad.advertisementType} Ad`}
-                                        title={`${ad.advertisementType} Ad`}
-                                    />
-                                </div>
-                                <div className="blog-details">
-                                    {ad.advertisementType === 'outdoor' ? '' : (
-                                        <>
-                                            <ul className="list-inline">
-                                                <li>
-                                                    <i className="fa fa-calendar-alt"></i>{' '}
-                                                    <span>{ad.advertisementDate}</span>
-                                                </li>
-                                            </ul>
-                                            <h6 className="h6">{ad.advertisementTitle || 'Luxury Property Show 2023'}</h6>
-                                        </>
-                                    )}
-                                    <div className="continue-reading">Click to View</div>
-                                </div>
+        const filteredAds = ads.filter(ad => ad.advertisementType === type);
+
+        if (filteredAds.length === 0) {
+            return <div className="col-12 text-center">No ads available for {type}</div>;
+        }
+
+        return filteredAds.map((ad, index) => {
+            if (type === 'radio') {
+                return (
+                    <div className="col-lg-4 col-sm-6 blogBox newsBox" key={ad._id}>
+                        <a
+                            href="#radioModal"
+                            className="inner d-block common-border"
+                            data-bs-toggle="modal"
+                            data-title={ad.advertisementTitle || 'Radio Ad'}
+                            data-src={ad.videoURL}
+                        >
+                            <div className="img-fluid">
+                                <img
+                                    src={`${axiosInstance.defaults.globalURL}${ad.advertisementImage}`}
+                                    alt="Radio Ad"
+                                    title="Radio Ad"
+                                />
+                            </div>
+                            <div className="blog-details">
+                                <ul className="list-inline">
+                                    <li>
+                                        <i className="fa fa-tag"></i> <span>{ad.advertisementLocation || 'Red FM'}</span>
+                                    </li>
+                                </ul>
+                                <h6 className="h6">{ad.advertisementTitle || 'Luxury Property Show 2023'}</h6>
+                                <div className="continue-reading">Click to View</div>
+                            </div>
+                        </a>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="col-lg-4 col-sm-6 blogBox newsBox" key={ad._id}>
+                        <div
+                            onClick={() => handleImageClick(index)}
+                            className="inner d-block common-border"
+                            style={{ cursor: 'pointer' }}
+                        >
+                            <div className="img-fluid">
+                                <img
+                                    src={`${axiosInstance.defaults.globalURL}${ad.advertisementImage}`}
+                                    alt={`${ad.advertisementType} Ad`}
+                                    title={`${ad.advertisementType} Ad`}
+                                />
+                            </div>
+                            <div className="blog-details">
+                                {ad.advertisementType === 'outdoor' ? '' : (
+                                    <>
+                                        <ul className="list-inline">
+                                            <li>
+                                                <i className="fa fa-calendar-alt"></i>{' '}
+                                                <span>{ad.advertisementDate}</span>
+                                            </li>
+                                        </ul>
+                                        <h6 className="h6">{ad.advertisementTitle || 'Luxury Property Show 2023'}</h6>
+                                    </>
+                                )}
+                                <div className="continue-reading">Click to View</div>
                             </div>
                         </div>
-                    );
-                }
-            });
+                    </div>
+                );
+            }
+        });
     };
 
     // Modal setup for radio ads
@@ -134,11 +142,22 @@ function Advertisement() {
 
     return (
         <div>
-            <Header />
+         
             <div className="insideBanner">
                 <picture>
-                    <source media="(max-width: 820px)" srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
-                    <img src="/star-estate-react/assets/images/banner-emi-calculator.jpg" className="h-100 object-cover" alt="Star Estate" />
+                    <source 
+                        media="(min-width: 992px)" 
+                        srcSet="/star-estate-react/assets/images/advertisements.jpg" 
+                    />
+                    <source 
+                        media="(min-width: 768px)" 
+                        srcSet="/star-estate-react/assets/images/advertisements-m.jpg" 
+                    />
+                    <img 
+                        src="/star-estate-react/assets/images/advertisements-m.jpg" 
+                        className="h-100 object-cover object-position-bottom rounded" 
+                        alt="Star Estate" 
+                    />
                 </picture>
             </div>
 
@@ -159,6 +178,8 @@ function Advertisement() {
                     <div className="heading mx-sm-auto text-sm-center">
                         <h3 className="mb-0">Advertisements</h3>
                     </div>
+
+                    {/* Toggle Buttons */}
                     <div className="toggleHead">
                         <button
                             className={`toggleBtn adsToggleBtn ${activeType === 'print' ? 'active' : ''}`}
@@ -183,17 +204,32 @@ function Advertisement() {
                         </button>
                     </div>
 
-                    <div className="ads-container toggleWrapper show" style={{ display: activeType === 'print' ? 'block' : 'none' }}>
-                        <div className="row gap-row">{renderAds('print')}</div>
-                    </div>
+                    {/* Loading Spinner */}
+                    {loading ? (
+                        <div className="d-flex justify-content-center align-items-center">
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                            <span className="ml-2">Loading...</span>
+                        </div>
+                    ) : (
+                        <>
+                            {/* Print Ads */}
+                            <div className="ads-container toggleWrapper show" style={{ display: activeType === 'print' ? 'block' : 'none' }}>
+                                <div className="row gap-row">{renderAds('print')}</div>
+                            </div>
 
-                    <div className="ads-container toggleWrapper" style={{ display: activeType === 'outdoor' ? 'block' : 'none' }}>
-                        <div className="row gap-row">{renderAds('outdoor')}</div>
-                    </div>
+                            {/* Outdoor Ads */}
+                            <div className="ads-container toggleWrapper" style={{ display: activeType === 'outdoor' ? 'block' : 'none' }}>
+                                <div className="row gap-row">{renderAds('outdoor')}</div>
+                            </div>
 
-                    <div className="ads-container toggleWrapper" style={{ display: activeType === 'radio' ? 'block' : 'none' }}>
-                        <div className="row gap-row">{renderAds('radio')}</div>
-                    </div>
+                            {/* Radio Ads */}
+                            <div className="ads-container toggleWrapper" style={{ display: activeType === 'radio' ? 'block' : 'none' }}>
+                                <div className="row gap-row">{renderAds('radio')}</div>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
 
@@ -207,14 +243,14 @@ function Advertisement() {
                         </div>
                         <div className="modal-body">
                             <div className="ratio ratio-16x9">
-                                <iframe id="radioVideo" width="100%" height="315" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                <iframe id="radioVideo" src="" title="Radio Ad"></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Lightbox for image ads */}
+            {/* Image Lightbox */}
             {isOpen && (
                 <Lightbox
                     mainSrc={`${axiosInstance.defaults.globalURL}${ads[currentIndex].advertisementImage}`}
@@ -229,8 +265,8 @@ function Advertisement() {
                     }
                 />
             )}
-            
-            <Footer />
+
+       
         </div>
     );
 }

@@ -65,7 +65,6 @@
 
 // export default Awards
 
-
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { Link } from 'react-router-dom';
@@ -76,6 +75,7 @@ function Awards() {
     const [awards, setAwards] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const fetchAwards = async () => {
@@ -83,8 +83,10 @@ function Awards() {
                 const response = await axiosInstance.get(`/award/getAwards`);
                 const filteredAwards = response.data.filter(award => award.status === true);
                 setAwards(filteredAwards);
+                setLoading(false); // Set loading to false after data is fetched
             } catch (error) {
                 console.error('Failed to fetch Awards', error);
+                setLoading(false); // Set loading to false in case of an error
             }
         };
 
@@ -105,8 +107,19 @@ function Awards() {
             {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source media="(max-width: 820px)" srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
-                    <img src="/star-estate-react/assets/images/banner-emi-calculator.jpg" className="h-100 object-cover" alt="Star Estate" />
+                    <source 
+                        media="(min-width: 992px)" 
+                        srcSet="/star-estate-react/assets/images/award.jpg" 
+                    />
+                    <source 
+                        media="(min-width: 768px)" 
+                        srcSet="/star-estate-react/assets/images/award-m.jpg" 
+                    />
+                    <img 
+                        src="/star-estate-react/assets/images/award-m.jpg" 
+                        className="h-100 object-cover object-position-bottom rounded" 
+                        alt="Star Estate" 
+                    />
                 </picture>
             </div>
 
@@ -127,18 +140,28 @@ function Awards() {
                     <div className="heading mx-sm-auto text-sm-center">
                         <h3 className="mb-0">Awards & Recognitions</h3>
                     </div>
-                    <div className="row gap-row">
-                        {awards.map((award, index) => (
-                            <div key={index} className="col-lg-4 col-sm-6 award-slide">
-                                <img
-                                    src={`${axiosInstance.defaults.globalURL}${award.awardImage}`}
-                                    alt={award.awardName || 'Award Image'}
-                                    onClick={() => openLightbox(index)}
-                                    style={{ cursor: 'pointer', width: '100%', height: 'auto' }} // Set image dimensions
-                                />
+
+                    {/* Show spinner while loading */}
+                    {loading ? (
+                        <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '200px' }}>
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="sr-only">Loading...</span>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ) : (
+                        <div className="row gap-row">
+                            {awards.map((award, index) => (
+                                <div key={index} className="col-lg-4 col-sm-6 award-slide">
+                                    <img
+                                        src={`${axiosInstance.defaults.globalURL}${award.awardImage}`}
+                                        alt={award.awardName || 'Award Image'}
+                                        onClick={() => openLightbox(index)}
+                                        style={{ cursor: 'pointer', width: '100%', height: 'auto' }} // Set image dimensions
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
 

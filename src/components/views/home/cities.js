@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { Link, useNavigate } from 'react-router-dom';
+
 export const fetchCities = async () => {
   try {
     const response = await axiosInstance.get(`city/getCityWithImage`);
@@ -10,11 +11,13 @@ export const fetchCities = async () => {
     throw error;
   }
 };
+
 const CitywiseContainer = () => {
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const loadCities = async () => {
       try {
@@ -38,6 +41,7 @@ const CitywiseContainer = () => {
     };
     loadCities();
   }, []);
+
   const handleCityClick = (city) => {
     if (city.alt === 'Other Cities') {
       navigate('/city');
@@ -45,6 +49,7 @@ const CitywiseContainer = () => {
       navigate(`/city/${city.slugURL}`);
     }
   };
+
   return (
     <div className="w-100 padding position-relative overflow-hidden hm-citywiseContainer animate-section2">
       <div className="container-lg">
@@ -53,29 +58,42 @@ const CitywiseContainer = () => {
             Find your dream property in the city you're searching in
           </h3>
         </div>
-        <div className="all-cities">
-          <div className="inner text-center">
-            <div className="row g-3">
-              {cities.map((city, index) => (
-                <div
-                  key={index}
-                  className="col-lg-3 col-md-4 col-sm-6 project_box cityBox py-0"
-                  onClick={() => handleCityClick(city)} // Add click handler
-                >
-                  <div className="project_box_inner p-0">
-                    <div className="Project_box_img">
-                      <div className="img-fluid">
-                        <img src={city.src} alt={city.alt} />
+
+        {loading ? ( // Show spinner while loading
+          <div className="d-flex justify-content-center align-items-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="sr-only">Loading cities...</span>
+            </div>
+            <span className="ml-2">Loading cities...</span>
+          </div>
+        ) : error ? ( // Show error message if any
+          <p className="text-danger text-center">{error}</p>
+        ) : (
+          <div className="all-cities">
+            <div className="inner text-center">
+              <div className="row g-3">
+                {cities.map((city, index) => (
+                  <div
+                    key={index}
+                    className="col-lg-3 col-md-4 col-sm-6 project_box cityBox py-0"
+                    onClick={() => handleCityClick(city)} // Add click handler
+                  >
+                    <div className="project_box_inner p-0">
+                      <div className="Project_box_img">
+                        <div className="img-fluid">
+                          <img src={city.src} alt={city.alt} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
 };
+
 export default CitywiseContainer;

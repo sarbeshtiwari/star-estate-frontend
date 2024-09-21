@@ -76,9 +76,10 @@ const Footer = () => {
                                     <h6>Projects</h6>
                                     <ul className="list-inline">
                                         {/* <li><Link to="/projects/luxury">Luxury</Link></li> */}
+                                        <li><Link to="/projects/new-launch">New Launches</Link></li>
                                         <li><Link to='/projects/commercial'>Commercial</Link></li>
                                         <li><Link to='/projects/residential'>Residential</Link></li>
-                                        <li><Link to="/projects/new-launch">New Launches</Link></li>
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -113,7 +114,7 @@ const Footer = () => {
                                         <li><Link to='/careers'>Careers</Link></li>
                                         <li><Link to='/contact-us'>Contact Us</Link></li>
                                         <li><Link to='/buyer-guide/'>Buyer Guide</Link></li>
-                                        <li><Link to='/'>Desclaimer</Link></li>
+                                        <li><Link to='/desclaimer'>Desclaimer</Link></li>
                                         <li><Link to='/privacy-policy'>Privacy Policy</Link></li>
                                         <li><Link to='/sitemap'>Sitemap</Link></li>
                                     </ul>

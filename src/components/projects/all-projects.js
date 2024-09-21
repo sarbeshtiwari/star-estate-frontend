@@ -6,11 +6,14 @@ import { Link, useLocation } from 'react-router-dom';
 
 function AllProjects() {
     const [allProjects, setAllProjects] = useState([]);
-    const [errors, setError] = useState([]);
+    const [errors, setError] = useState('');
+    const [loading, setLoading] = useState(true); // Loading state
     const location = useLocation();
 
     useEffect(() => {
         const fetchFilteredProjects = async () => {
+            setLoading(true); // Set loading to true before fetching data
+
             const parsePrice = (price) => {
                 if (!price) return '';
                 const cleanPrice = price.replace(/[^0-9.]/g, '');
@@ -32,7 +35,6 @@ function AllProjects() {
                 maxPrice: queryParams.get('maxPrice') || '',
             };
 
-            // Convert minPrice and maxPrice to numeric values
             const minPrice = parsePrice(params.minPrice);
             const maxPrice = parsePrice(params.maxPrice);
 
@@ -46,7 +48,6 @@ function AllProjects() {
                 });
                 console.log(response.data);
                 if (response.data.success) {
-                    // Filter projects where projectStatus is true
                     const filteredProjects = response.data.projects.filter(project => project.status === true);
                     if (filteredProjects.length > 0) {
                         setAllProjects(filteredProjects);
@@ -59,16 +60,16 @@ function AllProjects() {
             } catch (error) {
                 setError('Error fetching projects');
                 console.error('Error fetching projects:', error);
+            } finally {
+                setLoading(false); // Set loading to false after fetching
             }
         };
 
         fetchFilteredProjects();
     }, [location.search]);
 
-
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
                     <source media="(max-width: 520px)" srcSet="/star-estate-react/assets/images/banner-commercial-m.jpg" />
@@ -91,7 +92,14 @@ function AllProjects() {
                         <h3 className="mb-0">Projects</h3>
                     </div>
                     <div className="row gap-row">
-                        {allProjects.length > 0 ? (
+                        {loading ? (
+                            <div className="d-flex justify-content-center align-items-center">
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <span className="ml-2">Loading...</span>
+                            </div>
+                        ) : allProjects.length > 0 ? (
                             allProjects.map((project) => (
                                 <div className="col-lg-4 col-sm-6 project_box" key={project._id}>
                                     <Link to={`/${project.slugURL}`} className="project_box_inner">
@@ -134,12 +142,11 @@ function AllProjects() {
                                 </div>
                             ))
                         ) : (
-                            <p>No projects available</p>
+                            <p>{'No projects available'}</p>
                         )}
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     );
 }

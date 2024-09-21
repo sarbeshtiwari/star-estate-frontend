@@ -83,7 +83,19 @@ function ContactUs() {
             {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <img src="/star-estate-react/assets/images/banner-emi-calculator1.jpg" className="h-100 object-cover object-position-bottom rounded" alt="Star Estate" />
+                    <source 
+                        media="(min-width: 992px)" 
+                        srcSet="/star-estate-react/assets/images/contact-us.jpg" 
+                    />
+                    <source 
+                        media="(min-width: 768px)" 
+                        srcSet="/star-estate-react/assets/images/contact-us-m.jpg" 
+                    />
+                    <img 
+                        src="/star-estate-react/assets/images/contact-us-m.jpg" 
+                        className="h-100 object-cover object-position-bottom rounded" 
+                        alt="Star Estate" 
+                    />
                 </picture>
             </div>
             <div className="w-100">

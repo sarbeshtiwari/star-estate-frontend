@@ -1811,7 +1811,7 @@ a.carousel-control-next[href="#banner"] {
 .iconBox .d-flex{
   gap: 10px;
   padding: 1rem;
-  background-color: var(--lightgreen);
+  background-color: var(--lightgray);
   font-size: 14px;
   font-weight: 700;
 }
@@ -2483,34 +2483,33 @@ canvas {
 /* About page ends */
 
 /* Careers page */
-.table {
-  font-size: 14px;
-}
-
-.career-pointer-box .img-fluid img{
-  object-fit: cover;
-}
-.career-pointer-box .inner{
-  overflow: hidden;
-  position: relative;
-  isolation: isolate;
-}
-.career-pointer-box .inner::before{
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(transparent 75%, rgb(0 0 0 / 75%));
+.career-section1.bg-image::before{
+  background: linear-gradient(rgb(14 121 235 / 85%), transparent 50%);
   z-index: 1;
 }
 
-.career-pointer-box .inner h6{
-  font-weight: 700;
-  margin-bottom: 0;
+.career-random-text{
+  max-width: 800px;
+  width: 100%;
   position: absolute;
-  inset: auto 0 0;
-  padding: 20px;
-  color: #fff;
-  z-index: 2;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);  
+  padding-left: 15px;
+  padding-right: 15px;
+  z-index: 1;
+}
+
+.career-random-text[data-position='center']{
+  max-width: 700px;
+  top: 50%;
+  left: auto;
+  right: 5%;
+  transform: translateY(-50%);
+}
+
+.table {
+  font-size: 14px;
 }
 
 .career-details h5{

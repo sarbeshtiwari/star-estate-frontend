@@ -114,6 +114,7 @@ import Footer from './components/widgets/footer';
 import CPRegistration from './components/widgets/channelPartner';
 import Faq from './components/views/home/faq';
 import PrivacyPolicy from './components/views/home/privacy-policy';
+import NewScreen from './components/views/home/desclaimer.js';
 
 function AppContent() {
   const location = useLocation();
@@ -139,7 +140,8 @@ function AppContent() {
     '/sitemap',
     '/channel-partner-registration',
     '/faq',
-    '/privacy-policy'
+    '/privacy-policy',
+    '/desclaimer'
   ].includes(location.pathname);
 
   return (
@@ -175,6 +177,7 @@ function AppContent() {
         <Route path='/channel-partner-registration' element={<CPRegistration />} />
         <Route path='/faq' element={<Faq />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
+        <Route path= '/desclaimer' element={<NewScreen/>}/>
       </Routes>
       {!isProjectDetailsPage && <Footer />}
     </>
