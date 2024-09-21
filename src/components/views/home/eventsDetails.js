@@ -44,8 +44,19 @@ function EventDetails() {
             <Header />
             <div className="insideBanner">
                 <picture>
-                    <source media="(max-width: 820px)" srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
-                    <img src="/star-estate-react/assets/images/banner-emi-calculator.jpg" className="h-100 object-cover" alt="Star Estate" />
+                    <source 
+                        media="(min-width: 992px)" 
+                        srcSet="/star-estate-react/assets/images/events.jpg" 
+                    />
+                    <source 
+                        media="(min-width: 768px)" 
+                        srcSet="/star-estate-react/assets/images/events-m.jpg" 
+                    />
+                    <img 
+                        src="/star-estate-react/assets/images/events-m.jpg" 
+                        className="h-100 object-cover object-position-bottom rounded" 
+                        alt="Star Estate" 
+                    />
                 </picture>
             </div>
             <div className="w-100">

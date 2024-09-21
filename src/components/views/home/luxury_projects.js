@@ -29,7 +29,7 @@ const ProjectsCarousel = () => {
             <div className="w-100 position-relative overflow-hidden padding bg-lightgray hm-overviewContainer animate-section1">
                 <div className="container-lg">
                     <div className="heading mx-auto text-center">
-                        <h3>New Luxury Projects</h3>
+                        <h3>Featured Projects</h3>
                     </div>
 
                     {loading ? ( // Show spinner while loading
