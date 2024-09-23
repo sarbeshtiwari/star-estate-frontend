@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Header from '../widgets/header';
 import Footer from '../widgets/footer';
@@ -35,6 +35,36 @@ function PropertyEvaluationReport() {
         message: '',
     });
 
+    useEffect(() => {
+        // Update buildingType based on propertyType whenever it changes
+        if (formData.propertyType === 'commercial') {
+            setFormData(prev => ({
+                ...prev,
+                buildingType: 'retail-shop', // Default for commercial
+            }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                buildingType: 'apartment', // Default for residential
+            }));
+        }
+    }, [formData.propertyType]); // Depend on propertyType
+
+    useEffect(() => {
+        // Update buildingType based on propertyType whenever it changes
+        if (formData.propertyType === 'commercial') {
+            setFormData(prev => ({
+                ...prev,
+                unitType: ' ', // Default for commercial
+            }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                unitType: '1bhk', // Default for residential
+            }));
+        }
+    }, [formData.propertyType]); // Depend on propertyType
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData(prevData => ({
@@ -44,12 +74,12 @@ function PropertyEvaluationReport() {
     };
 
     const handleSubmit = async (e) => {
-       
+
         e.preventDefault();
         try {
             await sendvaluationReport(formData);
-              // Clear form data after a successful submission
-       
+            // Clear form data after a successful submission
+
             setSuccessMessage('Form submitted successfully!');
             setFormData({
                 name: '',
@@ -77,25 +107,24 @@ function PropertyEvaluationReport() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source 
-                        media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/banner-per.jpg" 
+                    <source
+                        media="(min-width: 992px)"
+                        srcSet="/star-estate-react/assets/images/banner-per.jpg"
                     />
-                    <source 
-                        media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/banner-per-m.jpg" 
+                    <source
+                        media="(min-width: 768px)"
+                        srcSet="/star-estate-react/assets/images/banner-per-m.jpg"
                     />
-                    <img 
-                        src="/star-estate-react/assets/images/banner-per-m.jpg" 
-                        className="img-fluid h-100 object-cover object-position-bottom rounded" 
-                        alt="Star Estate" 
+                    <img
+                        src="/star-estate-react/assets/images/banner-per-m.jpg"
+                        className="img-fluid h-100 object-cover object-position-bottom rounded"
+                        alt="Star Estate"
                     />
                 </picture>
             </div>
-            
+
 
             <div className="w-100">
                 <div className="container-lg">
@@ -118,7 +147,7 @@ function PropertyEvaluationReport() {
                         <div className="form-box">
                             <form onSubmit={handleSubmit}>
                                 <div className="form--section">
-                                <p className="status mb-0 text-warning">{successMessage}</p>
+                                    <p className="status mb-0 text-warning">{successMessage}</p>
                                     <h6 className="form--title">Fill your personal details</h6>
                                     <div className="row g-3">
                                         <div className="col-sm-8">
@@ -194,7 +223,60 @@ function PropertyEvaluationReport() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-sm-7">
+
+                                        {formData.propertyType === 'commercial' ? (
+                                            <div className="col-sm-7">
+                                                {/* <h6 className="form--title">Select Commercial Options</h6> */}
+                                                <div className="col-sm-12">
+                                                    <div className="custom-control-flexbox bg-darkgreen text-white rounded p-2">
+                                                        <div className="custom-control custom-radio form-check form-check-inline">
+                                                            <input
+                                                                type="radio"
+                                                                id="retail-shop"
+                                                                name="buildingType"
+                                                                value="retail-shop"
+                                                                className="form-check-input"
+                                                                onChange={handleChange}
+                                                            />
+                                                            <label className="form-check-label" htmlFor="retail-shop">Retail Shop</label>
+                                                        </div>
+                                                        <div className="custom-control custom-radio form-check form-check-inline">
+                                                            <input
+                                                                type="radio"
+                                                                id="office-space"
+                                                                name="buildingType"
+                                                                value="office-space"
+                                                                className="form-check-input"
+                                                                onChange={handleChange}
+                                                            />
+                                                            <label className="form-check-label" htmlFor="office-space">Office Space</label>
+                                                        </div>
+                                                        <div className="custom-control custom-radio form-check form-check-inline">
+                                                            <input
+                                                                type="radio"
+                                                                id="society-shop"
+                                                                name="buildingType"
+                                                                value="society-shop"
+                                                                className="form-check-input"
+                                                                onChange={handleChange}
+                                                            />
+                                                            <label className="form-check-label" htmlFor="society-shop">Society Shop</label>
+                                                        </div>
+                                                        <div className="custom-control custom-radio form-check form-check-inline">
+                                                            <input
+                                                                type="radio"
+                                                                id="food-court"
+                                                                name="buildingType"
+                                                                value="food-court"
+                                                                className="form-check-input"
+                                                                onChange={handleChange}
+                                                            />
+                                                            <label className="form-check-label" htmlFor="food-court">Food Court</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : (<div className="col-sm-7">
                                             <div className="custom-control-flexbox bg-darkgreen text-white rounded p-2">
                                                 <div className="custom-control custom-radio form-check form-check-inline">
                                                     <input
@@ -245,10 +327,12 @@ function PropertyEvaluationReport() {
                                                     <label className="form-check-label" htmlFor="villa">Villa</label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>)}
+
+
                                     </div>
                                 </div>
-                                <div className="form--section">
+                                {formData.propertyType === 'residential' ? ( <div className="form--section">
                                     <h6 className="form--title">Please select the unit type and configuration</h6>
                                     <div className="row g-3">
                                         <div className="col-sm-6">
@@ -330,7 +414,107 @@ function PropertyEvaluationReport() {
                                             />
                                         </div>
                                     </div>
-                                </div>
+                                </div>) : (
+                                    <div className="form--section">
+                                     <div className="row g-3">
+                                        <div className="col-sm-6">
+                                            <label htmlFor="area">Area</label>
+                                            <input
+                                                type="text"
+                                                id="area"
+                                                name="area"
+                                                className="form-control"
+                                                placeholder="Super Built-up Area (Sq. Ft.)"
+                                                value={formData.area}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        </div></div>)}
+
+                                {/* <div className="form--section">
+                                    <h6 className="form--title">Please select the unit type and configuration</h6>
+                                    <div className="row g-3">
+                                        <div className="col-sm-6">
+                                            <label htmlFor="bhk">BHK</label>
+                                            <div className="d-flex">
+                                                <div className="form-check form-check-inline">
+                                                    <input
+                                                        type="radio"
+                                                        id="bhk1"
+                                                        name="unitType"
+                                                        value="bhk1"
+                                                        className="form-check-input"
+                                                        checked={formData.unitType === 'bhk1'}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label className="form-check-label" htmlFor="bhk1">1 BHK</label>
+                                                </div>
+                                                <div className="form-check form-check-inline">
+                                                    <input
+                                                        type="radio"
+                                                        id="bhk2"
+                                                        name="unitType"
+                                                        value="bhk2"
+                                                        className="form-check-input"
+                                                        checked={formData.unitType === 'bhk2'}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label className="form-check-label" htmlFor="bhk2">2 BHK</label>
+                                                </div>
+                                                <div className="form-check form-check-inline">
+                                                    <input
+                                                        type="radio"
+                                                        id="bhk3"
+                                                        name="unitType"
+                                                        value="bhk3"
+                                                        className="form-check-input"
+                                                        checked={formData.unitType === 'bhk3'}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label className="form-check-label" htmlFor="bhk3">3 BHK</label>
+                                                </div>
+                                                <div className="form-check form-check-inline">
+                                                    <input
+                                                        type="radio"
+                                                        id="bhk4"
+                                                        name="unitType"
+                                                        value="bhk4"
+                                                        className="form-check-input"
+                                                        checked={formData.unitType === 'bhk4'}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label className="form-check-label" htmlFor="bhk4">4 BHK</label>
+                                                </div>
+                                                <div className="form-check form-check-inline">
+                                                    <input
+                                                        type="radio"
+                                                        id="bhk5"
+                                                        name="unitType"
+                                                        value="bhk5"
+                                                        className="form-check-input"
+                                                        checked={formData.unitType === 'bhk5'}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label className="form-check-label" htmlFor="bhk5">5+ BHK</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <label htmlFor="area">Area</label>
+                                            <input
+                                                type="text"
+                                                id="area"
+                                                name="area"
+                                                className="form-control"
+                                                placeholder="Super Built-up Area (Sq. Ft.)"
+                                                value={formData.area}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                </div> */}
                                 <div className="form--section">
                                     <h6 className="form--title">Additional details</h6>
                                     <div className="row g-3">
@@ -411,7 +595,7 @@ function PropertyEvaluationReport() {
                                             </div>
                                         </div>
                                         <div className="col-sm-4 form-group">
-                                            <label htmlFor="message">Write message (optional)</label>
+                                            <label htmlFor="message">Location Details</label>
                                             <textarea
                                                 id="message"
                                                 name="message"
@@ -419,6 +603,7 @@ function PropertyEvaluationReport() {
                                                 rows="5"
                                                 value={formData.message}
                                                 onChange={handleChange}
+                                                required
                                             ></textarea>
                                         </div>
                                     </div>
@@ -433,42 +618,6 @@ function PropertyEvaluationReport() {
                     </div>
                 </div>
             </div>
-
-            {/* <div className="modal fade" id="formModal" tabIndex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                        <div className="modal-header bg-warning">
-                            <h5 className="modal-title" id="formModalLabel">Please fill the given form.</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="form-container">
-                                <form id="contact_form" method="post" onSubmit="return Enquiry();">
-                                    <p className="status mb-0 text-warning"></p>
-                                    <div className="mb-3">
-                                        <label htmlFor="name" className="form-label">Name<sup className="text-danger">*</sup></label>
-                                        <input type="text" name="name" id="name" className="form-control" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="email" className="form-label">Email<sup className="text-danger">*</sup></label>
-                                        <input type="email" name="email" id="email" className="form-control" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="phoneNumber" className="form-label">phoneNumber</label>
-                                        <input type="text" name="phoneNumber" id="phoneNumber" className="form-control" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="message" className="form-label">Message<sup className="text-danger">*</sup></label>
-                                        <textarea name="message" id="message" className="form-control"></textarea>
-                                    </div>
-                                    <button type="submit" className="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-            {/* <Footer /> */}
         </div>
     )
 }

@@ -15,6 +15,13 @@
   --instagram: #c92bb7;
 }
 
+.cityBox {
+  cursor: pointer;
+}
+
+
+
+
 body {
   color: var(--body-color);
   font: 400 1rem "Open Sans", sans-serif;

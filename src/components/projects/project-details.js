@@ -18,15 +18,15 @@ import {
 
 
 export const sendProjectQuery = async (formData) => {
-    console.log(formData)
+    // console.log(formData)
     try {
         const response = await axiosInstance.post(`/userQuery/addQuery`, formData);
         return response;
     } catch (error) {
-        console.error('Error sending data:', error);
+        // console.error('Error sending data:', error);
         throw error;
     }
-  };
+};
 
 function ProjectDetails() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -73,7 +73,7 @@ function ProjectDetails() {
         setIsChecked(e.target.checked);
     };
 
-   const handleInputChange = (e) => {
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevData => ({
             ...prevData,
@@ -116,7 +116,7 @@ function ProjectDetails() {
     };
 
 
-    
+
     const [mainData, setMainData] = useState([]);
     const [quickDetails, setQuickDetails] = useState([]);
     const [phone, setPhone] = useState('');
@@ -136,7 +136,7 @@ function ProjectDetails() {
     const [Faqs, setFaqs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+
     useEffect(() => {
         const initializeSwipers = () => {
             new Swiper('.ameninity-slider', {
@@ -220,7 +220,7 @@ function ProjectDetails() {
                 }
             } catch (error) {
                 setError('Error fetching main project data');
-                console.error('Error fetching main project data:', error);
+                // console.error('Error fetching main project data:', error);
             }
         };
 
@@ -234,7 +234,7 @@ function ProjectDetails() {
                 setQuickDetails(response.data);
             } catch (error) {
                 setError('Error fetching quick details');
-                console.error('Error fetching quick details:', error);
+                // console.error('Error fetching quick details:', error);
             }
         };
         fetchQuickDetails();
@@ -246,7 +246,7 @@ function ProjectDetails() {
                 setProject(response.data);
             } catch (error) {
                 setError('Error fetching project content');
-                console.error('Error fetching project content:', error);
+                // console.error('Error fetching project content:', error);
             }
         };
         fetchProjectContent();
@@ -258,7 +258,7 @@ function ProjectDetails() {
                 setWalkthrough(response.data);
             } catch (error) {
                 setError('Error fetching walkthrough');
-                console.error('Error fetching walkthrough:', error);
+                // console.error('Error fetching walkthrough:', error);
             }
         };
         fetchWalkthrough();
@@ -270,7 +270,7 @@ function ProjectDetails() {
                 setFloorPlan(response.data.data.length > 0 ? response.data.data[0] : null);
             } catch (error) {
                 setError('Error fetching floor plan');
-                console.error('Error fetching floor plan:', error);
+                // console.error('Error fetching floor plan:', error);
             }
         };
         fetchFloorPlan();
@@ -282,7 +282,7 @@ function ProjectDetails() {
                 setFloorData(response.data);
             } catch (error) {
                 setError('Error fetching floor data');
-                console.error('Error fetching floor data:', error);
+                // console.error('Error fetching floor data:', error);
             }
         };
         fetchFloorData();
@@ -294,7 +294,7 @@ function ProjectDetails() {
                 setGalleryContent(response.data.data.length > 0 ? response.data.data[0] : null);
             } catch (error) {
                 setError('Error fetching gallery content');
-                console.error('Error fetching gallery content:', error);
+                // console.error('Error fetching gallery content:', error);
             }
         };
         fetchGalleryContent();
@@ -303,17 +303,18 @@ function ProjectDetails() {
         const fetchGalleryData = async () => {
             try {
                 const response = await axiosInstance.get(`projectGallery/getProjectGallery/${slugURL}`);
+                
                 setGalleryData(response.data);
             } catch (error) {
                 setError('Error fetching gallery data');
-                console.error('Error fetching gallery data:', error);
+                // console.error('Error fetching gallery data:', error);
             }
         };
         fetchGalleryData();
     }, [slugURL]);
     const [bannerImages, setBannerImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0); // State for current index
- 
+
     // useEffect(() => {
     //     const fetchBannerImages = async () => {
     //         try {
@@ -323,15 +324,15 @@ function ProjectDetails() {
     //                 const filteredImages = response.data.filter(image => image.status === true);
     //                 setBannerImages(filteredImages);
     //             } else {
-    //                 console.error('Unexpected response structure or no images found:', response.data);
+                    // console.error('Unexpected response structure or no images found:', response.data);
     //                 setBannerImages([]);
     //             }
     //         } catch (error) {
-    //             console.error('Error fetching banner images:', error);
+                // console.error('Error fetching banner images:', error);
     //             setBannerImages([]);
     //         }
     //     };
-        
+
     //     fetchBannerImages();
     // }, [slugURL]);
 
@@ -343,11 +344,11 @@ function ProjectDetails() {
                     const filteredImages = response.data.filter(image => image.status === true);
                     setBannerImages(filteredImages);
                 } else {
-                    console.error('Unexpected response structure or no images found:', response.data);
+                    // console.error('Unexpected response structure or no images found:', response.data);
                     setBannerImages([]);
                 }
             } catch (error) {
-                console.error('Error fetching banner images:', error);
+                // console.error('Error fetching banner images:', error);
                 setBannerImages([]);
             } finally {
                 setLoading(false); // Set loading to false after fetching
@@ -382,7 +383,7 @@ function ProjectDetails() {
                 setAmenitiesContent(projectAmenitiesContent);
             } catch (error) {
                 setError('Error fetching project and all amenities');
-                console.error('Error fetching project and all amenities:', error);
+                // console.error('Error fetching project and all amenities:', error);
             } finally {
                 setLoading(false);
             }
@@ -407,7 +408,7 @@ function ProjectDetails() {
                 setDetails2(projectLocationResponse.data.data);
             } catch (error) {
                 setError('Error fetching project and all location advantages');
-                console.error('Error fetching project and all location advantages:', error);
+                // console.error('Error fetching project and all location advantages:', error);
             } finally {
                 setLoading(false);
             }
@@ -422,7 +423,7 @@ function ProjectDetails() {
                 setBankDetails([response.data]);
             } catch (error) {
                 setError('Error fetching project content');
-                console.error('Error fetching project content:', error);
+                // console.error('Error fetching project content:', error);
             }
         };
         fetchAccountDetails();
@@ -435,7 +436,7 @@ function ProjectDetails() {
                 setFaqs(filteredCommercialProjectsDetails);
                 // setFaqs(response.data);
             } catch (error) {
-                console.error('Error fetching FAQs:', error);
+                // console.error('Error fetching FAQs:', error);
             }
         };
         fetchFAQs();
@@ -447,20 +448,21 @@ function ProjectDetails() {
             const filteredProjects = response.data.filter(project => project.status === true);
 
             // Debugging statements
-            console.log('Current Project Name:', currentProjectName);
-            console.log('Fetched Projects:', filteredProjects);
+            // console.log('Current Project Name:', currentProjectName);
+            // console.log('Fetched Projects:', filteredProjects);
 
             // Exclude the current project based on its name (case-insensitive)
             const filteredSimilarProjects = filteredProjects.filter(project =>
                 project.projectName.trim().toLowerCase() !== currentProjectName.trim().toLowerCase()
             );
 
-            console.log('Filtered Similar Projects:', filteredSimilarProjects);
+            // console.log('Filtered Similar Projects:', filteredSimilarProjects);
             setsimilarProjects(filteredSimilarProjects);
         } catch (error) {
-            console.error('Error fetching projects:', error);
+            // console.error('Error fetching projects:', error);
         }
     };
+    
 
 
     return (
@@ -516,26 +518,26 @@ function ProjectDetails() {
                     ))}
                 </div>
                 <div className="carousel-inner h-100">
-            {loading ? (
-                <div className="carousel-item h-100 active">
-                    <p>Loading images...</p>
+                    {loading ? (
+                        <div className="carousel-item h-100 active">
+                            <p>Loading images...</p>
+                        </div>
+                    ) : bannerImages.length > 0 ? (
+                        bannerImages.map((image, index) => (
+                            <div key={index} className={`carousel-item h-100 ${index === currentIndex ? 'active' : ''}`}>
+                                <picture>
+                                    <source media="(max-width: 520px)" srcSet={image.mobile_image_url} />
+                                    <source media="(min-width: 521px) and (max-width: 1024px)" srcSet={image.tablet_image_url} />
+                                    <img src={image.desktop_image_url} className="d-block w-100 h-100 object-cover" alt={image.alt_tag_desktop} />
+                                </picture>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="carousel-item h-100 active">
+                            <p>No images available</p>
+                        </div>
+                    )}
                 </div>
-            ) : bannerImages.length > 0 ? (
-                bannerImages.map((image, index) => (
-                    <div key={index} className={`carousel-item h-100 ${index === currentIndex ? 'active' : ''}`}>
-                        <picture>
-                            <source media="(max-width: 520px)" srcSet={image.mobile_image_url} />
-                            <source media="(min-width: 521px) and (max-width: 1024px)" srcSet={image.tablet_image_url} />
-                            <img src={image.desktop_image_url} className="d-block w-100 h-100 object-cover" alt={image.alt_tag_desktop} />
-                        </picture>
-                    </div>
-                ))
-            ) : (
-                <div className="carousel-item h-100 active">
-                    <p>No images available</p>
-                </div>
-            )}
-        </div>
                 {/* <div className="carousel-inner h-100">
                     {bannerImages.length > 0 ? (
                         bannerImages.map((image, index) => (
@@ -619,37 +621,37 @@ function ProjectDetails() {
                     <form onSubmit={handleSubmit}>
                         <div className="row g-0">
                             <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" value={formData.Name}
-                            onChange={handleInputChange}
-                            required /></div>
+                                onChange={handleInputChange}
+                                required /></div>
                             <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email" value={formData.Email}
-                            onChange={handleInputChange}
-                            required/></div>
+                                onChange={handleInputChange}
+                                required /></div>
                             <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" value={formData.phoneNumber}
-                            onChange={handleInputChange}
-                            required/></div>
-                          
-                        <div className="col-12 form-group">
-                            <div className="custom-control d-flex ml-3 custom-checkbox">
-                                <input
-                                    type="checkbox"
-                                    className="custom-control-input"
-                                    id="customCheck1"
-                                    checked={isChecked}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <label className="custom-control-label" htmlFor="customCheck1">
-                                    I hereby agree for processing my personal data
-                                </label>
+                                onChange={handleInputChange}
+                                required /></div>
+
+                            <div className="col-12 form-group">
+                                <div className="custom-control d-flex ml-3 custom-checkbox">
+                                    <input
+                                        type="checkbox"
+                                        className="custom-control-input"
+                                        id="customCheck1"
+                                        checked={isChecked}
+                                        onChange={handleCheckboxChange}
+                                    />
+                                    <label className="custom-control-label" htmlFor="customCheck1">
+                                        I hereby agree for processing my personal data
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                   
+
                         </div>
                         <div className="readmore mt-0 ml-lg-0">
-                    <button className="button" type="submit" disabled={!isChecked}>
-                        Send Message
-                    </button>
-                </div>
-                {successMessage && <div className="alert alert-success mt-3">{successMessage}</div>}
+                            <button className="button" type="submit" disabled={!isChecked}>
+                                Send Message
+                            </button>
+                        </div>
+                        {successMessage && <div className="alert alert-success mt-3">{successMessage}</div>}
                     </form>
                 </div>
             </div>
@@ -712,21 +714,21 @@ function ProjectDetails() {
                         </div>
                     );
                 })}
-               <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className="row g-2">
-                    <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" 
+                        <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name"
                             onChange={handleInputChange}
                             required /></div>
-                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email" 
+                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email"
                             onChange={handleInputChange}
-                            required/></div>
-                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" 
+                            required /></div>
+                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber"
                             onChange={handleInputChange}
-                            required/></div>
-                          
+                            required /></div>
+
                         <div className="col-12 form-group">
                             <div className="custom-control custom-checkbox">
-                            <input
+                                <input
                                     type="checkbox"
                                     className="custom-control-input"
                                     id="customCheck1"
@@ -743,7 +745,7 @@ function ProjectDetails() {
                         Send Message
                     </button></div>
                     {successMessage && <div className="alert alert-success mt-3">{successMessage}</div>}
-                    </form>
+                </form>
             </div>
             {/* -----------Mobile view--------------- */}
             <div id="overview" className="w-100 padding pb-0 projectDetails section-overview">
@@ -779,6 +781,7 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div>
+            {/* walkthrough */}
             <div className="w-100 padding section-walkthrough">
                 <div className="container-lg">
                     <div className="row justify-content-center">
@@ -797,7 +800,32 @@ function ProjectDetails() {
                                         </div>
                                     </div>
                                 </div>
-                                {galleryData.map((data, index) => (
+                                {galleryData.length > 0 ? (
+                                    galleryData.find(data => data.displayHome) ? (
+                                        <picture>
+                                        <source
+                                            media="(max-width: 520px)"
+                                            srcSet={`${axiosInstance.defaults.globalURL}${galleryData.find(data => data.displayHome).mobileImage}`}
+                                        />
+                                        <img
+                                            src={`${axiosInstance.defaults.globalURL}${galleryData.find(data => data.displayHome).desktopImage}`}
+                                            className="position-absolute"
+                                            alt=""
+                                        />
+                                        </picture>
+                                    ) : (
+                                        <img
+                                        src="/star-estate-react/assets/images/lodha-bellevue/gallery/1.webp"
+                                        className="position-absolute"
+                                        alt="Default"
+                                        />
+                                    )
+                                    ) : (
+                                    <div>No gallery data available</div>
+                                    )}
+
+
+                                {/* {galleryData.map((data, index) => (
                                     data.displayHome === true ? (
                                         <picture>
                                             <source media="(max-width: 520px)" srcSet={`${axiosInstance.defaults.globalURL}${data.mobileImage}`} />
@@ -816,7 +844,7 @@ function ProjectDetails() {
                                             alt="Default"
                                         />
                                     )
-                                ))}
+                                ))} */}
                             </div>
                         </div>
                     </div>
@@ -847,59 +875,85 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div>
-            <div   id="amenities" 
-  className="w-100 padding position-relative overflow-hidden section-amenities" 
-  style={{ 
-    backgroundImage: `url(${
-      galleryData.some(data => data.amenityImage)
-        ? `${axiosInstance.defaults.globalURL}${galleryData.find(data => data.displayHome).desktopImage}`
-        : '/star-estate-react/assets/images/lodha-bellevue/gallery/1.webp' // Your default background image
-    })` 
-  }}
->
-  <div className="container-lg">
-    <div className="heading mx-auto text-sm-center text-white">
-      <h2 className="mb-3">Amenities</h2>
-      <p
-        className="mb-0"
-        dangerouslySetInnerHTML={{
-          __html: amenitiesContent && amenitiesContent.length > 0 && amenitiesContent[0].amenityContent
-            ? amenitiesContent[0].amenityContent
-            : '',
-        }}
-      ></p>
-    </div>
-    <div className="swiper ameninity-slider amenitiesContainer">
-      <div className="swiper-wrapper">
-        {amenities.length > 0 ? (
-          amenities.map((amenity) => (
-            <div className="swiper-slide amenBox" key={amenity._id}>
-              <div className="inner">
-                <div className="img-fluid">
-                  <img 
-                    src={`${axiosInstance.defaults.globalURL}${amenity.image}`} 
-                    className="filter-white" 
-                    alt={amenity.alt_tag} 
-                  />
+                {/* amenities */}
+                <div
+                id="amenities"
+                className="w-100 padding position-relative overflow-hidden section-amenities"
+                style={{
+                    backgroundImage: `url(${
+                    galleryData.some(data => data.amenityImage)
+                        ? `${axiosInstance.defaults.globalURL}${galleryData.find(data => data.amenityImage).desktopImage}`
+                        : '/star-estate-react/assets/images/lodha-bellevue/gallery/1.webp' // Default image if no amenityImage is found
+                    })`
+                }}
+                >
+                <div className="container-lg">
+                    <div className="heading mx-auto text-sm-center text-white">
+                    <h2 className="mb-3">Amenities</h2>
+                    <p
+                        className="mb-0"
+                        dangerouslySetInnerHTML={{
+                        __html:
+                            amenitiesContent &&
+                            amenitiesContent.length > 0 &&
+                            amenitiesContent[0].amenityContent
+                            ? amenitiesContent[0].amenityContent
+                            : ''
+                        }}
+                    ></p>
+                    </div>
+
+                    <div className="swiper ameninity-slider amenitiesContainer">
+                    <div className="swiper-wrapper">
+                        {amenities.length > 0 ? (
+                        amenities.map((amenity) => (
+                            <div className="swiper-slide amenBox" key={amenity._id}>
+                            <div className="inner">
+                                <div className="img-fluid">
+                                <img
+                                    src={`${axiosInstance.defaults.globalURL}${amenity.image}`}
+                                    className="filter-white"
+                                    alt={amenity.alt_tag}
+                                />
+                                </div>
+                                <p className="mb-0">{amenity.title}</p>
+                            </div>
+                            </div>
+                        ))
+                        ) : (
+                        <div>No amenities available</div>
+                        )}
+                    </div>
+
+                    <div className="swiper-controls">
+                        <div
+                        className="swiper-button-prev bg-white"
+                        tabIndex="0"
+                        role="button"
+                        aria-label="Previous slide"
+                        ></div>
+                        <div className="readmore mt-0">
+                        <a
+                            href="#formModal"
+                            onClick={handleShow}
+                            data-bs-toggle="modal"
+                            className="button light"
+                        >
+                            View All
+                        </a>
+                        </div>
+                        <div
+                        className="swiper-button-next bg-white"
+                        tabIndex="0"
+                        role="button"
+                        aria-label="Next slide"
+                        ></div>
+                    </div>
+                    </div>
                 </div>
-                <p className="mb-0">{amenity.title}</p>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div>No amenities available</div>
-        )}
-      </div>
-      <div className="swiper-controls">
-        <div className="swiper-button-prev bg-white" tabIndex="0" role="button" aria-label="Previous slide"></div>
-        <div className="readmore mt-0">
-          <a href="#formModal" onClick={handleShow} data-bs-toggle="modal" className="button light">View All</a>
-        </div>
-        <div className="swiper-button-next bg-white" tabIndex="0" role="button" aria-label="Next slide"></div>
-      </div>
-    </div>
-  </div>
-</div>
+                </div>
+
+            {/* Floor plan */}
 
             <div id="floorplan" className="w-100 padding section-floorplan">
                 <div className="container-lg">
@@ -958,29 +1012,42 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div>
+            {/* Gallery */}
             <div id="gallery" className="w-100 padding bg-dark section-gallery">
-                <div className="container-lg">
-                    <div className="heading mx-auto text-center text-white">
-                        <h2 className="mb-3">Gallery</h2>
-                        <p className="mb-0">{galleryContent ? galleryContent.projectGalleryContent : ''}</p>
+            <div className="container-lg">
+                <div className="heading mx-auto text-center text-white">
+                <h2 className="mb-3">Gallery</h2>
+                <p className="mb-0">
+                    {galleryContent ? galleryContent.projectGalleryContent : ''}
+                </p>
+                </div>
+                <div className="swiper photo-slider">
+                <div className="swiper-wrapper">
+                    {galleryData.map((galleryData, index) => (
+                    <div key={index} className="swiper-slide gal-slide">
+                        <picture>
+                        <source
+                            media="(max-width: 520px)"
+                            srcSet={`${axiosInstance.defaults.globalURL}${galleryData.mobileImage}`}
+                        />
+                        <img
+                            src={`${axiosInstance.defaults.globalURL}${galleryData.desktopImage}`}
+                            alt={galleryData.alt}
+                        />
+                        </picture>
+                        <div className="caption">{galleryData.alt}</div>
                     </div>
-                    <div className="swiper photo-slider">
-                        <div className="swiper-wrapper">
-                            {galleryData.map((galleryData, index) => (
-                                <div key={index} className="swiper-slide gal-slide">
-                                    <picture>
-                                        <source media="(max-width: 520px)" srcSet={`${axiosInstance.defaults.globalURL}${galleryData.mobileImage}`} />
-                                        <img src={`${axiosInstance.defaults.globalURL}${galleryData.desktopImage}`} />
-                                    </picture>
-                                    <div className="caption">{galleryData.alt}</div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="swiper-button-prev fullcontrol"></div>
-                        <div className="swiper-button-next fullcontrol"></div>
-                    </div>
+                    ))}
+                </div>
+                {/* Swiper navigation */}
+                <div className="swiper-button-prev fullcontrol"></div>
+                <div className="swiper-button-next fullcontrol"></div>
+                {/* Swiper pagination */}
+                <div className="swiper-pagination"></div>
                 </div>
             </div>
+            </div>
+            {/* location */}
             <div id="location" className="w-100 padding section-location">
                 <div className="container-lg">
                     <div className="heading mx-auto text-center">
@@ -1069,6 +1136,7 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div>
+            {/* get in touch */}
             <div className="w-100 bg-gray-gradient-box padding section-getInTouch mb-1">
                 <div className="container-lg">
                     <div className="heading mx-auto text-center">
@@ -1076,11 +1144,11 @@ function ProjectDetails() {
                         <p className="mb-0">If you would like to know more details or something specific, feel free to contact us. <br />Our site representative will give you a call back.</p>
                     </div>
                     <div className="touchFormWrapper">
-                    <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <div className="row ">
                                 <div className="col-md-4 form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" value={formData.Name}
-                            onChange={handleInputChange}
-                            required /></div>
+                                    onChange={handleInputChange}
+                                    required /></div>
                                 <div className="col-md-4 form-group">
                                     <PhoneInput
                                         country={'in'}
@@ -1094,8 +1162,8 @@ function ProjectDetails() {
                                 </div>
                                 <div className="col-md-4 form-group">
                                     <input type="email" className="form-control" placeholder="Your email address*" name="Email" value={formData.Email}
-                                    onChange={handleInputChange}
-                                    required/>
+                                        onChange={handleInputChange}
+                                        required />
                                 </div>
                                 <div className="col-12 form-group">
                                     <div className="form-check mx-auto d-table">
@@ -1119,52 +1187,52 @@ function ProjectDetails() {
 
             {/* FAQs */}
             <div className="w-100 padding bg-gray-gradient-box section-faq">
-            {Faqs.length > 0 && (
-                <div className="container-lg">
-                    <div className="heading mx-auto text-center">
-                        <h2 className="mb-0">FAQs</h2>
-                    </div>
-                    <div className="touchFormWrapper">
-                        <div className="accordion" id="myAccordion">
-                            {Faqs.map((faq, index) => {
-                                const faqIndex = index + 1;
-                                const isActive = activeIndex === faqIndex; // Check if this item is active
+                {Faqs.length > 0 && (
+                    <div className="container-lg">
+                        <div className="heading mx-auto text-center">
+                            <h2 className="mb-0">FAQs</h2>
+                        </div>
+                        <div className="touchFormWrapper">
+                            <div className="accordion" id="myAccordion">
+                                {Faqs.map((faq, index) => {
+                                    const faqIndex = index + 1;
+                                    const isActive = activeIndex === faqIndex; // Check if this item is active
 
-                                return (
-                                    <div className="accordion-item" key={faqIndex}>
-                                        <h2 className="accordion-header" id={`heading${faqIndex}`}>
-                                            <button
-                                                className={`accordion-button ${isActive ? "" : "collapsed"}`}
-                                                type="button"
-                                                onClick={() => handleToggle(faqIndex)}
-                                                aria-expanded={isActive ? "true" : "false"}
-                                                aria-controls={`collapse${faqIndex}`}
+                                    return (
+                                        <div className="accordion-item" key={faqIndex}>
+                                            <h2 className="accordion-header" id={`heading${faqIndex}`}>
+                                                <button
+                                                    className={`accordion-button ${isActive ? "" : "collapsed"}`}
+                                                    type="button"
+                                                    onClick={() => handleToggle(faqIndex)}
+                                                    aria-expanded={isActive ? "true" : "false"}
+                                                    aria-controls={`collapse${faqIndex}`}
+                                                >
+                                                    Q{faqIndex}: {faq.faqQuestion}
+                                                </button>
+                                            </h2>
+                                            <div
+                                                id={`collapse${faqIndex}`}
+                                                className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
+                                                aria-labelledby={`heading${faqIndex}`}
+                                                data-bs-parent="#myAccordion"
                                             >
-                                                Q{faqIndex}: {faq.faqQuestion}
-                                            </button>
-                                        </h2>
-                                        <div
-                                            id={`collapse${faqIndex}`}
-                                            className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
-                                            aria-labelledby={`heading${faqIndex}`}
-                                            data-bs-parent="#myAccordion"
-                                        >
-                                            <div className="accordion-body">
-                                                <ul className="list-group list-group-flush">
-                                                    <li className="list-group-item px-0">
-                                                        <b>A:</b> <span>{faq.faqAnswer}</span>
-                                                    </li>
-                                                </ul>
+                                                <div className="accordion-body">
+                                                    <ul className="list-group list-group-flush">
+                                                        <li className="list-group-item px-0">
+                                                            <b>A:</b> <span>{faq.faqAnswer}</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
 
             {/* Marketing Partner */}
             <div className="w-100 padding bg-lightgray section-partner">
@@ -1194,68 +1262,68 @@ function ProjectDetails() {
                         </div>
                     </div>
                 </div>
-           
-            </div>
-             {/* Similar Projects */}
 
-                <div className="w-100 padding section-similar-projects">
-                    <div className="container-lg">
-            {similarProjects.length > 0 && (
+            </div>
+            {/* Similar Projects */}
+
+            <div className="w-100 padding section-similar-projects">
+                <div className="container-lg">
+                    {similarProjects.length > 0 && (
                         <div className="heading mx-auto text-center">
                             <h2 className="mb-0">Similar Projects</h2>
                         </div>
                     )}
-                        <div className="swiper project-slider">
-                            <div className="swiper-wrapper">
-                                {similarProjects.map((project, index) => (
-                                    <div className="swiper-slide project_box" key={index}>
-                                        <Link to={`/${project.slugURL}`} className="project_box_inner">
-                                            <div className="Project_box_img">
-                                                <div className="reraBox position-absolute">
-                                                    <div className="qr_img">
-                                                        <img src={`${axiosInstance.defaults.globalURL}${project.rera_qr}`} alt="" />
-                                                    </div>
-                                                    <div className="rera_num">
-                                                        <small className="mb-0">
-                                                            <strong className="text-primary">Projects RERA No: </strong>
-                                                            {project.rera_no}
-                                                            <br />
-                                                            <small className="small text-primary">
-                                                                <i className="fa fa-link"></i> {project.reraWebsite}
-                                                            </small>
+                    <div className="swiper project-slider">
+                        <div className="swiper-wrapper">
+                            {similarProjects.map((project, index) => (
+                                <div className="swiper-slide project_box" key={index}>
+                                    <Link to={`/${project.slugURL}`} className="project_box_inner">
+                                        <div className="Project_box_img">
+                                            <div className="reraBox position-absolute">
+                                                <div className="qr_img">
+                                                    <img src={`${axiosInstance.defaults.globalURL}${project.rera_qr}`} alt="" />
+                                                </div>
+                                                <div className="rera_num">
+                                                    <small className="mb-0">
+                                                        <strong className="text-primary">Projects RERA No: </strong>
+                                                        {project.rera_no}
+                                                        <br />
+                                                        <small className="small text-primary">
+                                                            <i className="fa fa-link"></i> {project.reraWebsite}
                                                         </small>
-                                                    </div>
-                                                </div>
-                                                <div className="img-fluid">
-                                                    <img src={`${axiosInstance.defaults.globalURL}${project.project_thumbnail}`} alt={project.projectName} />
+                                                    </small>
                                                 </div>
                                             </div>
-                                            <div className="project_box_details">
-                                                <div className="project_developer_detail">
-                                                    <h4 className="mb-0 project_name">{project.projectName}</h4>
-                                                    <h6 className="mb-0 project_price">
-                                                        {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon' ? `${project.projectPrice}` : <><i className="fa fa-indian-rupee-sign"></i>{project.projectPrice} onwards</>}
-                                                    </h6>
-                                                </div>
-                                                <div className="project_status_detail">
-                                                    <span className="project_box_location">
-                                                        <i className="fa fa-map-marker-alt"></i>
-                                                        {project.projectAddress}
-                                                    </span>
-                                                </div>
+                                            <div className="img-fluid">
+                                                <img src={`${axiosInstance.defaults.globalURL}${project.project_thumbnail}`} alt={project.projectName} />
                                             </div>
-                                        </Link>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="swiper-controls h-auto mr-auto">
-                                <div className="swiper-button-prev" role="button" aria-label="Previous slide"></div>
-                                <div className="readmore w-auto mt-0"></div>
-                                <div className="swiper-button-next" role="button" aria-label="Next slide"></div>
-                            </div>
+                                        </div>
+                                        <div className="project_box_details">
+                                            <div className="project_developer_detail">
+                                                <h4 className="mb-0 project_name">{project.projectName}</h4>
+                                                <h6 className="mb-0 project_price">
+                                                    {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon' ? `${project.projectPrice}` : <><i className="fa fa-indian-rupee-sign"></i>{project.projectPrice} onwards</>}
+                                                </h6>
+                                            </div>
+                                            <div className="project_status_detail">
+                                                <span className="project_box_location">
+                                                    <i className="fa fa-map-marker-alt"></i>
+                                                    {project.projectAddress}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                            ))}
                         </div>
+                        {/* <div className="swiper-controls h-auto mr-auto">
+                            <div className="swiper-button-prev" role="button" aria-label="Previous slide"></div>
+                            <div className="readmore w-auto mt-0"></div>
+                            <div className="swiper-button-next" role="button" aria-label="Next slide"></div>
+                        </div> */}
                     </div>
                 </div>
+            </div>
 
             <div className='pt-2 account-details bg-gray-gradient-box'>
                 <div className='container-lg'>
@@ -1294,20 +1362,20 @@ function ProjectDetails() {
                                         <div class="col-md-12 form-group">
                                             <label for="name">Name<sup class="text-danger" >*</sup></label>
                                             <input type="text" class="form-control bg-white" id="Name" name="Name" value={formData.Name}
-                            onChange={handleInputChange}
-                            required />
+                                                onChange={handleInputChange}
+                                                required />
                                         </div>
                                         <div class="col-md-12 form-group">
                                             <label for="email">Email<sup class="text-danger">*</sup></label>
                                             <input type="email" class="form-control bg-white" name="Email" id="Email" value={formData.Email}
-                            onChange={handleInputChange}
-                            required/>
+                                                onChange={handleInputChange}
+                                                required />
                                         </div>
                                         <div class="col-md-12 form-group">
                                             <label for="mobile">Mobile<sup class="text-danger">*</sup></label>
                                             <input type="tel" class="form-control bg-white" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber}
-                            onChange={handleInputChange}
-                            required/>
+                                                onChange={handleInputChange}
+                                                required />
                                         </div>
                                         <div class="col-md-12 text-align-center w-auto formFooter readmore mt-0">
                                             <input type="hidden" name="contact_action" value="active" />
@@ -1315,7 +1383,7 @@ function ProjectDetails() {
                                             <input type="hidden" name="utm_source" value="" />
                                             <input type="hidden" name="utm_medium" value="" />
                                             <input type="hidden" name="utm_campaign" value="" />
-                                            
+
                                             <button type="submit" class="button">Submit</button>
                                         </div>
                                         <div class="col-md-12 modal-call text-center mt-4 d-flex align-items-center justify-content-center" style={{ gap: "24px" }}>
@@ -1332,7 +1400,7 @@ function ProjectDetails() {
                 </div>
             </div>
             <div className="footer-enquiryBtn d-flex d-sm-none">
-                {mainData.map((data, index) => ( 
+                {mainData.map((data, index) => (
                     <>
                         <a className="monCall" id="mobPhone" href={`tel:${data.ivr_no}`}><strong><i className="fa fa-phone"></i> Call</strong></a>
                         <a id="mobEnquiry" href="#formModal" data-bs-toggle="modal"><strong><i className="fa fa-envelope"></i>

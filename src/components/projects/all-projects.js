@@ -46,7 +46,7 @@ function AllProjects() {
                         maxPrice: maxPrice
                     }
                 });
-                console.log(response.data);
+                // console.log(response.data);
                 if (response.data.success) {
                     const filteredProjects = response.data.projects.filter(project => project.status === true);
                     if (filteredProjects.length > 0) {
