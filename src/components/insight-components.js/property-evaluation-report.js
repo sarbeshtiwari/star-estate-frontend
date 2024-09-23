@@ -34,6 +34,40 @@ function PropertyEvaluationReport() {
         unitNo: '',
         message: '',
     });
+    const Faqs = [
+        {
+          faqQuestion: "What is a property valuation?",
+          faqAnswer: "A property valuation is the assessment of the property's age, floor plan, amenities, connectivity, and law and order in the area."
+        },
+        {
+          faqQuestion: "For which states/Cities is this property valuation available?",
+          faqAnswer: "This property valuation is available for Tier I and Tier II cities in India."
+        },
+        {
+          faqQuestion: "On what types of Properties is valuation available?",
+          faqAnswer: "Here, property valuation is available for residential and commercial properties."
+        },
+        {
+          faqQuestion: "What is the timeframe for receiving Property Valuation?",
+          faqAnswer: "It takes 1-2 business days to complete the property valuation process."
+        },
+        {
+          faqQuestion: "Is Property Valuation on Star Estate Chargeable?",
+          faqAnswer: "No. The property valuation process on Star Estate is free of cost."
+        }
+        
+      ];
+
+      const [activeIndex, setActiveIndex] = useState(null);
+
+    const handleToggle = (index) => {
+        // If the clicked item is already active, deactivate it by setting the activeIndex to null
+        if (activeIndex === index) {
+            setActiveIndex(null);
+        } else {
+            setActiveIndex(index);
+        }
+    };
 
     useEffect(() => {
         // Update buildingType based on propertyType whenever it changes
@@ -142,8 +176,67 @@ function PropertyEvaluationReport() {
                     <div className="heading">
                         <h2 className="mb-0">Property Valuation</h2>
                     </div>
+                    <h6 className="form--title">Evaluate the real worth of your immovable asset from experts.</h6>
                     <div className="form-wrapper mt-4">
-                        <p className="mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos, ad. Iure eum explicabo delectus officiis voluptatem hic, mollitia laudantium tempora cum quae? Vero maxime nostrum iste quia recusandae quos totam!</p>
+                        <p className="mb-4">A property valuation report is a documentation of a property’s monetary value which is estimated by
+                            considering parameters like location, layout, build-up area, configuration, property age, covered
+                            parking, and frontage.
+
+                        </p><p className='mb-4'>Property valuation is a method to determine the actual worth of a concrete structure according to the
+                            real estate market. It highlights the pros and cons of an immovable asset concluding a value that is
+                            fair for buyer and seller.</p><div className="form--section"></div>
+                        <h6 className='form--title'>How to receive Property Valuation Report on Star Estate?</h6>
+                        <p className='mb-4'><ul className="list mb-0"><li><strong>Step 1 -</strong> Share your details in the fields below</li>
+                            <li><strong>Step 2 -</strong>  Choose the Property type you wish for valuation</li>
+                            <li><strong>Step 3 -</strong>  Choose the configuration the area for the property valuation procedure</li>
+                            <li><strong>Step 4 -</strong>  Share more details to receive an accurate property valuation report</li></ul></p>
+                            <div className="form--section"></div>
+                        <h6 className="form--title">Features of Property Valuation Procedure</h6>
+
+                        <p className='mb-4'>There are three key features of the property valuation procedure that yield the accurate value of an
+                            immovable asset.
+                          
+                            <ul className="list mb-0"><li><strong>Property Details -</strong>It includes information about a property, including connectivity, amenities,
+                                floor plan, and year of construction. </li>
+                                <li><strong>Market Analysis -</strong>  The availability of open areas, parking spaces, and other spheres plays a
+                                    pivotal role in determining property value.</li>
+                                <li><strong>Property Age -</strong>  It is an important factor that outlines the worth of an immovable asset. A
+                                    property age defines whether the construction demands renovation or is in a good condition.</li>
+                            </ul>
+                        </p>
+                        <div className="form--section"></div>
+
+                        <h6 className="form--title">Key Perspective of Property Valuation</h6>
+                        <p className='mb-4'>The ideal perspectives of property valuation include:
+
+                            <ul className="list mb-0"><li><strong>Resale Value -</strong>It assesses the present and upcoming infrastructure development in the
+                                locality and nearby areas as it evaluates the demand for respective configurations at present. </li>
+                                <li><strong>Income Value -</strong>  It assesses the estimated rental value of the property reflected in annual
+                                    passive income. </li>
+                                <li><strong>Cost Value -</strong>  It calculate the definite property price after eliminating the depreciation value.</li>
+                            </ul>
+                        </p>
+                        <div className="form--section"></div>
+
+                        <h6 className="form--title">Benefits of Property Valuation with Star Estate</h6>
+                        <p className='mb-4'>
+                            <ul className="list mb-0"><li>Star Estate renders online property valuation procedures to simplify the understanding of
+                                actual property value. </li>
+                                <li>The turnaround time for online property valuation is less than physical site visits. </li>
+                                <li>The biggest benefit of property valuation with Star Estate is cost-efficient service for
+                                    investors</li>
+                            </ul>
+                        </p>
+                        <div className="form--section"></div>
+
+                        <h6 className="form--title">Factors Affecting Property Valuation</h6>
+                        <p className='mb-4'>
+                            Along with location, connectivity, law and order, the current economic situation affects property
+                            valuation. Also, inflation, changes in interest rates, and the cost of construction material are the
+                            factors that affect property valuation.
+                        </p>
+                        <div className="form--section"></div>
+
                         <div className="form-box">
                             <form onSubmit={handleSubmit}>
                                 <div className="form--section">
@@ -332,7 +425,7 @@ function PropertyEvaluationReport() {
 
                                     </div>
                                 </div>
-                                {formData.propertyType === 'residential' ? ( <div className="form--section">
+                                {formData.propertyType === 'residential' ? (<div className="form--section">
                                     <h6 className="form--title">Please select the unit type and configuration</h6>
                                     <div className="row g-3">
                                         <div className="col-sm-6">
@@ -416,20 +509,20 @@ function PropertyEvaluationReport() {
                                     </div>
                                 </div>) : (
                                     <div className="form--section">
-                                     <div className="row g-3">
-                                        <div className="col-sm-6">
-                                            <label htmlFor="area">Area</label>
-                                            <input
-                                                type="text"
-                                                id="area"
-                                                name="area"
-                                                className="form-control"
-                                                placeholder="Super Built-up Area (Sq. Ft.)"
-                                                value={formData.area}
-                                                onChange={handleChange}
-                                                required
-                                            />
-                                        </div>
+                                        <div className="row g-3">
+                                            <div className="col-sm-6">
+                                                <label htmlFor="area">Area</label>
+                                                <input
+                                                    type="text"
+                                                    id="area"
+                                                    name="area"
+                                                    className="form-control"
+                                                    placeholder="Super Built-up Area (Sq. Ft.)"
+                                                    value={formData.area}
+                                                    onChange={handleChange}
+                                                    required
+                                                />
+                                            </div>
                                         </div></div>)}
 
                                 {/* <div className="form--section">
@@ -616,6 +709,54 @@ function PropertyEvaluationReport() {
                             </form>
                         </div>
                     </div>
+                    <div className="form--section"></div>
+                    <div className="w-100 padding bg-gray-gradient-box section-faq">
+                {Faqs.length > 0 && (
+                    <div className="container-lg">
+                        <div className="heading mx-auto text-center">
+                            <h2 className="mb-0">FAQs</h2>
+                        </div>
+                        <div className="touchFormWrapper">
+                            <div className="accordion" id="myAccordion">
+                                {Faqs.map((faq, index) => {
+                                    const faqIndex = index + 1;
+                                    const isActive = activeIndex === faqIndex; // Check if this item is active
+
+                                    return (
+                                        <div className="accordion-item" key={faqIndex}>
+                                            <h2 className="accordion-header" id={`heading${faqIndex}`}>
+                                                <button
+                                                    className={`accordion-button ${isActive ? "" : "collapsed"}`}
+                                                    type="button"
+                                                    onClick={() => handleToggle(faqIndex)}
+                                                    aria-expanded={isActive ? "true" : "false"}
+                                                    aria-controls={`collapse${faqIndex}`}
+                                                >
+                                                    Q{faqIndex}: {faq.faqQuestion}
+                                                </button>
+                                            </h2>
+                                            <div
+                                                id={`collapse${faqIndex}`}
+                                                className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
+                                                aria-labelledby={`heading${faqIndex}`}
+                                                data-bs-parent="#myAccordion"
+                                            >
+                                                <div className="accordion-body">
+                                                    <ul className="list-group list-group-flush">
+                                                        <li className="list-group-item px-0">
+                                                            <b>A:</b> <span>{faq.faqAnswer}</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
                 </div>
             </div>
         </div>

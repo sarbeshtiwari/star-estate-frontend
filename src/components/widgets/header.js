@@ -252,7 +252,7 @@ const Header = () => {
                                 </ul>
                             </div>
                         </li>
-                        <li><Link to='/clients-speak' onClick={closeMenu}>Client's Speak</Link></li>
+                        {/* <li><Link to='/clients-speak' onClick={closeMenu}>Client's Speak</Link></li> */}
                         <li><Link to='/careers' onClick={closeMenu}>Careers</Link></li>
                         <li><Link to='/contact-us' onClick={closeMenu}>Contact us</Link></li>
                     </ul>

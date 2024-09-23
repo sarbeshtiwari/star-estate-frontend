@@ -51,17 +51,25 @@ function Career() {
     <div className="w-100 padding">
         <div className="container-lg">
             <div className="heading mx-auto text-center">
-                <h3 className="mb-0">Life at STAR ESTATE</h3>
+                <h3 className="mb-0">We practice holistic growth approach competitively</h3>
             </div>
-            <p className='mb-0 text-center'>STAR ESTATE is a team of experienced and accomplished professionals committed to working with a result-oriented approach. Our team members precisely understand their roles and responsibilities towards clients, and thus the organisation is continuously rising towards excellence, client satisfaction, and goal achievements. Lorem Ipsum on lihtsalt proovitekst, mida kasutatakse printimis- ja ladumistööstuses. See on olnud tööstuse põhiline proovitekst juba alates 1500. aastatest, mil tundmatu printija võttis hulga suvalist teksti, et teha trükinäidist. Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega.</p>
+            <p className='mb-0 text-center'>Step into the ecosystem of competitive ecosystem that nurture professional growth aspirations with
+collaboration, and camaraderie moments. Our workplace embrace the synergy to learn, share, ideate
+and build long-term and sturdy partnerships. We have a work culture at respects every voiced
+perception. Join us to experience mega growth opportunities and embrace continuous growth.</p>
         </div>
     </div>
     <div className="w-100 position-relative overflow-hidden career-section1 bg-image">
-        <div className='career-random-text padding text-center text-white' data-position="top center">
-            <p className='mb-0 h2 fw-light'><i className='fa fa-quote-left'></i> Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilis. <i className='fa fa-quote-right'></i></p>
-        </div>
-        <img src='/star-estate-react/assets/images/Do-work-that-matters.jpg' alt='Career' />
+    <div className='career-random-text px-1 text-center text-white container-lg'>
+        <p className='mb-0 h4 fw-light'>
+            <i className='fa fa-quote-left'></i> 
+            Our talent pool address real estate apprehensions and resolve investors’ asymmetrical problems across India. Our experienced, expert, and considerate team answer search for exclusive and elite immovable assets across segments and budgets.
+            <i className='fa fa-quote-right'></i>
+        </p>
     </div>
+    <img src='/star-estate-react/assets/images/Do-work-that-matters.jpg' alt='Career' />
+</div>
+
 
     <div className="w-100 padding">
         <div className="container-lg">

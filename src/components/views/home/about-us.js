@@ -84,9 +84,17 @@ function AboutUs() {
                                 <div className="heading mx-auto">
                                     <h3 className="mb-0">Star Estate was founded in 2012 as the fastest-growing Real Estate enterprise.</h3>
                                 </div>
-                                <p><b>Today, we have come a long way with a history of successful results and unparalleled management — as well as offering a wide range of consulting services in residential, commercial and retail verticals and more.</b></p>
-                                <p>That "more" represents one of the best customer service, customer experience, and our company culture. We want to inspire the world by demonstrating that it is possible to provide long-term and sustainable benefits to consumers, entrepreneurs, suppliers, shareholders, and the community all at the same time.</p>
-                                <p className="mb-0">Star Estate is associated with more than 100 world's top-class real estate developers who have a legacy of making outstanding real estate properties with no drawbacks and a record of on-time possession within the committed time. With innovation and the use of updated research analysis and the latest technologies like Artificial Intelligence (AI) &amp; Virtual Reality (VR), Star Estate is set to make the new benchmark in Indian Real Estate history by making property consultation more transparent and advanced. We also use machine learning to ease the process of personalization, focus on the preferences in selecting properties for customers, and save them money and time.</p>
+                                <p><b><em>Dreams don't turn into reality by chance it takes determination and courage to pursue them.</em></b></p>
+                                <p>To realize dreams, it is important to accelerate the pedal of competence. Even after
+completing 12 successful years in the business of unlocking prosperity, we dream and dream
+it big. To appraise aspirational dreams in the real estate realm, we a team of assertive
+professionals confers tailored solutions to investors under the leadership of Mr. Vijay Jain,
+Founder and Managing Director, Star Estate.</p>
+                                <p className="mb-0">We work with the synergy to meet the pursuit of structural excellence in the property market
+across India. With experience and expertise in our armory, we shoot to attain goals. We don’t
+just exhibit concrete structures, but we unveil exclusive architectural masterpieces close to
+whims and fancies.
+</p>
                             </div>
                         </div>
                         <div className="col-xl-4 overview-stats">
@@ -133,8 +141,13 @@ function AboutUs() {
                             <div className="heading mx-auto">
                                 <h3 className="mb-0">STAR ESTATE is the No. 1 property portal offering you the services in the real estate industry.</h3>
                             </div>
-                            <p>Star Estate has been one of the most reliable &amp; trusted real estate consultation firms for over a decade, providing the best-in-class real estate and property-related solutions for its highly esteemed clients and customers through its extensive market research and scientific data analysis. Star Estate delivers the maximum level of hassle-free property investment solutions for home buyers and real estate management with long-term strategic planning for developers, which is exceptionally well acclaimed and recognized by its users and reviewers. We aim to give our customers a comprehensive and flawless experience in buying or investing in residential and commercial properties. We take care of almost every aspect of property-related concerns, from searching for new homes, finding suitable locations, and competitive pricing to after-sales services.</p>
-                            <p className="mb-0">We hope that people won't even realize the hassle of real estate in the future. Instead, they'll know Star Estate as a company that just happens to deliver complete real estate solutions.</p>
+                            <p>Our in-house think tank streamlines promising practices to ascend performance in the
+competitive market to maintain the benchmark work standard. With real estate giants and
+investors counting on us, we are elated to be a catalyst of refined real estate investment
+experience provider across India.</p>
+                            <p className="mb-0">With exceptional talent as the backbone, we become more ambitious and delimit boundaries
+to ascertain benchmarks in the Indian property market.
+</p>
                         </div>
                     </div>
                 </div>
@@ -145,7 +158,10 @@ function AboutUs() {
                         <div className="col-lg-12 vmBox">
                             <div className="inner pl-lg-4">
                                 <div className="heading mx-auto"><h3 className='mb-0'>Vision</h3></div>
-                                <p className="mb-0 text-justify">Star Estate looks forward to a new India where we provide the luxury of comfortable housing at utmost affordability and ensure customer satisfaction as much as can be. We aim to eradicate the problems of poor infrastructure and estate and to bring about a revolution to how the new India lives.</p>
+                                <p className="mb-0 text-justify">For us, the sky is not the limit and global expansion is the next milestone we are working to
+achieve in the future. From taking off in India to flying into international property markets
+across continents is an aspiration and we are confident of nurturing it seamlessly.
+</p>
                             </div>
                         </div>
                     </div>
@@ -159,10 +175,10 @@ function AboutUs() {
                         <i className="fa fa-quote-right"></i>
                         <div className="img-fluid"><img src="/star-estate-react/assets/images/Mr-Vijay-Jain-MD-Star-Estate.jpg" alt="Direct Vijay Jain" /></div>
                         <div className="director-content">
-                            <div className="director-quote">We make sure to serve every client with transparency, reliability, and a proven commitment.</div>
+                            <div className="director-quote">My parameter of success is rendering dreams to investors in a pragmatic way possible.</div>
                             <div className="director-title">
-                                <h6>Vijay Jain<br />
-                                    <small>Managing Director</small></h6>
+                                <h6>Mr. Vijay Jain<br />
+                                    <small>Founder and Managing Director, Star Estate</small></h6>
                             </div>
                         </div>
                     </div>
@@ -195,7 +211,9 @@ function AboutUs() {
                                 <div className="imgBox"><img src="/star-estate-react/assets/images/star/s.png" alt="" /></div>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Sincerity</h5>
-                                    <p className="mb-0">We stay true to our words. Star Estate never steps back from the commitment. Our professional work approach and the precision to evaluate and meet client expectations draw our proven commitment since inception.</p>
+                                    <p className="mb-0">We stay true to our words. Star Estate never steps back from the commitment.
+Our professional work approach and the precision to evaluate and meet client expectations
+draw our proven commitment since inception.</p>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +222,11 @@ function AboutUs() {
                                 <div className="imgBox"><img src="/star-estate-react/assets/images/star/t.png" alt="" /></div>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Transparency</h5>
-                                    <p className="mb-0">Listening is the key to success, and our team patiently listens to the client's requirements and expectations. With it, we begin the procedure of listing, searching, and shortlisting properties for clients.</p>
+                                    <p className="mb-0">– Listening is the key to success and our team patiently listens to the client's
+requirements and expectations. With it, we begin the procedure of listing, searching, and
+shortlisting properties for clients. The process includes picking up budget-friendly inventory
+and describing the project embellished with features that make the dream living experience
+a fairy-tale. </p>
                                 </div>
                             </div>
                         </div>
@@ -213,7 +235,9 @@ function AboutUs() {
                                 <div className="imgBox"><img src="/star-estate-react/assets/images/star/a.png" alt="" /></div>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Assurance</h5>
-                                    <p className="mb-0">Star Estate assures investors about closing the right deal. The company addresses property investment purposes in the wake to meet client satisfaction. The organisation exhibits relevant properties for investors with assurance of post-sale.</p>
+                                    <p className="mb-0">Star Estate assures investors about closing the right deal. The company addresses
+property investment purposes in the wake to meet client satisfaction. The organisation
+exhibits relevant properties for investors with assurance of post-sale assistance.</p>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +246,9 @@ function AboutUs() {
                                 <div className="imgBox"><img src="/star-estate-react/assets/images/star/r.png" alt="" /></div>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Reliability</h5>
-                                    <p className="mb-0">With the transparent work approach, we have won the trust of clients' across segments. Thus, clienteles refer us to friends and family as they know Star Estate is a reliable name in the Indian real estate market.</p>
+                                    <p className="mb-0">With the transparent work approach, we have won the trust of clients across
+segments. Thus, clienteles refer us to friends and family as Star Estate is a reliable name in
+the Indian real estate market.</p>
                                 </div>
                             </div>
                         </div>

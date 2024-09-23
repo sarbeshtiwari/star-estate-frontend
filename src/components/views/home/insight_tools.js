@@ -21,7 +21,7 @@ const InsightsTools = () => {
                     <div className="col-lg-3 col-sm-6 project-card">
                         <div className="inner px-0 pt-0">
                             <img src="/star-estate-react/assets/images/evaluation-report.jpg" alt="" />
-                            <div className="card-footer viewmore"><Link to='/property-evaluation-report'>Explore Now</Link></div>
+                            <div className="card-footer viewmore"><Link to='/property-valuation'>Explore Now</Link></div>
                         </div>
                     </div>
                     <div className="col-lg-3 col-sm-6 project-card">

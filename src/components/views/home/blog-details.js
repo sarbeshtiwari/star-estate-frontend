@@ -83,7 +83,7 @@ function BlogDetails() {
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item"><Link to='/'>Home</Link></li>
                                     <li className="breadcrumb-item">Media</li>
-                                    <li className="breadcrumb-item"><Link to='/blogs'>Blogs</Link></li>
+                                    <li className="breadcrumb-item">{blogs.blogsCategory === 'blog' ? <Link to='/blogs'>Blogs</Link> : <Link to='/blogs'>News</Link>}</li>
                                     <li className="breadcrumb-item active">{blogs.blogsName}</li>
                                 </ol>
                             </div>

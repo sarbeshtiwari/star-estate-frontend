@@ -122,7 +122,7 @@ function AppContent() {
   // Hide Header and Footer for the dynamic ProjectDetails route
   const isProjectDetailsPage = /^\/[^/]+$/.test(location.pathname) && ![
     '/emi-calculator',
-    '/property-evaluation-report',
+    '/property-valuation',
     '/nri-guidelines',
     '/reality-check-before-buying',
     '/about-us',
@@ -150,7 +150,7 @@ function AppContent() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/emi-calculator' element={<EmiCalculator />} />
-        <Route path='/property-evaluation-report' element={<PropertyEvaluationReport />} />
+        <Route path='/property-valuation' element={<PropertyEvaluationReport />} />
         <Route path='/nri-guidelines' element={<NriGuidelines />} />
         <Route path='/reality-check-before-buying' element={<RealityCheck />} />
         <Route path='/:slugURL' element={<ProjectDetails />} />
