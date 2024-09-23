@@ -57,13 +57,23 @@ function EmiCalculator() {
   return (
     <div>
        {/* <Header /> */}
-    <div className="insideBanner">
-
-            <picture>
-                <img src="/star-estate-react/assets/images/banner-emi-calculator1.jpg" className="h-100 object-cover object-position-bottom rounded" alt="Star Estate" />
-            </picture>
-
-    </div>
+       <div className="insideBanner">
+                <picture>
+                    <source 
+                        media="(min-width: 992px)" 
+                        srcSet="/star-estate-react/assets/images/banner-emi-calculator.jpg" 
+                    />
+                    <source 
+                        media="(min-width: 768px)" 
+                        srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" 
+                    />
+                    <img 
+                        src="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" 
+                        className="h-100 object-cover object-position-bottom rounded" 
+                        alt="Star Estate" 
+                    />
+                </picture>
+            </div>
 
     <div className="w-100">
         <div className="container-lg">

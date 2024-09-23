@@ -105,7 +105,7 @@ function News() {
                                             <li><i className="fa fa-tag text-primary"></i> <span>{item.blogsBy}</span></li>
                                         </ul>
                                         <a className="h6" href="#">{item.heading}</a>
-                                        <div className="continue-reading"><Link to={`/blog/${item.slugURL}`}>Continue Readings</Link></div>
+                                        <div className="continue-reading"><Link to={`/blog/${item.slugURL}`}>Continue Reading</Link></div>
                                     </div>
                                 </div>
                             </div>
