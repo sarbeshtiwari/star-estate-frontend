@@ -147,14 +147,14 @@ function Advertisement() {
                 <picture>
                     <source 
                         media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/advertisements.jpg" 
+                        srcSet="assets/images/advertisements.jpg" 
                     />
                     <source 
                         media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/advertisements-m.jpg" 
+                        srcSet="assets/images/advertisements-m.jpg" 
                     />
                     <img 
-                        src="/star-estate-react/assets/images/advertisements-m.jpg" 
+                        src="assets/images/advertisements-m.jpg" 
                         className="h-100 object-cover object-position-bottom rounded" 
                         alt="Star Estate" 
                     />

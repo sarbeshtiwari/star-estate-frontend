@@ -85,14 +85,14 @@ function ContactUs() {
                 <picture>
                     <source 
                         media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/contact-us.jpg" 
+                        srcSet="assets/images/contact-us.jpg" 
                     />
                     <source 
                         media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/contact-us-m.jpg" 
+                        srcSet="assets/images/contact-us-m.jpg" 
                     />
                     <img 
-                        src="/star-estate-react/assets/images/contact-us-m.jpg" 
+                        src="assets/images/contact-us-m.jpg" 
                         className="h-100 object-cover object-position-bottom rounded" 
                         alt="Star Estate" 
                     />

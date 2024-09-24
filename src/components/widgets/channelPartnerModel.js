@@ -63,7 +63,7 @@ const CPRegistrationModal = ({ showModal, closeModal, title }) => {
   };
 
   const contentStyle = {
-    backgroundImage: 'url(../star-estate-react/assets/images/card-bg.jpg)', // Replace with your image path
+    backgroundImage: 'url(..assets/images/card-bg.jpg)', // Replace with your image path
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     color: 'black', // Text color updated to black

@@ -23,8 +23,8 @@ function ClientsSpeak() {
         {/* <Header /> */}
         <div class="insideBanner">
         <picture>
-            <source media="(max-width: 820px)" srcset="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
-            <img src="/star-estate-react/assets/images/banner-emi-calculator.jpg" class="h-100 object-cover" alt="Star Estate" />
+            <source media="(max-width: 820px)" srcset="assets/images/banner-emi-calculator-m.jpg" />
+            <img src="assets/images/banner-emi-calculator.jpg" class="h-100 object-cover" alt="Star Estate" />
         </picture>
     </div>
     <div class="w-100">
@@ -47,7 +47,7 @@ function ClientsSpeak() {
                     {testi.map((tests, index) => (
                     <div class="col-lg-6 testimBox">
                         <div class="inner common-border">
-                            <i><img src="/star-estate-react/assets/images/icons/double-quote.png" alt="" /></i>
+                            <i><img src="assets/images/icons/double-quote.png" alt="" /></i>
 
                             <div key={index} class="testim-text">
                                 <p>{tests.clientWords}</p>

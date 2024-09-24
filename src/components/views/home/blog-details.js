@@ -18,6 +18,14 @@ function BlogDetails() {
                 const response = await axiosInstance.get(`/blogs/getBlogBySlugURL/${slugURL}`);
                 const fetchedData = response.data;
                 setBlogDetails([fetchedData]);
+                if (fetchedData && fetchedData.blogsCategory) {
+                    console.log(fetchedData.blogsCategory);
+                    // fetchRecentBlogs() or fetchRecentNews() based on the category
+                    fetchedData.blogsCategory === 'blog' ? fetchRecentBlogs() : fetchRecentNews();
+                }
+                // console.log(blogDetails[0].blogsCategory)
+                // {blogDetails[0].blogsCategory === 'blog' ? fetchRecentBlogs() : fetchRecentNews()}
+                // fetchRecentBlogs();
             } catch (error) {
                 setError('Error fetching blog data');
                 console.error('Error fetching blog data:', error);
@@ -28,13 +36,14 @@ function BlogDetails() {
         fetchBlogDetailsData();
     }, [slugURL]);
 
-    useEffect(() => {
+    // useEffect(() => {
         const fetchRecentBlogs = async () => {
             try {
+                console.log('blog')
                 const response = await axiosInstance.get('/blogs/getBlog');
                 const fetchedBlogs = response.data;
                 const recentBlogsFiltered = fetchedBlogs
-                    .filter(blog => blog.slugURL !== slugURL && blog.status !== false)
+                    .filter(blog => blog.slugURL !== slugURL && blog.status !== false && blog.blogsCategory === 'blog')
                     .slice(0, 5);
                 setRecentBlogs(recentBlogsFiltered);
             } catch (error) {
@@ -44,8 +53,25 @@ function BlogDetails() {
                 setLoadingRecent(false);
             }
         };
-        fetchRecentBlogs();
-    }, [slugURL]);
+        // fetchRecentBlogs();
+    // }, [slugURL]);
+
+    const fetchRecentNews = async () => {
+        try {
+            console.log('news')
+            const response = await axiosInstance.get('/blogs/getBlog');
+            const fetchedBlogs = response.data;
+            const recentBlogsFiltered = fetchedBlogs
+                .filter(blog => blog.slugURL !== slugURL && blog.status !== false && blog.blogsCategory === 'news')
+                .slice(0, 5);
+            setRecentBlogs(recentBlogsFiltered);
+        } catch (error) {
+            setError('Error fetching recent blogs');
+            console.error('Error fetching recent blogs:', error);
+        } finally {
+            setLoadingRecent(false);
+        }
+    };
 
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {

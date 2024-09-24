@@ -145,14 +145,14 @@ function PropertyEvaluationReport() {
                 <picture>
                     <source
                         media="(min-width: 992px)"
-                        srcSet="/star-estate-react/assets/images/banner-per.jpg"
+                        srcSet="assets/images/banner-per.jpg"
                     />
                     <source
                         media="(min-width: 768px)"
-                        srcSet="/star-estate-react/assets/images/banner-per-m.jpg"
+                        srcSet="assets/images/banner-per-m.jpg"
                     />
                     <img
-                        src="/star-estate-react/assets/images/banner-per-m.jpg"
+                        src="assets/images/banner-per-m.jpg"
                         className="img-fluid h-100 object-cover object-position-bottom rounded"
                         alt="Star Estate"
                     />

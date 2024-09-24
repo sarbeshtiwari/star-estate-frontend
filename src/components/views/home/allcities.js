@@ -28,8 +28,8 @@ function AllCities() {
             {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source media="(max-width: 820px)" srcSet="/star-estate-react/assets/images/banner-commercial-m.jpg" />
-                    <img src="/star-estate-react/assets/images/banner-commercial.jpg" className="h-100 object-cover" alt="Star Estate" />
+                    <source media="(max-width: 820px)" srcSet="assets/images/banner-commercial-m.jpg" />
+                    <img src="assets/images/banner-commercial.jpg" className="h-100 object-cover" alt="Star Estate" />
                 </picture>
             </div>
             <div className="w-100">

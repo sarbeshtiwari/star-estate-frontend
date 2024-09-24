@@ -65,7 +65,7 @@ const CPRegistration = ({ showModal, closeModal, title }) => {
   };
 
   const contentStyle = {
-    backgroundImage: 'url(../star-estate-react/assets/images/card-bg.jpg)', // Replace with your image path
+    backgroundImage: 'url(..assets/images/card-bg.jpg)', // Replace with your image path
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     color: 'black', // Text color updated to black
@@ -83,14 +83,14 @@ const CPRegistration = ({ showModal, closeModal, title }) => {
         <picture>
             <source 
                 media="(min-width: 992px)" 
-                srcSet="/star-estate-react/assets/images/banner-per.jpg" 
+                srcSet="assets/images/banner-per.jpg" 
             />
             <source 
                 media="(min-width: 768px)" 
-                srcSet="/star-estate-react/assets/images/banner-per-m.jpg" 
+                srcSet="assets/images/banner-per-m.jpg" 
             />
             <img 
-                src="/star-estate-react/assets/images/banner-per-m.jpg" 
+                src="assets/images/banner-per-m.jpg" 
                 className="h-100 object-cover object-position-bottom rounded" 
                 alt="Star Estate" 
             />

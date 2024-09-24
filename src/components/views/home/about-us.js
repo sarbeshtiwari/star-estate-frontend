@@ -52,14 +52,14 @@ function AboutUs() {
                 <picture>
                     <source 
                         media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/about-us.jpg" 
+                        srcSet="assets/images/about-us.jpg" 
                     />
                     <source 
                         media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/about-us-m.jpg" 
+                        srcSet="assets/images/about-us-m.jpg" 
                     />
                     <img 
-                        src="/star-estate-react/assets/images/about-us-m.jpg" 
+                        src="assets/images/about-us-m.jpg" 
                         className="h-100 object-cover object-position-bottom rounded" 
                         alt="Star Estate" 
                     />
@@ -128,13 +128,13 @@ whims and fancies.
                                         </div>
                                     </div>
                                 </div>
-                                <img src="/star-estate-react/assets/images/card-bg.jpg" className="h-100 object-cover stats-bg" alt="" />
+                                <img src="assets/images/card-bg.jpg" className="h-100 object-cover stats-bg" alt="" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="w-100 padding bg-image overflow-hidden" style={{backgroundImage: "url(/star-estate-react/assets/images/card-bg.jpg)" }}>
+            <div className="w-100 padding bg-image overflow-hidden" style={{backgroundImage: "url(assets/images/card-bg.jpg)" }}>
                 <div className="container-lg">
                     <div className="overview-box text-justify">
                         <div className="inner">
@@ -173,7 +173,7 @@ across continents is an aspiration and we are confident of nurturing it seamless
                     <div className="director-msg bg-gray-gradient-box p-3">
                         <i className="fa fa-quote-left"></i>
                         <i className="fa fa-quote-right"></i>
-                        <div className="img-fluid"><img src="/star-estate-react/assets/images/Mr-Vijay-Jain-MD-Star-Estate.jpg" alt="Direct Vijay Jain" /></div>
+                        <div className="img-fluid"><img src="assets/images/Mr-Vijay-Jain-MD-Star-Estate.jpg" alt="Direct Vijay Jain" /></div>
                         <div className="director-content">
                             <div className="director-quote">My parameter of success is rendering dreams to investors in a pragmatic way possible.</div>
                             <div className="director-title">
@@ -208,7 +208,7 @@ across continents is an aspiration and we are confident of nurturing it seamless
                     <div className="row gap-row">
                         <div className="col-xl-3 col-sm-6 whyUsBox">
                             <div className="inner h-100">
-                                <div className="imgBox"><img src="/star-estate-react/assets/images/star/s.png" alt="" /></div>
+                                <div className="imgBox"><img src="assets/images/star/s.png" alt="" /></div>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Sincerity</h5>
                                     <p className="mb-0">We stay true to our words. Star Estate never steps back from the commitment.
@@ -219,7 +219,7 @@ draw our proven commitment since inception.</p>
                         </div>
                         <div className="col-xl-3 col-sm-6 whyUsBox">
                             <div className="inner h-100">
-                                <div className="imgBox"><img src="/star-estate-react/assets/images/star/t.png" alt="" /></div>
+                                <div className="imgBox"><img src="assets/images/star/t.png" alt="" /></div>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Transparency</h5>
                                     <p className="mb-0">– Listening is the key to success and our team patiently listens to the client's
@@ -232,7 +232,7 @@ a fairy-tale. </p>
                         </div>
                         <div className="col-xl-3 col-sm-6 whyUsBox">
                             <div className="inner h-100">
-                                <div className="imgBox"><img src="/star-estate-react/assets/images/star/a.png" alt="" /></div>
+                                <div className="imgBox"><img src="assets/images/star/a.png" alt="" /></div>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Assurance</h5>
                                     <p className="mb-0">Star Estate assures investors about closing the right deal. The company addresses
@@ -243,7 +243,7 @@ exhibits relevant properties for investors with assurance of post-sale assistanc
                         </div>
                         <div className="col-xl-3 col-sm-6 whyUsBox">
                             <div className="inner h-100">
-                                <div className="imgBox"><img src="/star-estate-react/assets/images/star/r.png" alt="" /></div>
+                                <div className="imgBox"><img src="assets/images/star/r.png" alt="" /></div>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Reliability</h5>
                                     <p className="mb-0">With the transparent work approach, we have won the trust of clients across

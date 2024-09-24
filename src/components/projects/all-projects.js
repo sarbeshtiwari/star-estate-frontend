@@ -72,8 +72,8 @@ function AllProjects() {
         <div>
             <div className="insideBanner">
                 <picture>
-                    <source media="(max-width: 520px)" srcSet="/star-estate-react/assets/images/banner-commercial-m.jpg" />
-                    <img src="/star-estate-react/assets/images/banner-commercial.jpg" className="h-100 object-cover object-position-bottom" alt="Star Estate" />
+                    <source media="(max-width: 520px)" srcSet="assets/images/banner-commercial-m.jpg" />
+                    <img src="assets/images/banner-commercial.jpg" className="h-100 object-cover object-position-bottom" alt="Star Estate" />
                 </picture>
             </div>
             <div className="w-100">

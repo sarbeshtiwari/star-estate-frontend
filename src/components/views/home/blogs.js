@@ -31,14 +31,14 @@ function Blogs() {
                 <picture>
                     <source 
                         media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/blog.jpg" 
+                        srcSet="assets/images/blog.jpg" 
                     />
                     <source 
                         media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/blog-m.jpg" 
+                        srcSet="assets/images/blog-m.jpg" 
                     />
                     <img 
-                        src="/star-estate-react/assets/images/blog-m.jpg" 
+                        src="assets/images/blog-m.jpg" 
                         className="h-100 object-cover object-position-bottom rounded" 
                         alt="Star Estate" 
                     />

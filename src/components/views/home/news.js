@@ -35,14 +35,14 @@ function News() {
                 <picture>
                     <source 
                         media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/news.jpg" 
+                        srcSet="assets/images/news.jpg" 
                     />
                     <source 
                         media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/news-m.jpg" 
+                        srcSet="assets/images/news-m.jpg" 
                     />
                     <img 
-                        src="/star-estate-react/assets/images/news-m.jpg" 
+                        src="assets/images/news-m.jpg" 
                         className="h-100 object-cover object-position-bottom rounded" 
                         alt="Star Estate" 
                     />
@@ -79,7 +79,7 @@ function News() {
                                             <li><i className="fa fa-tag text-primary"></i> <span>{item.paperName}</span></li>
                                         </ul>
                                         <a className="h6" href="#">{item.heading}</a>
-                                        <div className="continue-reading"><Link to={`/news/${item.slugURL}`}>Continue Readings</Link></div>
+                                        <div className="continue-reading"><Link to={`/news/${item.slugURL}`}>Continue Reading</Link></div>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@ function News() {
                                             <li><i className="fa fa-tag text-primary"></i> <span>{item.blogsBy}</span></li>
                                         </ul>
                                         <a className="h6" href="#">{item.heading}</a>
-                                        <div className="continue-reading"><Link to={`/blog/${item.slugURL}`}>Continue Reading</Link></div>
+                                        <div className="continue-reading"><Link to={`/blogs/${item.slugURL}`}>Continue Reading</Link></div>
                                     </div>
                                 </div>
                             </div>

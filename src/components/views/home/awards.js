@@ -25,8 +25,8 @@
 //         {/* <Header /> */}
 //           <div className="insideBanner">
 //         <picture>
-//             <source media="(max-width: 820px)" srcset="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
-//             <img src="/star-estate-react/assets/images/banner-emi-calculator.jpg" className="h-100 object-cover" alt="Star Estate" />
+//             <source media="(max-width: 820px)" srcset="assets/images/banner-emi-calculator-m.jpg" />
+//             <img src="assets/images/banner-emi-calculator.jpg" className="h-100 object-cover" alt="Star Estate" />
 //         </picture>
 //     </div>
 
@@ -109,14 +109,14 @@ function Awards() {
                 <picture>
                     <source 
                         media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/award.jpg" 
+                        srcSet="assets/images/award.jpg" 
                     />
                     <source 
                         media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/award-m.jpg" 
+                        srcSet="assets/images/award-m.jpg" 
                     />
                     <img 
-                        src="/star-estate-react/assets/images/award-m.jpg" 
+                        src="assets/images/award-m.jpg" 
                         className="h-100 object-cover object-position-bottom rounded" 
                         alt="Star Estate" 
                     />

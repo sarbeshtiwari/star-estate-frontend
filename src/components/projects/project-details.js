@@ -1093,9 +1093,9 @@ function ProjectDetails() {
                                                             />
                                                         </div>
                                                         {details && (
-                                                            <p className="mb-0">
+                                                            <p className="mb-1">
                                                                 {details.title}
-                                                                <span className="badge badge-primary">
+                                                                <span className="badge badge-primary ms-1">
                                                                     {details.proximity} {details.unit}
                                                                 </span>
                                                             </p>

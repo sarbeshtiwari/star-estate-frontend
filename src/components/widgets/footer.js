@@ -91,7 +91,7 @@ const Footer = () => {
                                         <li><Link to='/about-us'>About Star Estate</Link></li>
                                         {/* <li><Link to='/about-us'>Mission &amp; Vision</Link></li>
                                         <li><Link to='/about-us'>Who We Are</Link></li> */}
-                                        <li><Link to='/clients-speak'>Client's Speak</Link></li>
+                                        {/* <li><Link to='/clients-speak'>Client's Speak</Link></li> */}
                                         <li><Link to='/faq'>FAQs</Link></li>
                                     </ul>
                                 </div>

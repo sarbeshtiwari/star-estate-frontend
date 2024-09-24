@@ -104,14 +104,14 @@ function EmiCalculator() {
                 <picture>
                     <source
                         media="(min-width: 992px)"
-                        srcSet="/star-estate-react/assets/images/banner-emi-calculator.jpg"
+                        srcSet="assets/images/banner-emi-calculator.jpg"
                     />
                     <source
                         media="(min-width: 768px)"
-                        srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg"
+                        srcSet="assets/images/banner-emi-calculator-m.jpg"
                     />
                     <img
-                        src="/star-estate-react/assets/images/banner-emi-calculator-m.jpg"
+                        src="assets/images/banner-emi-calculator-m.jpg"
                         className="h-100 object-cover object-position-bottom rounded"
                         alt="Star Estate"
                     />
@@ -242,7 +242,7 @@ function EmiCalculator() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><div className="w-100 padding bg-gray-gradient-box section-faq">
                     {Faqs.length > 0 && (
                         <div className="container-lg">
                             <div className="heading mx-auto text-center">
@@ -287,7 +287,7 @@ function EmiCalculator() {
                                 </div>
                             </div>
                         </div>
-                    )}
+                    )}</div>
                 </div>
             </div>
             {/* <Footer /> */}
