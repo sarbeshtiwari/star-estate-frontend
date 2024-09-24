@@ -107,8 +107,11 @@ img {
   right: 0;
   top: 0;
   bottom: 0;
-  /* background-color: rgb(0 0 0 / 75%); */
   z-index: -1;
+}
+
+.bg-image.has-overlay::before {
+  background-color: rgb(0 0 0 / 75%);
 }
 
 p {

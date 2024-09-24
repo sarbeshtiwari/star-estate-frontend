@@ -236,11 +236,11 @@ const ProjectsCarousel = () => {
                         </Swiper>
                     )}
 
-                    {/* <div className="swiper-controls h-auto mr-auto">
-                        <div className="swiper-button-prev" role="button" aria-label="Previous slide"></div>
+                    <div className="swiper-controls h-auto mr-auto">
+                        {/* <div className="swiper-button-prev" role="button" aria-label="Previous slide"></div> */}
                         <div className="readmore w-auto mt-0"><Link to='/projects' className="button reverse">View All</Link></div>
-                        <div className="swiper-button-next" role="button" aria-label="Next slide"></div>
-                    </div> */}
+                        {/* <div className="swiper-button-next" role="button" aria-label="Next slide"></div> */}
+                    </div>
                 </div>
             </div>
         </div>

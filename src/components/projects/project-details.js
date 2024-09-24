@@ -142,6 +142,7 @@ function ProjectDetails() {
             new Swiper('.ameninity-slider', {
                 slidesPerView: 1,
                 spaceBetween: 10,
+                centeredSlides: true,
                 loop: true,
                 navigation: {
                     nextEl: '.swiper-button-next',
@@ -620,13 +621,13 @@ function ProjectDetails() {
                 <div className="heroFormContainer d-none d-lg-flex shadow">
                     <form onSubmit={handleSubmit}>
                         <div className="row g-0">
-                            <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" value={formData.Name}
+                            <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" 
                                 onChange={handleInputChange}
                                 required /></div>
-                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email" value={formData.Email}
+                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email"
                                 onChange={handleInputChange}
                                 required /></div>
-                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" value={formData.phoneNumber}
+                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber"
                                 onChange={handleInputChange}
                                 required /></div>
 
@@ -716,13 +717,13 @@ function ProjectDetails() {
                 })}
                 <form onSubmit={handleSubmit}>
                     <div className="row g-2">
-                        <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name"
+                        <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" value={formData.Name}
                             onChange={handleInputChange}
                             required /></div>
-                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email"
+                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email" value={formData.Email}
                             onChange={handleInputChange}
                             required /></div>
-                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber"
+                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" value={formData.phoneNumber}
                             onChange={handleInputChange}
                             required /></div>
 
@@ -878,7 +879,7 @@ function ProjectDetails() {
                 {/* amenities */}
                 <div
                 id="amenities"
-                className="w-100 padding position-relative overflow-hidden section-amenities"
+                className="w-100 padding position-relative overflow-hidden bg-image has-overlay section-amenities"
                 style={{
                     backgroundImage: `url(${
                     galleryData.some(data => data.amenityImage)
@@ -908,16 +909,16 @@ function ProjectDetails() {
                         {amenities.length > 0 ? (
                         amenities.map((amenity) => (
                             <div className="swiper-slide amenBox" key={amenity._id}>
-                            <div className="inner">
-                                <div className="img-fluid">
-                                <img
-                                    src={`${axiosInstance.defaults.globalURL}${amenity.image}`}
-                                    className="filter-white"
-                                    alt={amenity.alt_tag}
-                                />
+                                <div className="inner">
+                                    <div className="img-fluid">
+                                    <img
+                                        src={`${axiosInstance.defaults.globalURL}${amenity.image}`}
+                                        className="filter-white"
+                                        alt={amenity.alt_tag}
+                                    />
+                                    </div>
+                                    <p className="mb-0">{amenity.title}</p>
                                 </div>
-                                <p className="mb-0">{amenity.title}</p>
-                            </div>
                             </div>
                         ))
                         ) : (
