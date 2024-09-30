@@ -1,10 +1,39 @@
 import React, { useEffect, useState } from 'react'
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 import axiosInstance from '../utils/axiosInstance';
 import { Link } from 'react-router-dom';
 import Header from '../../widgets/header';
 import Footer from '../../widgets/footer';
 
 function Career() {
+    var swiper = new Swiper(".crDreamer-slider", {
+        slidesPerView: "auto",
+        loop: true,
+        speed: 1000,
+        // autoplay: {
+        //     delay: 3000,
+        //     disableOnInteraction: false,
+        // },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        effect: "creative",
+        creativeEffect: {
+            prev: {
+            shadow: true,
+            origin: "left center",
+            translate: ["-5%", 0, -200],
+            rotate: [0, 100, 0],
+            },
+            next: {
+            origin: "right center",
+            translate: ["5%", 0, -200],
+            rotate: [0, -100, 0],
+            },
+        },
+    });
     const [jobs, setJobs] = useState([]);
     useEffect(() => {
         const fetchJobs = async () => {
@@ -53,10 +82,8 @@ function Career() {
                     <div className="heading mx-auto text-center">
                         <h3 className="mb-0">We practice holistic growth approach competitively</h3>
                     </div>
-                    <p className='mb-0 text-center'>Step into the ecosystem of competitive ecosystem that nurture professional growth aspirations with
-                        collaboration, and camaraderie moments. Our workplace embrace the synergy to learn, share, ideate
-                        and build long-term and sturdy partnerships. We have a work culture at respects every voiced
-                        perception. Join us to experience mega growth opportunities and embrace continuous growth.</p>
+                    <p className='text-center'>Step into the ecosystem of the competitive ecosystem that nurtures professional growth aspirations with collaboration, and camaraderie moments. Our workplace embraces the synergy to learn, share, ideate, and build long-term and sturdy partnerships. We have a work culture at respects every voiced perception. Join us to experience mega-growth opportunities and embrace continuous growth.</p>
+                    <p className='mb-0 text-center'>Our talent pool addresses real estate apprehensions and resolves investors’ asymmetrical problems across India. Our experienced, expert, and considerate team answers the searches for exclusive and elite immovable assets across segments and budgets.</p>
                 </div>
             </div>
             <div className="w-100 position-relative overflow-hidden career-section1 bg-image">
@@ -107,134 +134,228 @@ function Career() {
                     </div>
                 </div>
             </div> */}
-           <div className="w-100 float-left padding">
-  <div className="container-lg">
-    <div className="row justify-content-center">
-      <div className="col-xl-10">
-        {[
-          {
-            imgSrc: "assets/images/professional-growth-aspects.jpg",
-            title: "Professional Growth Aspects",
-            description: "Being a part of Star Estate is an opportunity to work with real estate giant and embrace experience to propel exceptional levels in the career while conquering laurels that reflect your determination and result-oriented work approach.",
-          },
-          {
-            imgSrc: "assets/images/equality-at-work-place.jpg",
-            title: "Equality At Work Place",
-            description: "We believe in rendering equal growth opportunities for professionals to weave a stable and successful career. With equal opportunity to excel in the professional realm, Star Estate is a platform for professionals to nurture dreams and climb the ladder of success.",
-          },
-          {
-            imgSrc: "assets/images/incentives-n-perks.jpg",
-            title: "Incentives & Perks",
-            description: "We count on success along with the result-oriented work efforts and applaud stellar performances with tokens of appreciation. At Star Estate, sincere efforts to attain goals are always recognized and appreciation is rendered to boost the confidence of our real estate professionals.",
-          },
-          {
-            imgSrc: "assets/images/healthy-work-environment.jpg",
-            title: "Healthy Work Environment",
-            description: "We believe in an ideal work-life balance in life thus celebrations are a part of our work culture. At Star Estate work and celebration runs parallel to bring team members together to weave a bond of trust and cherish joyful moments to unburden professionals.",
-          },
-          {
-            imgSrc: "assets/images/industry-standard-payouts.jpg",
-            title: "Industry Standard Payouts",
-            description: "Star Estate values work and is happy to render the best remuneration for distinguished portfolios considering the payout standards of the real estate market. Our healthy work frame is an opportunity to elevate in our career by attaining a much-deserved payout.",
-          },
-          {
-            imgSrc: "assets/images/cognitive-diversity.jpg",
-            title: "Cognitive Diversity",
-            description: "Star Estate is a network of professionals with distinguished work experience across India. Our distinct workforce with unique ideas, concepts, and work strategies elevate the business to attain the target and reap massive success.",
-          },
-        ].map((item, index) => (
-          <div className={`row gx-0 ${index % 2 === 0 ? '' : 'flex-row-reverse'}`} key={index}>
-            <div className="col-md-6 imgBox">
-              <img src={item.imgSrc} className="h-100 object-cover" alt={item.title} />
+            {/* <div className="w-100 padding">
+                <div className="container-lg">
+                    {[
+                    {
+                        imgSrc: "assets/images/professional-growth-aspects.jpg",
+                        title: "Professional Growth Aspects",
+                        description: "Being a part of Star Estate is an opportunity to work with real estate giant and embrace experience to propel exceptional levels in the career while conquering laurels that reflect your determination and result-oriented work approach.",
+                    },
+                    {
+                        imgSrc: "assets/images/equality-at-work-place.jpg",
+                        title: "Equality At Work Place",
+                        description: "We believe in rendering equal growth opportunities for professionals to weave a stable and successful career. With equal opportunity to excel in the professional realm, Star Estate is a platform for professionals to nurture dreams and climb the ladder of success.",
+                    },
+                    {
+                        imgSrc: "assets/images/incentives-n-perks.jpg",
+                        title: "Incentives & Perks",
+                        description: "We count on success along with the result-oriented work efforts and applaud stellar performances with tokens of appreciation. At Star Estate, sincere efforts to attain goals are always recognized and appreciation is rendered to boost the confidence of our real estate professionals.",
+                    },
+                    {
+                        imgSrc: "assets/images/healthy-work-environment.jpg",
+                        title: "Healthy Work Environment",
+                        description: "We believe in an ideal work-life balance in life thus celebrations are a part of our work culture. At Star Estate work and celebration runs parallel to bring team members together to weave a bond of trust and cherish joyful moments to unburden professionals.",
+                    },
+                    {
+                        imgSrc: "assets/images/industry-standard-payouts.jpg",
+                        title: "Industry Standard Payouts",
+                        description: "Star Estate values work and is happy to render the best remuneration for distinguished portfolios considering the payout standards of the real estate market. Our healthy work frame is an opportunity to elevate in our career by attaining a much-deserved payout.",
+                    },
+                    {
+                        imgSrc: "assets/images/cognitive-diversity.jpg",
+                        title: "Cognitive Diversity",
+                        description: "Star Estate is a network of professionals with distinguished work experience across India. Our distinct workforce with unique ideas, concepts, and work strategies elevate the business to attain the target and reap massive success.",
+                    },
+                    ].map((item, index) => (
+                    <div className={`row gx-0 ${index % 2 === 0 ? '' : 'flex-row-reverse'}`} key={index}>
+                        <div className="col-md-6 imgBox">
+                        <img src={item.imgSrc} className="h-100 object-cover" alt={item.title} />
+                        </div>
+                        <div className="col-md-6 serviceBox careersbox">
+                        <div className="inner h-100 bg-light d-flex align-items-center">
+                            <article>
+                            <div className="heading mb-4">
+                                <h4 className="mb-0 text-primary">{item.title}</h4>
+                            </div>
+                            <p className="text-left">{item.description}</p>
+                            </article>
+                        </div>
+                        </div>
+                    </div>
+                    ))}
+                </div>
+            </div> */}
+
+            <div className="w-100 padding career-services-wrapper">
+                <div className="container-lg">
+                    <div class="career-services-parent">
+                        <div class="career-serviceBox common-border crBox1" style={{'--clr':'#ecf6ff'}}>
+                            <div className='row g-0 h-100'>
+                                <div className='col-lg-6 crServImg'>
+                                    <img src='assets/images/professional-growth-aspects.jpg' className='h-100 object-cover' alt='' />
+                                </div>
+                                <div className='col-lg-6 crServText'>
+                                    <div className='inner bg-gray-gradient-box'>
+                                        <div className='heading mb-2'><h5 className='mb-0 text-texture'>Professional Growth Aspects</h5></div>
+                                        <article>
+                                            <p>Being a part of Star Estate is an opportunity to work with real estate giant and embrace experience to propel exceptional levels in the career while conquering laurels that reflect your determination and result-oriented work approach.</p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="career-serviceBox common-border crBox2" style={{'--clr':'#ecffee'}}>
+                            <div className='row g-0 h-100'>
+                                <div className='col-md-12 crServImg'>
+                                    <img src='assets/images/equality-at-work-place.jpg' className='h-100 object-cover' alt='' />
+                                </div>
+                                <div className='col-md-12 crServText'>
+                                    <div className='inner bg-gray-gradient-box'>
+                                        <div className='heading mb-2'><h5 className='mb-0 text-texture'>Equality At Work Place</h5></div>
+                                        <article>
+                                            <p>We count on success along with the result-oriented work efforts and applaud stellar performances with tokens of appreciation. At Star Estate, sincere efforts to attain goals are always recognized and appreciation is rendered to boost the confidence of our real estate professionals.</p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="career-serviceBox common-border crBox3" style={{'--clr':'#ddd2f9'}}>
+                            <div className='row g-0 h-100'>
+                                <div className='col-md-12 crServImg'>
+                                    <img src='assets/images/incentives-n-perks.jpg' className='h-100 object-cover' alt='' />
+                                </div>
+                                <div className='col-md-12 crServText'>
+                                    <div className='inner bg-gray-gradient-box'>
+                                        <div className='heading mb-2'><h5 className='mb-0 text-texture'>Incentives & Perks</h5></div>
+                                        <article>
+                                            <p>We count on success along with the result-oriented work efforts and applaud stellar performances with tokens of appreciation. At Star Estate, sincere efforts to attain goals are always recognized and appreciation is rendered to boost the confidence of our real estate professionals.</p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="career-serviceBox common-border crBox4" style={{'--clr':'#fffbec'}}>
+                            <div className='row g-0 h-100'>
+                                <div className='col-md-12 crServImg'>
+                                    <img src='assets/images/healthy-work-environment.jpg' className='h-100 object-cover' alt='' />
+                                </div>
+                                <div className='col-md-12 crServText'>
+                                    <div className='inner bg-gray-gradient-box'>
+                                        <div className='heading mb-2'><h5 className='mb-0 text-texture'>Healthy Work Environment</h5></div>
+                                        <article>
+                                            <p>We believe in an ideal work-life balance in life thus celebrations are a part of our work culture. At Star Estate work and celebration runs parallel to bring team members together to weave a bond of trust and cherish joyful moments to unburden professionals.</p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="career-serviceBox common-border crBox5" style={{'--clr':'#ecf6ff'}}>
+                            <div className='row g-0 h-100'>
+                                <div className='col-lg-6 crServImg'>
+                                    <img src='assets/images/industry-standard-payouts.jpg' className='h-100 object-cover' alt='' />
+                                </div>
+                                <div className='col-lg-6 crServText'>
+                                    <div className='inner bg-gray-gradient-box'>
+                                        <div className='heading mb-2'><h5 className='mb-0 text-texture'>Industry Standard Payouts</h5></div>
+                                        <article>
+                                            <p>Star Estate values work and is happy to render the best remuneration for distinguished portfolios considering the payout standards of the real estate market. Our healthy work frame is an opportunity to elevate in our career by attaining a much-deserved payout.</p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="career-serviceBox common-border crBox6" style={{'--clr':'#ecf6ff'}}>
+                            <div className='row g-0 h-100'>
+                                <div className='col-md-12 crServImg'>
+                                    <img src='assets/images/cognitive-diversity.jpg' className='h-100 object-cover' alt='' />
+                                </div>
+                                <div className='col-md-12 crServText'>
+                                    <div className='inner bg-gray-gradient-box'>
+                                        <div className='heading mb-2'><h5 className='mb-0 text-texture'>Cognitive Diversity</h5></div>
+                                        <article>
+                                            <p>Star Estate is a network of professionals with distinguished work experience across India. Our distinct workforce with unique ideas, concepts, and work strategies elevates the business to attain the target and reap massive success.</p>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="col-md-6 serviceBox careersbox">
-              <div className="inner h-100 bg-light d-flex align-items-center">
-                <article>
-                  <div className="heading mb-4">
-                    <h4 className="mb-0 text-primary">{item.title}</h4>
-                  </div>
-                  <p className="text-left">{item.description}</p>
-                </article>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
 
 
-            <div className="w-100 position-relative overflow-hidden career-section2">
-                {/* <div className='career-random-text' data-position="center">
-                    <div className='heading mx-auto text-center ms-sm-0 text-sm-start'><h2>Star Estate welcome Dreamer</h2></div>
-                    <p className='mb-0'>Lorem Ipsum ei ole ainult viis sajandit säilinud, vaid on ka edasi kandunud elektroonilisse trükiladumisse, jäädes sealjuures peaaegu muutumatuks. See sai tuntuks 1960. aastatel Letraset'i lehtede väljalaskmisega.</p>
-                </div> */}
-                <div className="career-random-text" data-position="center">
-            <div className="heading mx-auto text-center">
-            <h2 className="heading mx-auto text-center ms-sm-0 text-sm-start">Star Estate Welcome Dreamer</h2>
-            </div>
-            <div className="row align-items-center careers-box">
-                <div className="col-2">
-                    <img className="w-75 mx-auto" src="assets/images/lEARN.png"/>
-                    <div className="text-center mx-auto heading mb-0 text-sm-start">
-                        <h6 className=" mb-0 mt-1 text-uppercase text-center">Learn</h6>
+            <div className="w-100 position-relative overflow-hidden padding career-section2 bg-image" style={{backgroundImage: "url(assets/images/career-section-img.jpg)"}}>
+                <div className="container-lg">
+                    <div className='crDreamerWrapper bg-white shadow'>
+                        <div className="heading">
+                            <h3 className="mb-0 text-texture">Star Estate Welcome Dreamers To</h3>
+                        </div>
+                        <div className='swiper crDreamer-slider'>
+                            <div className='swiper-wrapper'>
+                                <div className='swiper-slide crDreamer-slide'>
+                                    <div className='inner  bg-gray-gradient-box'>
+                                        <div className='heading-container'>
+                                            <div className='heading mb-0 mx-auto d-flex justify-content-center'>
+                                                <img src='assets/images/lEARN.png' className='img-fluid' />
+                                                <h4 className='mb-0 text-primary'>Learn</h4>
+                                            </div>
+                                        </div>
+                                        <p className="mb-0">Learning is a never ending process leading to knowledge wisdom that amplifies growth in the professional sphere. If you are ready to embrace trainings, and accept new responsibilities to earn an edge over others competitively, then share your resume with us.</p>
+                                    </div>
+                                </div>
+                                <div className='swiper-slide crDreamer-slide'>
+                                    <div className='inner  bg-gray-gradient-box'>
+                                        <div className='heading-container'>
+                                            <div className='heading mb-0 mx-auto d-flex justify-content-center'>
+                                                <img src='assets/images/lead.png' className='img-fluid' />
+                                                <h4 className='mb-0 text-primary'>Lead</h4>
+                                            </div>
+                                        </div>
+                                        <p className="mb-0">Be the leader and not the ladder to success. Join us if you have the expertise to lead from the front along with nurturing young minds. At Star Estate, we value quality work and compassion to elevate our family at work as we shine bright when our team strike work-life right.</p>
+                                    </div>
+                                </div>
+                                <div className='swiper-slide crDreamer-slide'>
+                                    <div className='inner  bg-gray-gradient-box'>
+                                        <div className='heading-container'>
+                                            <div className='heading mb-0 mx-auto d-flex justify-content-center'>
+                                                <img src='assets/images/inspire.png' className='img-fluid' />
+                                                <h4 className='mb-0 text-primary'>Inspire</h4>
+                                            </div>
+                                        </div>
+                                        <p className="mb-0">Join us if you are not just another professional in the business. Get on board with us, accept challenges, emerge victories in the competitive workplace and let your success story be an inspiration for other.</p>
+                                    </div>
+                                </div>
+                                <div className='swiper-slide crDreamer-slide'>
+                                    <div className='inner  bg-gray-gradient-box'>
+                                        <div className='heading-container'>
+                                            <div className='heading mb-0 mx-auto d-flex justify-content-center'>
+                                                <img src='assets/images/aspire.png' className='img-fluid' />
+                                                <h4 className='mb-0 text-primary'>Aspire</h4>
+                                            </div>
+                                        </div>
+                                        <p className="mb-0">Pause! If this word isn’t part of your dictionary then join us and propel yourself to garner newer higher of success in the business. Star Estate respect efforts and your commitment to work will be the key to nurture aspirations of stepping new milestones professionally.</p>
+                                    </div>
+                                </div>
+                                <div className='swiper-slide crDreamer-slide'>
+                                    <div className='inner  bg-gray-gradient-box'>
+                                        <div className='heading-container'>
+                                            <div className='heading mb-0 mx-auto d-flex justify-content-center'>
+                                                <img src='assets/images/CELEBRATE.png' className='img-fluid' />
+                                                <h4 className='mb-0 text-primary'>Celebrate</h4>
+                                            </div>
+                                        </div>
+                                        <p className="mb-0">Work and celebration are two reflections of Star Estate. We appreciate determination to accomplish goals and we applaud joyousness to bond as a family. At our workplace, professionals dazzle in holistic rituals, comfort, and testaments.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='swiper-controls'>
+                                <div className='swiper-button-prev'></div>
+                                <div className='swiper-button-next'></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="col-10">
-                    <p className="mb-2">Learning is a never ending process leading to knowledge wisdom that amplifies growth in the professional sphere. If you are ready to embrace trainings, and accept new responsibilities to earn an edge over others competitively, then share your resume with us.</p>
-                </div>
-            </div>
-            
-            <div className="row align-items-center careers-box">
-                <div className="col-2">
-                    <img className="w-75 mx-auto" src="assets/images/lead.png"/>
-                    <div className="text-center mx-auto heading mb-0 text-sm-start">
-                        <h6 className=" mb-0 mt-1 text-uppercase text-center">Lead</h6>
-                    </div>
-                </div>
-                <div className="col-10">
-                    <p className="mb-2">Be the leader and not the ladder to success. Join us if you have the expertise to lead from the front along with nurturing young minds. At Star Estate, we value quality work and compassion to elevate our family at work as we shine bright when our team strike work-life right.</p>
-                </div>
-            </div>
-            
-            <div className="row align-items-center careers-box">
-                <div className="col-2">
-                    <img className="w-75 mx-auto" src="assets/images/inspire.png"/>
-                    <div className="text-center mx-auto heading mb-0 text-sm-start">
-                        <h6 className=" mb-0 mt-1 text-uppercase text-center">Inspire</h6>
-                    </div>
-                </div>
-                <div className="col-10">
-                    <p className="mb-2">Join us if you are not just another professional in the business. Get on board with us, accept challenges, emerge victories in the competitive workplace and let your success story be an inspiration for other.</p>
-                </div>
-            </div>
-            <div className="row align-items-center careers-box">
-                <div className="col-2">
-                    <img className="w-75 mx-auto" src="assets/images/aspire.png"/>
-                    <div className="text-center mx-auto heading mb-0 text-sm-start">
-                        <h6 className=" mb-0 mt-1 text-uppercase text-center">Aspire</h6>
-                    </div>
-                </div>
-                <div className="col-10">
-                    <p className="mb-2">Pause! If this word isn’t part of your dictionary then join us and propel yourself to garner newer higher of success in the business. Star Estate respect efforts and your commitment to work will be the key to nurture aspirations of stepping new milestones professionally.</p>
-                </div>
-            </div>
-            
-            <div className="row align-items-center careers-box">
-                <div className="col-2">
-                    <img className="w-75 mx-auto" src="assets/images/CELEBRATE.png"/>
-                    <div className="text-center mx-auto heading mb-0 text-sm-start">
-                        <h6 className=" mb-0 mt-1 text-uppercase text-center">Celebrate</h6>
-                    </div>
-                </div>
-                <div className="col-10">
-                    <p className="mb-2">Work and celebration are two reflections of Star Estate. We appreciate determination to accomplish goals and we applaud joyousness to bond as a family. At our workplace, professionals
-                        dazzle in holistic rituals, comfort, and testaments. </p>
-                </div>
-            </div>
-        </div>
-                <img src='assets/images/career-section-img.jpg' alt='Career' />
             </div>
 
             <div id='job_opening_section' className="w-100 padding">

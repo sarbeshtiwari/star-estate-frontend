@@ -90,7 +90,7 @@ const SearchModal = ({ show, handleClose }) => {
                       required
                     />
                   </div>
-                  <div className="col-md-2 px-0 px-md-2 readmore w-auto mt-0">
+                  <div className="readmore mt-0">
                     <input type="hidden" name="projectfltr" value="active" />
                     <button className="button w-100 h-100" type="submit">
                       Search

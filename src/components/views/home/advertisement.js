@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
 import axiosInstance from '../utils/axiosInstance';
 import { Link } from 'react-router-dom';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // Import CSS for lightbox
+import './App.css';
 
 function Advertisement() {
     const [activeType, setActiveType] = useState('print');
@@ -36,11 +35,21 @@ function Advertisement() {
         setActiveType(type);
     };
 
-    // Open lightbox with the selected image
+    // Open lightbox with the selected image and block scrolling
     const handleImageClick = (index) => {
         setCurrentIndex(index);
         setIsOpen(true);
+        document.body.style.overflow = 'hidden'; // Block scrolling
     };
+
+    // Close lightbox and restore scrolling
+    const handleCloseLightbox = () => {
+        setIsOpen(false);
+        document.body.style.overflow = ''; // Restore scrolling
+    };
+
+    // Filter ads by the currently selected type
+    const filteredAdsByType = ads.filter(ad => ad.advertisementType === activeType);
 
     // Render ads based on their type (print, outdoor, radio)
     const renderAds = (type) => {
@@ -142,7 +151,6 @@ function Advertisement() {
 
     return (
         <div>
-         
             <div className="insideBanner">
                 <picture>
                     <source 
@@ -238,35 +246,35 @@ function Advertisement() {
                 <div className="modal-dialog modal-lg modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title text-white" id="radioModalLabel">Radio Ad</h5>
-                            <button type="button" className="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 className="modal-title" id="radioModalLabel">Radio Ad</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             <div className="ratio ratio-16x9">
-                                <iframe id="radioVideo" src="" title="Radio Ad"></iframe>
+                                <iframe
+                                    id="radioVideo"
+                                    src=""
+                                    title="Radio Ad"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Image Lightbox */}
+            {/* Lightbox for other ads */}
             {isOpen && (
                 <Lightbox
-                    mainSrc={`${axiosInstance.defaults.globalURL}${ads[currentIndex].advertisementImage}`}
-                    nextSrc={`${axiosInstance.defaults.globalURL}${ads[(currentIndex + 1) % ads.length].advertisementImage}`}
-                    prevSrc={`${axiosInstance.defaults.globalURL}${ads[(currentIndex + ads.length - 1) % ads.length].advertisementImage}`}
-                    onCloseRequest={() => setIsOpen(false)}
-                    onMovePrevRequest={() =>
-                        setCurrentIndex((currentIndex + ads.length - 1) % ads.length)
-                    }
-                    onMoveNextRequest={() =>
-                        setCurrentIndex((currentIndex + 1) % ads.length)
-                    }
+                    mainSrc={`${axiosInstance.defaults.globalURL}${filteredAdsByType[currentIndex].advertisementImage}`}
+                    onCloseRequest={handleCloseLightbox}
+                    nextSrc={`${axiosInstance.defaults.globalURL}${filteredAdsByType[(currentIndex + 1) % filteredAdsByType.length].advertisementImage}`}
+                    prevSrc={`${axiosInstance.defaults.globalURL}${filteredAdsByType[(currentIndex + filteredAdsByType.length - 1) % filteredAdsByType.length].advertisementImage}`}
+                    onMovePrevRequest={() => setCurrentIndex((currentIndex + filteredAdsByType.length - 1) % filteredAdsByType.length)}
+                    onMoveNextRequest={() => setCurrentIndex((currentIndex + 1) % filteredAdsByType.length)}
                 />
             )}
-
-       
         </div>
     );
 }

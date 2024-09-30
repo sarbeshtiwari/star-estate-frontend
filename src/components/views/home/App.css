@@ -75,6 +75,59 @@ button.go-home-btn:hover {
   z-index: 2;
 } */
 
+/* ProjectsCarousel.css */
+
+/* body.modal-open {
+    overflow: hidden;
+} */
+
+/* Modal styles */
+/* .location-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.main-content.blur {
+    filter: blur(10px);
+    pointer-events: none;
+    user-select: none;
+} */
+
+
+.ril__image,
+.ril__imagePrev,
+.ril__imageNext {
+  width: auto;
+  max-width: 100%;
+  max-height: 96vH;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  /* max-width: none; */
+  -ms-content-zooming: none;
+  -ms-user-select: none;
+  -ms-touch-select: none;
+  touch-action: none;    
+ 
+}
 
 /* End */
 .breadcrumb {
@@ -2570,7 +2623,7 @@ canvas {
   max-width: 800px;
   width: 100%;
   position: absolute;
-  top: 0;
+  top: 2.5rem;
   left: 50%;
   transform: translateX(-50%);  
   padding-left: 15px;
@@ -2584,6 +2637,73 @@ canvas {
   left: auto;
   right: 5%;
   transform: translateY(-50%);
+}
+
+/* career services */
+.career-services-parent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1.5rem;
+  height: 960px;
+}
+
+.crBox1 { grid-area: 1 / 1 / 2 / 3; }
+.crBox2 { grid-area: 1 / 3 / 3 / 4; }
+.crBox3 { grid-area: 2 / 2 / 4 / 3; }
+.crBox4 { grid-area: 2 / 1 / 4 / 2; }
+.crBox5 { grid-area: 4 / 1 / 5 / 3; }
+.crBox6 { grid-area: 3 / 3 / 5 / 4; }
+
+.career-serviceBox.common-border{
+  padding: 10px;
+  box-shadow: none !important;
+}
+
+.career-serviceBox .bg-gray-gradient-box{
+  box-shadow:  none !important;
+}
+
+.crServText .inner{
+  padding: 1.25rem;
+  height: 100%;
+  /* background-color: var(--clr); */
+}
+
+.crServText .inner p{
+  font-size: .875rem;
+  text-align: justify;
+  margin-bottom: 0;
+}
+/* career services */
+
+.crDreamerWrapper{
+  margin-left: auto;
+  margin-right: 0;
+  /* position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%); */
+  padding: 2rem;
+  max-width: 600px;
+  min-height: 450px;
+  font-size: 1.25rem;
+  text-align: justify;
+  text-align-last: center;
+}
+.crDreamerWrapper > .heading{
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(0 0 0 / 15%);
+  width: 100%;
+}
+
+.crDreamer-slide.swiper-slide{
+  height: auto;
+}
+
+.crDreamer-slide .inner{
+  padding: 2rem;
+  height: 100%;
 }
 
 .table {
@@ -2611,6 +2731,7 @@ canvas {
 .career-details ul li::marker{
   color: var(--primary-color);
 }
+
 
 .careers-box {
   border-bottom: 1px solid #ccc;

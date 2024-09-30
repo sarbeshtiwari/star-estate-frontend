@@ -4,89 +4,114 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/autoplay';
 import 'swiper/css/bundle';
 import axiosInstance from '../utils/axiosInstance';
+import './App.css'; // Assuming you have a separate CSS file for styles
 
 const ProjectsCarousel = () => {
     const [allProjects, setAllProjects] = useState([]);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true);
     const [errors, setError] = useState('');
     const [selectedLocation, setSelectedLocation] = useState('');
     const [location, setLocation] = useState(null);
     const [address, setAddress] = useState({ city: '', state: '' });
+    
 
-    // Effect to manage body overflow based on loading state
-    useEffect(() => {
-        if (loading) {
-            document.body.style.overflow = 'hidden'; // Disable scrolling
-        } else {
-            document.body.style.overflow = 'auto'; // Enable scrolling
-        }
-        return () => {
-            document.body.style.overflow = 'auto'; // Clean up to enable scrolling
-        };
-    }, [loading]);
-
-    // Fetch all properties
+    // Fetch all the properties
     useEffect(() => {
         handleLocationClick();
     }, []);
 
+    // Block scrolling when modal is open
+    // useEffect(() => {
+    //     if (isLocationModalOpen) {
+    //         document.body.style.overflow = 'hidden'; // Block scrolling
+    //         document.body.classList.add('blur-background'); // Add blur class
+    //     } else {
+    //         document.body.style.overflow = 'auto'; // Reset scrolling
+    //         document.body.classList.remove('blur-background'); // Remove blur class
+    //     }
+    // }, [isLocationModalOpen]);
+
     // Fetch data by location
     useEffect(() => {
         const fetchDataByLocationHandler = async (location) => {
+            const fallbackCities = ['noida', 'delhi', 'gurugram', 'ghaziabad'];
+
             try {
+                console.log('Trying by location:', location);
                 const lowerCaseLocation = location.toLowerCase();
+
                 const data = await axiosInstance.get(`addProjects/getProjectByLocation/${lowerCaseLocation}`);
                 const filteredProjects = data.data.filter(project => project.status === true);
-                setAllProjects(filteredProjects);
+
+                if (filteredProjects.length > 0) {
+                    setAllProjects(filteredProjects);
+                } else {
+                    console.log('No projects found for the selected city, fetching fallback cities.');
+                    const allProjectsData = await Promise.all(fallbackCities.map(async (city) => {
+                        const response = await axiosInstance.get(`addProjects/getProjectByLocation/${city}`);
+                        return response.data.filter(project => project.status === true);
+                    }));
+
+                    const allFilteredProjects = allProjectsData.flat();
+                    setAllProjects(allFilteredProjects);
+                }
             } catch (error) {
                 console.error('Error fetching data by location:', error);
             }
+
         };
 
-        if (selectedLocation) {
+        if (!address.city || !address.state) {
+            fetchAllProjects();
+        } else {
             fetchDataByLocationHandler(selectedLocation);
         }
-    }, [selectedLocation, address.state]);
+    }, [selectedLocation, address]);
 
     const fetchAllProjects = async () => {
         try {
+            console.log('Fetching all projects');
             const response = await axiosInstance.get(`/addProjects/getProject`);
             const filteredProjects = response.data.filter(project => project.status === true);
             setAllProjects(filteredProjects);
+            setLoading(false);
+            
         } catch (error) {
             setError('Error fetching project details');
             console.error('Error fetching project details:', error);
             setLoading(false);
+            
         }
     };
 
-    // Fetch current location
     function handleLocationClick() {
         if (navigator.geolocation) {
+            
             navigator.geolocation.getCurrentPosition(success, error);
         } else {
             console.log("Geolocation not supported");
             fetchAllProjects();
             setLoading(false);
+           
         }
+       
     }
 
-    // If location fetched successfully
     function success(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         setLocation({ latitude, longitude });
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
         fetchAddressFromCoordinates(latitude, longitude);
     }
 
-    // If there is an error while fetching location
     function error() {
         console.log("Unable to retrieve your location");
         fetchAllProjects();
         setLoading(false);
     }
 
-    // Converting longitude and latitude into address
     async function fetchAddressFromCoordinates(latitude, longitude) {
         const apiKey = '77c01c128afa44fa855372aa07ee8b5d'; // OpenCage API key
         const geocodeUrl = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`;
@@ -97,46 +122,26 @@ const ProjectsCarousel = () => {
                 const components = data.results[0].components;
                 const city = components.city || components.town || components.village || '';
                 const state = components.state || '';
-
-                const effectiveCity = state === 'Delhi' ? 'Noida' : city;
-                setAddress({ city: effectiveCity, state });
-                setSelectedLocation(effectiveCity);
+                setAddress({ city, state });
+                setSelectedLocation(city);
+                console.log(`City: ${city}, State: ${state}`);
             } else {
                 console.log('No results found');
-                setAllProjects(allProjects);
+                setAddress({ city: '', state: '' });
             }
             setLoading(false);
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Error fetching address:', error);
-            setAllProjects(allProjects);
+            setAllProjects([]);
             setLoading(false);
         }
     }
 
+
     return (
         <div>
-            {loading ? (
-                <div style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    zIndex: 9999,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                    {/* <div className="spinner-border text-primary" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div> */}
-                    
-                </div>
-            ) : (
-                ''
-            )}
-
+            
             <div className="w-100 position-relative overflow-hidden padding bg-lightgray hm-overviewContainer animate-section1">
                 <div className="container-lg">
                     <div className="heading mx-auto text-center">
@@ -152,7 +157,7 @@ const ProjectsCarousel = () => {
                         </div>
                     ) : (
                         <Swiper
-                            className="project-slider"
+                            className=".project-slider"
                             slidesPerView={1}
                             spaceBetween={0}
                             loop={true}
@@ -197,17 +202,17 @@ const ProjectsCarousel = () => {
                                                 <div className="project_developer_detail">
                                                     <h4 className="mb-0 project_name">{project.projectName}</h4>
                                                     <h6 className="mb-0 project_price">
-                                                        {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon'
-                                                            ? `${project.projectPrice}`
-                                                            : <><i className="fa fa-indian-rupee-sign"></i>{project.projectPrice}*</>}
+                                                        {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon' 
+                                                        ? `${project.projectPrice}` 
+                                                        : <><i className="fa fa-indian-rupee-sign"></i>{project.projectPrice}*</>}
                                                     </h6>
                                                 </div>
                                                 <div className="project_status_detail">
                                                     <span className="project_box_location"><i className="fa fa-map-marker-alt"></i>{project.projectAddress}</span>
                                                     <span className="project_box_status">
                                                         <i className="fa-brands fa-font-awesome"></i>
-                                                        {Array.isArray(project.project_status)
-                                                            ? project.project_status.join(', ')
+                                                        {Array.isArray(project.project_status) 
+                                                            ? project.project_status.join(', ') 
                                                             : project.project_status}
                                                     </span>
                                                 </div>
@@ -220,9 +225,10 @@ const ProjectsCarousel = () => {
                             )}
                         </Swiper>
                     )}
-
-                    <div className="swiper-controls h-auto mr-auto">
-                        <div className="readmore w-auto mt-0"><Link to='/projects' className="button reverse">View All</Link></div>
+                     <div className="swiper-controls h-auto mr-auto">
+                       <div className="swiper-button-prev" role="button" aria-label="Previous slide"></div>
+                       <div className="readmore w-auto mt-0"><Link to='/projects' className="button reverse">View All</Link></div>
+                         <div className="swiper-button-next" role="button" aria-label="Next slide"></div>
                     </div>
                 </div>
             </div>
@@ -231,6 +237,7 @@ const ProjectsCarousel = () => {
 };
 
 export default ProjectsCarousel;
+
 
 
 

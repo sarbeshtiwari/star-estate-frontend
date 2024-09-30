@@ -558,7 +558,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.500);
+  background-color: rgb(0 0 0 / 75%);
   pointer-events: none;
 }
 

@@ -13,6 +13,7 @@
   .project-slider-wrapper{padding: 3rem !important;}
   .experience{font-size: 1.5rem;}
   .career-section1 .career-random-text{top: 5rem;}
+  .career-services-parent{height: 1000px;}
 }
   
 @media (max-width: 1199.9px) {
@@ -21,6 +22,7 @@
   .director-msg .director-content{max-width: calc(100% - 230px); flex-basis: calc(100% - 230px);}
   .director-content .director-quote{font-size: 1.75rem;}
   .whyUsBox:nth-child(2) .imgBox::before{border-top: 0;}
+  .career-services-parent{height: 1080px;}
 }
   
 @media (max-width: 991.9px) {
@@ -31,6 +33,8 @@
   #banner{margin-top: 54px; height: 70vh;}
   .projectPageWrapper {margin-top: 75px;}
   .toggleHead .toggleBtn::before{--brdwd: 90px;}
+  .career-services-parent{height: auto; display: flex; flex-wrap: wrap; gap: 1rem;}
+  .career-serviceBox{width: calc(50% - .5rem);}
 
   /* Project page */
   .projectBanner{height: auto !important;}
@@ -141,8 +145,10 @@
   .director-content .director-quote{font-size: 1.5rem;}
   .whyUsBox .imgBox::before{border-top: 0;}
   .career-section1 img{height: 350px; object-fit: cover;}
-  .career-section2 img{height: 450px; object-fit: cover; object-position: left top;}
-  .career-section2 .career-random-text[data-position='center']{top: 2.5rem; left: 50%; transform: translateX(-50%); right: auto; text-align: center; max-width: 700px;}
+  .career-section2.bg-image{background-position: 12% center;}
+  .crDreamerWrapper{margin: 10rem 0; font-size: 1rem; min-height: auto;}
+  .career-serviceBox .heading{margin-left: auto; margin-right: auto;}
+  .career-serviceBox{width: calc(100% - .5rem); text-align: justify; text-align-last: center;}
 
   /* project page */
   .gal-slide img{height: 300px;}

@@ -82,19 +82,10 @@ function AboutUs() {
                         <div className="col-xl-8 overview-box text-justify">
                             <div className="inner">
                                 <div className="heading mx-auto">
-                                    <h3 className="mb-0">Star Estate was founded in 2012 as the fastest-growing Real Estate enterprise.</h3>
+                                    <h3 className="mb-0">Dreams don't turn into reality by chance it takes determination and courage to pursue them.</h3>
                                 </div>
-                                <p><b><em>Dreams don't turn into reality by chance it takes determination and courage to pursue them.</em></b></p>
-                                <p>To realize dreams, it is important to accelerate the pedal of competence. Even after
-completing 12 successful years in the business of unlocking prosperity, we dream and dream
-it big. To appraise aspirational dreams in the real estate realm, we a team of assertive
-professionals confers tailored solutions to investors under the leadership of Mr. Vijay Jain,
-Founder and Managing Director, Star Estate.</p>
-                                <p className="mb-0">We work with the synergy to meet the pursuit of structural excellence in the property market
-across India. With experience and expertise in our armory, we shoot to attain goals. We don’t
-just exhibit concrete structures, but we unveil exclusive architectural masterpieces close to
-whims and fancies.
-</p>
+                                <p>To realize dreams, it is important to accelerate the pedal of competence. Even after completing 12 successful years in the business of unlocking prosperity, we dream and dream it big. To appraise aspirational dreams in the real estate realm, we a team of assertive professionals confers tailored solutions to investors under the leadership of Mr. Vijay Jain, Founder and Managing Director, Star Estate.</p>
+                                <p className="mb-0">We work with the synergy to meet the pursuit of structural excellence in the property market across India. With experience and expertise in our armory, we shoot to attain goals. We don’t just exhibit concrete structures, but we unveil exclusive architectural masterpieces close to whims and fancies.</p>
                             </div>
                         </div>
                         <div className="col-xl-4 overview-stats">
@@ -138,16 +129,11 @@ whims and fancies.
                 <div className="container-lg">
                     <div className="overview-box text-justify">
                         <div className="inner">
-                            <div className="heading mx-auto">
-                                <h3 className="mb-0">STAR ESTATE is the No. 1 property portal offering you the services in the real estate industry.</h3>
-                            </div>
-                            <p>Our in-house think tank streamlines promising practices to ascend performance in the
-competitive market to maintain the benchmark work standard. With real estate giants and
-investors counting on us, we are elated to be a catalyst of refined real estate investment
-experience provider across India.</p>
-                            <p className="mb-0">With exceptional talent as the backbone, we become more ambitious and delimit boundaries
-to ascertain benchmarks in the Indian property market.
-</p>
+                            {/* <div className="heading mx-auto">
+                                <h3 className="mb-0"></h3>
+                            </div> */}
+                            <p>Our in-house think tank streamlines promising practices to ascend performance in the competitive market to maintain the benchmark work standard. With real estate giants and investors counting on us, we are elated to be a catalyst of refined real estate investment experience provider across India.</p>
+                            <p className="mb-0">With exceptional talent as the backbone, we become more ambitious and delimit boundaries to ascertain benchmarks in the Indian property market.</p>
                         </div>
                     </div>
                 </div>

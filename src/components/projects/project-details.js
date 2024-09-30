@@ -14,6 +14,7 @@ import {
     getAllTheAmenities,
     getProjectAmenities
 } from './amenities';
+import Footer from '../widgets/footer';
 
 
 
@@ -142,7 +143,6 @@ function ProjectDetails() {
             new Swiper('.ameninity-slider', {
                 slidesPerView: 1,
                 spaceBetween: 10,
-                centeredSlides: true,
                 loop: true,
                 navigation: {
                     nextEl: '.swiper-button-next',
@@ -174,8 +174,9 @@ function ProjectDetails() {
         };
         initializeSwipers();
     }, []);
+
     useEffect(() => {
-        var swiper = new Swiper('.project-slider', {
+        new Swiper('.project-slider', {
             slidesPerView: 1,
             spaceBetween: 0,
             loop: true,
@@ -240,6 +241,7 @@ function ProjectDetails() {
         };
         fetchQuickDetails();
     }, [slugURL]);
+
     useEffect(() => {
         const fetchProjectContent = async () => {
             try {
@@ -252,6 +254,7 @@ function ProjectDetails() {
         };
         fetchProjectContent();
     }, [slugURL]);
+
     useEffect(() => {
         const fetchWalkthrough = async () => {
             try {
@@ -264,6 +267,7 @@ function ProjectDetails() {
         };
         fetchWalkthrough();
     }, [slugURL]);
+
     useEffect(() => {
         const fetchFloorPlan = async () => {
             try {
@@ -276,6 +280,7 @@ function ProjectDetails() {
         };
         fetchFloorPlan();
     }, [slugURL]);
+    
     useEffect(() => {
         const fetchFloorData = async () => {
             try {
@@ -288,6 +293,7 @@ function ProjectDetails() {
         };
         fetchFloorData();
     }, [slugURL]);
+
     useEffect(() => {
         const fetchGalleryContent = async () => {
             try {
@@ -300,6 +306,7 @@ function ProjectDetails() {
         };
         fetchGalleryContent();
     }, [slugURL]);
+
     useEffect(() => {
         const fetchGalleryData = async () => {
             try {
@@ -313,6 +320,7 @@ function ProjectDetails() {
         };
         fetchGalleryData();
     }, [slugURL]);
+
     const [bannerImages, setBannerImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0); // State for current index
 
@@ -366,6 +374,7 @@ function ProjectDetails() {
 
         return () => clearInterval(interval); // Cleanup on unmount
     }, [bannerImages]);
+
     // Fetch Project Amenities and All Amenities
     useEffect(() => {
         const fetchAmenities = async () => {
@@ -391,6 +400,7 @@ function ProjectDetails() {
         };
         fetchAmenities();
     }, [slugURL]);
+
     // Fetch Project Location Advantages and All Location Advantages
     useEffect(() => {
         const fetchLocationAdvantages = async () => {
@@ -416,6 +426,7 @@ function ProjectDetails() {
         };
         fetchLocationAdvantages();
     }, [slugURL]);
+
     useEffect(() => {
         const fetchAccountDetails = async () => {
             try {
@@ -429,6 +440,7 @@ function ProjectDetails() {
         };
         fetchAccountDetails();
     }, [slugURL]);
+
     useEffect(() => {
         const fetchFAQs = async () => {
             try {
@@ -442,6 +454,7 @@ function ProjectDetails() {
         };
         fetchFAQs();
     }, [slugURL]);
+    
     // Fetch projects by location from the API
     const fetchProjectsByLocation = async (cityLocation, currentProjectName) => {
         try {
@@ -621,13 +634,13 @@ function ProjectDetails() {
                 <div className="heroFormContainer d-none d-lg-flex shadow">
                     <form onSubmit={handleSubmit}>
                         <div className="row g-0">
-                            <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" 
+                            <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" value={formData.Name}
                                 onChange={handleInputChange}
                                 required /></div>
-                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email"
+                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email" value={formData.Email}
                                 onChange={handleInputChange}
                                 required /></div>
-                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber"
+                            <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" value={formData.phoneNumber}
                                 onChange={handleInputChange}
                                 required /></div>
 
@@ -717,13 +730,13 @@ function ProjectDetails() {
                 })}
                 <form onSubmit={handleSubmit}>
                     <div className="row g-2">
-                        <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" value={formData.Name}
+                        <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name"
                             onChange={handleInputChange}
                             required /></div>
-                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email" value={formData.Email}
+                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email"
                             onChange={handleInputChange}
                             required /></div>
-                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" value={formData.phoneNumber}
+                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber"
                             onChange={handleInputChange}
                             required /></div>
 
@@ -909,16 +922,16 @@ function ProjectDetails() {
                         {amenities.length > 0 ? (
                         amenities.map((amenity) => (
                             <div className="swiper-slide amenBox" key={amenity._id}>
-                                <div className="inner">
-                                    <div className="img-fluid">
-                                    <img
-                                        src={`${axiosInstance.defaults.globalURL}${amenity.image}`}
-                                        className="filter-white"
-                                        alt={amenity.alt_tag}
-                                    />
-                                    </div>
-                                    <p className="mb-0">{amenity.title}</p>
+                            <div className="inner">
+                                <div className="img-fluid">
+                                <img
+                                    src={`${axiosInstance.defaults.globalURL}${amenity.image}`}
+                                    className="filter-white"
+                                    alt={amenity.alt_tag}
+                                />
                                 </div>
+                                <p className="mb-0">{amenity.title}</p>
+                            </div>
                             </div>
                         ))
                         ) : (
@@ -1048,6 +1061,7 @@ function ProjectDetails() {
                 </div>
             </div>
             </div>
+
             {/* location */}
             <div id="location" className="w-100 padding section-location">
                 <div className="container-lg">
@@ -1080,7 +1094,7 @@ function ProjectDetails() {
                         </div>
                         <div className="col-lg-6">
                             <div className="hm-project-icons">
-                                <div className="row g-3 gap-form-row">
+                                <div className="row g-2 gap-form-row">
                                     {locationAdvantages.length > 0 && details2.length > 0 && (
                                         locationAdvantages.map((advantage, index) => {
                                             const details = details2[index];
@@ -1137,6 +1151,7 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div>
+
             {/* get in touch */}
             <div className="w-100 bg-gray-gradient-box padding section-getInTouch mb-1">
                 <div className="container-lg">
@@ -1193,15 +1208,15 @@ function ProjectDetails() {
                         <div className="heading mx-auto text-center">
                             <h2 className="mb-0">FAQs</h2>
                         </div>
-                        <div className="touchFormWrapper">
-                            <div className="accordion" id="myAccordion">
+                        <div className="">
+                            <div className="accordion-wrapper" id="myAccordion">
                                 {Faqs.map((faq, index) => {
                                     const faqIndex = index + 1;
                                     const isActive = activeIndex === faqIndex; // Check if this item is active
 
                                     return (
                                         <div className="accordion-item" key={faqIndex}>
-                                            <h2 className="accordion-header" id={`heading${faqIndex}`}>
+                                            <div className="accordion-header" id={`heading${faqIndex}`}>
                                                 <button
                                                     className={`accordion-button ${isActive ? "" : "collapsed"}`}
                                                     type="button"
@@ -1209,9 +1224,11 @@ function ProjectDetails() {
                                                     aria-expanded={isActive ? "true" : "false"}
                                                     aria-controls={`collapse${faqIndex}`}
                                                 >
-                                                    Q{faqIndex}: {faq.faqQuestion}
+                                                    {/* <span className='text-primary'>Q{faqIndex}:</span> {faq.faqQuestion} */}
+                                                    <span className='text-primary'>Q{faqIndex}:</span> <div dangerouslySetInnerHTML={{ __html: faq.faqQuestion }} />
+                                                    <i className="fa fa-plus"></i>
                                                 </button>
-                                            </h2>
+                                            </div>
                                             <div
                                                 id={`collapse${faqIndex}`}
                                                 className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
@@ -1219,11 +1236,9 @@ function ProjectDetails() {
                                                 data-bs-parent="#myAccordion"
                                             >
                                                 <div className="accordion-body">
-                                                    <ul className="list-group list-group-flush">
-                                                        <li className="list-group-item px-0">
-                                                            <b>A:</b> <span>{faq.faqAnswer}</span>
-                                                        </li>
-                                                    </ul>
+                                                    <div className="card-body">
+                                                        <div>{faq.faqAnswer}</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1235,36 +1250,7 @@ function ProjectDetails() {
                 )}
             </div>
 
-            {/* Marketing Partner */}
-            <div className="w-100 padding bg-lightgray section-partner">
-                <div className="container-lg">
-                    <div className="row">
-                        <div className="col-md-6 partnerBox">
-                            <div className="heading text-center mb-0">
-                                <h6 className="text-uppercase mb-3">Marketing Partner</h6>
-                                <img src="/star-estate-react/assets/images/logo-starestate.png" className="partner-logo" alt="" />
-                            </div>
-                            <div className="partner-rera">
-                                <p className="mb-0"><b>RERA No.: UPRERAAGT10202</b> <br />https://up-rera.in/Agents</p>
-                            </div>
-                        </div>
-                        <div className="col-md-6 partnerBox">
-                            {mainData.map((data, index) => (
-                                <React.Fragment key={index}>
-                                    <div className="heading text-center mb-0">
-                                        <img src={`${axiosInstance.defaults.globalURL}${data.rera_qr}`} className="project-qr-img" alt="" />
-                                    </div>
-                                    <div className="partner-rera">
-                                        <p className="mb-0"><b>Project RERA No.: {data.rera_no}</b> <br /></p>
-                                        <p><a href={data.reraWebsite}>{data.reraWebsite}</a></p>
-                                    </div>
-                                </React.Fragment>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+          
             {/* Similar Projects */}
 
             <div className="w-100 padding section-similar-projects">
@@ -1317,16 +1303,45 @@ function ProjectDetails() {
                                 </div>
                             ))}
                         </div>
-                        {/* <div className="swiper-controls h-auto mr-auto">
+                        <div className="swiper-controls h-auto mr-auto">
                             <div className="swiper-button-prev" role="button" aria-label="Previous slide"></div>
                             <div className="readmore w-auto mt-0"></div>
                             <div className="swiper-button-next" role="button" aria-label="Next slide"></div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>
+  {/* Marketing Partner */}
+  <div className="w-100 padding bg-lightgray section-partner">
+                <div className="container-lg">
+                    <div className="row">
+                        <div className="col-md-6 partnerBox">
+                            <div className="heading text-center mb-0">
+                                <h6 className="text-uppercase mb-3">Marketing Partner</h6>
+                                <img src="/star-estate-react/assets/images/logo-starestate.png" className="partner-logo" alt="" />
+                            </div>
+                            <div className="partner-rera">
+                                <p className="mb-0"><b>RERA No.: UPRERAAGT10202</b> <br />https://up-rera.in/Agents</p>
+                            </div>
+                        </div>
+                        <div className="col-md-6 partnerBox">
+                            {mainData.map((data, index) => (
+                                <React.Fragment key={index}>
+                                    <div className="heading text-center mb-0">
+                                        <img src={`${axiosInstance.defaults.globalURL}${data.rera_qr}`} className="project-qr-img" alt="" />
+                                    </div>
+                                    <div className="partner-rera">
+                                        <p className="mb-0"><b>Project RERA No.: {data.rera_no}</b> <br /></p>
+                                        <p><a href={data.reraWebsite}>{data.reraWebsite}</a></p>
+                                    </div>
+                                </React.Fragment>
+                            ))}
+                        </div>
+                    </div>
+                </div>
 
-            <div className='pt-2 account-details bg-gray-gradient-box'>
+            </div>
+            {/* <div className='pt-2 account-details bg-gray-gradient-box'>
                 <div className='container-lg'>
                     <div className='row '>
                         {bankDetails.map((detailBank, index) => (
@@ -1338,7 +1353,7 @@ function ProjectDetails() {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div
                 className={`modal fade ${show ? 'show' : ''}`}
                 id="formModal"
@@ -1411,13 +1426,14 @@ function ProjectDetails() {
                     </>
                 ))}
             </div>
-            <div className="footer-bottom">
+            <Footer/>
+            {/* <div className="footer-bottom">
                 <div className="container-lg justify-content-center">
                     <div className="copyrights">
                         <p>Copyrights © Star Estate 2024</p>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="button-top"><i className="fa fa-chevron-up"></i></div>
         </div >
     )

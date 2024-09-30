@@ -172,14 +172,9 @@ function EmiCalculator() {
 
                     <h6 className="form--title">Benefits of EMI Calculator</h6>
 
-                    <p className='mb-4'><ul className="list mb-0"><li>An EMI Calculator is a time-saving option to find the exact loan repayment value every
-                        month. Going by the pen and paper, or the manual way of calculations is timeconsuming. Whereas, an EMI Calculator fetches values in the fields to formulate a
-                        solution and reflects the EMI value.</li>
-                        <li>An EMI Calculator is easy to use as investors can check for EMI payment value while
-                            on the go. Thus, a dedicated place or time is not a requirement to assess the
-                            repayment value against a property purchase.</li>
-                        <li>The variable input option lets the investor select the loan amount, tenure, and rate
-                            of interest as per his/her preference.</li></ul></p>
+                    <p className='mb-4'><ul className="list mb-0"><li>An EMI Calculator is a time-saving option to find the exact loan repayment value every month. Going by the pen and paper, or the manual way of calculations is time-consuming. Whereas, an EMI Calculator fetches values in the fields to formulate a solution and reflects the EMI value.</li>
+                        <li>An EMI Calculator is easy to use as investors can check for EMI payment value while on the go. Thus, a dedicated place or time is not a requirement to assess the repayment value against a property purchase.</li>
+                        <li>The variable input option lets the investor select the loan amount, tenure, and rate of interest as per his/her preference.</li></ul></p>
 
                     <div className="form--section"></div>
                     <div className="row gap-form-row align-items-end">
@@ -242,54 +237,56 @@ function EmiCalculator() {
                                 </div>
                             </div>
                         </div>
-                    </div><div className="w-100 padding bg-gray-gradient-box section-faq">
-                    {Faqs.length > 0 && (
-                        <div className="container-lg">
-                            <div className="heading mx-auto text-center">
-                                <h2 className="mb-0">FAQs</h2>
-                            </div>
-                            <div className="touchFormWrapper">
-                                <div className="accordion" id="myAccordion">
-                                    {Faqs.map((faq, index) => {
-                                        const faqIndex = index + 1;
-                                        const isActive = activeIndex === faqIndex; // Check if this item is active
+                    </div>
+                </div>
+            </div>
 
-                                        return (
-                                            <div className="accordion-item" key={faqIndex}>
-                                                <h2 className="accordion-header" id={`heading${faqIndex}`}>
-                                                    <button
-                                                        className={`accordion-button ${isActive ? "" : "collapsed"}`}
-                                                        type="button"
-                                                        onClick={() => handleToggle(faqIndex)}
-                                                        aria-expanded={isActive ? "true" : "false"}
-                                                        aria-controls={`collapse${faqIndex}`}
-                                                    >
-                                                        Q{faqIndex}: {faq.faqQuestion}
-                                                    </button>
-                                                </h2>
-                                                <div
-                                                    id={`collapse${faqIndex}`}
-                                                    className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
-                                                    aria-labelledby={`heading${faqIndex}`}
-                                                    data-bs-parent="#myAccordion"
+
+            <div className="w-100 padding bg-gray-gradient-box section-faq">
+                {Faqs.length > 0 && (
+                    <div className="container-lg">
+                        <div className="heading mx-auto text-center">
+                            <h2 className="mb-0">FAQs</h2>
+                        </div>
+                        <div className="">
+                            <div className="accordion-wrapper" id="myAccordion">
+                                {Faqs.map((faq, index) => {
+                                    const faqIndex = index + 1;
+                                    const isActive = activeIndex === faqIndex; // Check if this item is active
+
+                                    return (
+                                        <div className="accordion-item" key={faqIndex}>
+                                            <div className="accordion-header" id={`heading${faqIndex}`}>
+                                                <button
+                                                    className={`accordion-button ${isActive ? "" : "collapsed"}`}
+                                                    type="button"
+                                                    onClick={() => handleToggle(faqIndex)}
+                                                    aria-expanded={isActive ? "true" : "false"}
+                                                    aria-controls={`collapse${faqIndex}`}
                                                 >
-                                                    <div className="accordion-body">
-                                                        <ul className="list-group list-group-flush">
-                                                            <li className="list-group-item px-0">
-                                                                <b>A:</b> <span>{faq.faqAnswer}</span>
-                                                            </li>
-                                                        </ul>
+                                                    <span className='text-primary'>Q{faqIndex}:</span> <div dangerouslySetInnerHTML={{ __html: faq.faqQuestion }} />
+                                                    <i className="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <div
+                                                id={`collapse${faqIndex}`}
+                                                className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
+                                                aria-labelledby={`heading${faqIndex}`}
+                                                data-bs-parent="#myAccordion"
+                                            >
+                                                <div className="accordion-body">
+                                                    <div className="card-body">
+                                                        <div>{faq.faqAnswer}</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        );
-                                    })}
-                                </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
-                    )}</div>
-                </div>
-            </div>
+                    </div>
+                )}</div>
             {/* <Footer /> */}
         </div>
     )
