@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axiosInstance from '../utils/axiosInstance';
 import { Link, useParams } from 'react-router-dom';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
+
 function NewsDetails() {
     const { slugURL } = useParams();
     const [newsDetails, setNewsDetails] = useState([]);
@@ -40,7 +39,6 @@ function NewsDetails() {
     }, [slugURL]);
     return (
         <div>
-            {/* <Header /> */}
             <div className="emptyBox"></div>
             <div className="w-100">
                 <div className="container-lg">
@@ -103,13 +101,12 @@ function NewsDetails() {
                                         </aside>
                                     </div>
                                 </div>}
-                                
+
                             </React.Fragment>
                         ))}
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     )
 }

@@ -4,8 +4,6 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import './App.css';
 import axiosInstance from '../utils/axiosInstance';
-import Footer from '../../widgets/footer';
-import Header from '../../widgets/header';
 function AboutUs() {
     useEffect(() => {
         var swiper3 = new Swiper(".awards-slider", {
@@ -47,25 +45,24 @@ function AboutUs() {
     }, []);
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source 
-                        media="(min-width: 992px)" 
-                        srcSet="assets/images/about-us.jpg" 
+                    <source
+                        media="(min-width: 992px)"
+                        srcSet="assets/images/about-us.jpg"
                     />
-                    <source 
-                        media="(min-width: 768px)" 
-                        srcSet="assets/images/about-us-m.jpg" 
+                    <source
+                        media="(min-width: 768px)"
+                        srcSet="assets/images/about-us-m.jpg"
                     />
-                    <img 
-                        src="assets/images/about-us-m.jpg" 
-                        className="h-100 object-cover object-position-bottom rounded" 
-                        alt="Star Estate" 
+                    <img
+                        src="assets/images/about-us-m.jpg"
+                        className="h-100 object-cover object-position-bottom rounded"
+                        alt="Star Estate"
                     />
                 </picture>
             </div>
-           
+
             <div className="w-100">
                 <div className="container-lg">
                     <div className="breadcrumbContainer" aria-label="breadcrumb">
@@ -125,7 +122,7 @@ function AboutUs() {
                     </div>
                 </div>
             </div>
-            <div className="w-100 padding bg-image overflow-hidden" style={{backgroundImage: "url(assets/images/card-bg.jpg)" }}>
+            <div className="w-100 padding bg-image overflow-hidden" style={{ backgroundImage: "url(assets/images/card-bg.jpg)" }}>
                 <div className="container-lg">
                     <div className="overview-box text-justify">
                         <div className="inner">
@@ -145,9 +142,9 @@ function AboutUs() {
                             <div className="inner pl-lg-4">
                                 <div className="heading mx-auto"><h3 className='mb-0'>Vision</h3></div>
                                 <p className="mb-0 text-justify">For us, the sky is not the limit and global expansion is the next milestone we are working to
-achieve in the future. From taking off in India to flying into international property markets
-across continents is an aspiration and we are confident of nurturing it seamlessly.
-</p>
+                                    achieve in the future. From taking off in India to flying into international property markets
+                                    across continents is an aspiration and we are confident of nurturing it seamlessly.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -198,8 +195,8 @@ across continents is an aspiration and we are confident of nurturing it seamless
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Sincerity</h5>
                                     <p className="mb-0">We stay true to our words. Star Estate never steps back from the commitment.
-Our professional work approach and the precision to evaluate and meet client expectations
-draw our proven commitment since inception.</p>
+                                        Our professional work approach and the precision to evaluate and meet client expectations
+                                        draw our proven commitment since inception.</p>
                                 </div>
                             </div>
                         </div>
@@ -209,10 +206,10 @@ draw our proven commitment since inception.</p>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Transparency</h5>
                                     <p className="mb-0">– Listening is the key to success and our team patiently listens to the client's
-requirements and expectations. With it, we begin the procedure of listing, searching, and
-shortlisting properties for clients. The process includes picking up budget-friendly inventory
-and describing the project embellished with features that make the dream living experience
-a fairy-tale. </p>
+                                        requirements and expectations. With it, we begin the procedure of listing, searching, and
+                                        shortlisting properties for clients. The process includes picking up budget-friendly inventory
+                                        and describing the project embellished with features that make the dream living experience
+                                        a fairy-tale. </p>
                                 </div>
                             </div>
                         </div>
@@ -222,8 +219,8 @@ a fairy-tale. </p>
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Assurance</h5>
                                     <p className="mb-0">Star Estate assures investors about closing the right deal. The company addresses
-property investment purposes in the wake to meet client satisfaction. The organisation
-exhibits relevant properties for investors with assurance of post-sale assistance.</p>
+                                        property investment purposes in the wake to meet client satisfaction. The organisation
+                                        exhibits relevant properties for investors with assurance of post-sale assistance.</p>
                                 </div>
                             </div>
                         </div>
@@ -233,15 +230,14 @@ exhibits relevant properties for investors with assurance of post-sale assistanc
                                 <div className="whyUsText">
                                     <h5 className="fw-bolder text-texture">Reliability</h5>
                                     <p className="mb-0">With the transparent work approach, we have won the trust of clients across
-segments. Thus, clienteles refer us to friends and family as Star Estate is a reliable name in
-the Indian real estate market.</p>
+                                        segments. Thus, clienteles refer us to friends and family as Star Estate is a reliable name in
+                                        the Indian real estate market.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     )
 }

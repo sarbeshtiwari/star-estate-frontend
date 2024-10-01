@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
 import Swal from 'sweetalert2';
 import { Link, useParams } from 'react-router-dom';
 import axiosInstance from '../utils/axiosInstance';
@@ -56,9 +54,9 @@ function CareerDetails() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         const { crname, cremail, crmobile, job_type, resume, location, category } = formData;
-    
+
         if (!crname || !cremail || !crmobile || !job_type || !resume) {
             Swal.fire({
                 title: 'Error!',
@@ -68,7 +66,7 @@ function CareerDetails() {
             });
             return;
         }
-    
+
         const data = new FormData();
         data.append('Name', crname);
         data.append('Email', cremail);
@@ -77,7 +75,7 @@ function CareerDetails() {
         data.append('resume', resume);
         data.append('category', category); // Include category in the data
         data.append('location', location); // Include location in the data
-    
+
         try {
             const response = await axiosInstance.post(
                 'careerQuery/addCareer',
@@ -104,11 +102,10 @@ function CareerDetails() {
             });
         }
     };
-    
+
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
                     <source media="(max-width: 820px)" srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
@@ -220,8 +217,8 @@ function CareerDetails() {
                                         <div className="col-sm-4 readmore mt-0">
                                             <button type="submit" className="button">Submit</button>
                                         </div>
-                                        <div class="col-sm-12">
-                                            <p class="mb-0 mt-5"><small>Didn’t find your job role! Email your resume to <a class="text-green text-decoration-underline" href="mailto:hr@starestate.in">hr@starestate.in</a>. We are always in search of talented professionals to join our team.</small></p>
+                                        <div className="col-sm-12">
+                                            <p className="mb-0 mt-5"><small>Didn’t find your job role! Email your resume to <a className="text-green text-decoration-underline" href="mailto:hr@starestate.in">hr@starestate.in</a>. We are always in search of talented professionals to join our team.</small></p>
                                         </div>
                                     </div>
                                 </form>
@@ -230,7 +227,6 @@ function CareerDetails() {
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     );
 }

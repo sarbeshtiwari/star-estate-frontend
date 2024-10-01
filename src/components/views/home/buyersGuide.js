@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
-import borderImage from '../../../assets/images/border-image.jpg';
 
 function BuyerGuide() {
 
@@ -14,10 +11,9 @@ function BuyerGuide() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source media="(max-width: 820px)" srcset="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
+                    <source media="(max-width: 820px)" srcSet="/star-estate-react/assets/images/banner-emi-calculator-m.jpg" />
                     <img src="/star-estate-react/assets/images/banner-emi-calculator.jpg" className="h-100 object-cover" alt="Star Estate" />
                 </picture>
             </div>
@@ -27,13 +23,13 @@ function BuyerGuide() {
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to='/'>Home</Link></li>
                             <li className="breadcrumb-item active">Buyer Guide</li>
-                           
+
                         </ol>
                     </div>
                 </div>
             </div>
             <div className="w-100 padding">
-                <div className="container-lg"> 
+                <div className="container-lg">
                     <div className="heading mx-sm-auto text-sm-center">
                         <h1 className="h3 mb-0">Buyer Guide</h1>
                     </div>
@@ -81,7 +77,7 @@ function BuyerGuide() {
                                 What to Buy?
                             </h2>
                         </div>
-                        
+
                         <div className="buyer-text-box mb-4">
                             <div className="heading">
                                 <h6 className="mb-0 text-primary"># Under-Construction Vs. Ready-To-Move-In</h6>
@@ -117,7 +113,7 @@ function BuyerGuide() {
                             </div>
                             <p className="mb-0">When you are looking to buy the new home, then you would be confused about whether to choose the Apartment, Villa, or a Plot. When you are buying a plot, then you would get complete satisfaction as well as the freedom to build your own home. Villas is available with various attributes that give more pride to living in the independent house. These would add the complete freedom and privacy without any requirement of the huge investment for construction. Gated villas are attracting the attention of affluent class buyers for paying ore amount these days. Most homebuyer prefers to choose the flats compared to the plots. The main reason is that they have a lesser initial investment needed.</p>
                         </div>
-                        
+
                     </div>
 
                     <div className={`buyers-container toggleWrapper ${activeSection === 'when' ? 'show' : ''}`} id="toggleWrapper-when">
@@ -150,13 +146,13 @@ function BuyerGuide() {
                             </div>
                             <p className="mb-0">CIBIL credit scores are mainly enabled with the three-digit numeric outline in the credit card history, and it is included in the credit profile. When you have the higher credit score, such as 900 or higher, then you could easily get more loans. Credit scores are directly correlated with financial status. Having a higher credit score would also lower the risk of loan rejection. When you have a bad credit history, it will affect your status as the lender would analyze that you are a low-risk investment. The minimum credit score for buying the house is 620. Improve Bad Credit with these techniques:
                             </p>
-                            <ol class="list mb-0">
+                            <ol className="list mb-0">
                                 <li>Make payments on time</li>
                                 <li>Use the credit card wisely</li>
                                 <li>Do not take too much credit</li>
                                 <li>Keep the check on a credit report</li>
                                 <li>Avoid applying for too many loans</li>
-                            </ol>                    
+                            </ol>
                         </div>
                         <div className="buyer-text-box mb-4">
                             <div className="heading">
@@ -264,7 +260,7 @@ function BuyerGuide() {
                                 <h6 className="mb-0 text-primary"># Shortlisting Safe Builder</h6>
                             </div>
                             <p className="mb-0">Normally, the budget and location are considered as the most important thing for making a decision on home buying. When the builder is of utmost importance, then it is quite important to choose the best builder accordingly. You need to have the comprehensive background check of the builder. These would mainly ensure the complete future security of the investment. Below are the steps for shortlisting or determining the safe builders:</p>
-                            <ul class="list mb-0">
+                            <ul className="list mb-0">
                                 <li>All developers need to be registered under their respective State regulatory authority.</li>
                                 <li>Check whether the builder has a RERA certificate</li>
                                 <li>Visit completed projects of the builder</li>
@@ -276,40 +272,38 @@ function BuyerGuide() {
                             </ul>
                         </div>
                         <div className="buyer-text-box">
-                        <div className="heading">
-                            <h6 className="mb-0 text-primary"># Important Documents</h6>
-                        </div>
-                        <p>When you are Verifying the documentation related to property that you are about to purchase, then it is important to have legal adversities associated with the process. when you are buying the property from an individual owner or a builder, then you need to take care of the below documents, such as:</p>
-                        <div className="row">
-                            <div className="col-xl-6">
-                                <ul className="list">
-                                    <li>Systematic Registered Agreement for sale</li>
-                                    <li>RERA certificate</li>
-                                    <li>Approvals and sanctions obtained by the</li>
-                                    <li>Payment clauses</li>
-                                    <li>Project completion timeline</li>
-                                    <li>Title deed</li>
-                                    <li>Funding source</li>
-                                    <li>Loans or mortgages</li>
-                                </ul>
+                            <div className="heading">
+                                <h6 className="mb-0 text-primary"># Important Documents</h6>
                             </div>
-                            <div className="col-xl-6">
-                                <ul className="list mb-0">
-                                    <li>Approved project layout</li>
-                                    <li>Interest and penalties to be levied on a buyer</li>
-                                    <li>Information about the previous ownership and occupancy</li>
-                                    <li>Owner’s name</li>
-                                    <li>Land’s survey number</li>
-                                    <li>The total area of the land</li>
-                                </ul>
+                            <p>When you are Verifying the documentation related to property that you are about to purchase, then it is important to have legal adversities associated with the process. when you are buying the property from an individual owner or a builder, then you need to take care of the below documents, such as:</p>
+                            <div className="row">
+                                <div className="col-xl-6">
+                                    <ul className="list">
+                                        <li>Systematic Registered Agreement for sale</li>
+                                        <li>RERA certificate</li>
+                                        <li>Approvals and sanctions obtained by the</li>
+                                        <li>Payment clauses</li>
+                                        <li>Project completion timeline</li>
+                                        <li>Title deed</li>
+                                        <li>Funding source</li>
+                                        <li>Loans or mortgages</li>
+                                    </ul>
+                                </div>
+                                <div className="col-xl-6">
+                                    <ul className="list mb-0">
+                                        <li>Approved project layout</li>
+                                        <li>Interest and penalties to be levied on a buyer</li>
+                                        <li>Information about the previous ownership and occupancy</li>
+                                        <li>Owner’s name</li>
+                                        <li>Land’s survey number</li>
+                                        <li>The total area of the land</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                        {/* Add more buyer-text-boxes here */}
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     )
 }

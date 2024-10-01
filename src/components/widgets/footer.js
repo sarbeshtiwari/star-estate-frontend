@@ -48,7 +48,7 @@ const Footer = () => {
         getCities();
     }, []);
     return (
-        <footer className="footer-area overflow-hidden float-left w-100">
+        <footer className="footer-area overflow-hidden w-100">
             <div className="container-lg">
                 {/* <div className="padding border-bottom foot-links">
                     <div className="inner">
@@ -144,14 +144,14 @@ const Footer = () => {
             <div className="footer-bottom">
                 <div className="container-lg">
                     <div className="footer-logo">
-                        <a href="https://www.starestate.in/"><img src="https://www.starestate.in/assets/images/logo-starestate.png" alt="Star Estate" /></a>
+                        <a href="https://www.starestate.in/"><img src="/star-estate-react/assets/images/logo-starestate.webp" alt="Star Estate" /></a>
                         <div className="partner-rera">
                             <p className="mb-0"><b>RERA No.: UPRERAAGT10202</b> <br />https://up-rera.in/Agents</p>
                         </div>
                     </div>
                     <div className="copyrights">
                         <p>© Star Estate 2024</p>
-                        <p>Designed &amp; Developed by: <img src="https://www.starestate.in/assets/images/ecis.png" /></p>
+                        <p>Designed &amp; Developed by: <img src="/star-estate-react/assets/images/ecis.webp" /></p>
                     </div>
                 </div>
             </div>

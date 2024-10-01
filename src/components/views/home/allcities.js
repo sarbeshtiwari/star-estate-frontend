@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../utils/axiosInstance';
 
@@ -25,7 +23,6 @@ function AllCities() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
                     <source media="(max-width: 820px)" srcSet="assets/images/banner-commercial-m.jpg" />
@@ -75,8 +72,6 @@ function AllCities() {
                     )}
                 </div>
             </div>
-
-            {/* <Footer /> */}
         </div>
     );
 }

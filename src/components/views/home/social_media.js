@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Swiper from 'swiper';
-import Footer from '../../widgets/footer';
+
 const SocialMediaFeed = () => {
     const [activeFeed, setActiveFeed] = useState('instagram');
     useEffect(() => {
@@ -86,7 +86,6 @@ const SocialMediaFeed = () => {
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </>
     );
 }

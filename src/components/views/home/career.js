@@ -3,8 +3,6 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import axiosInstance from '../utils/axiosInstance';
 import { Link } from 'react-router-dom';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
 
 function Career() {
     var swiper = new Swiper(".crDreamer-slider", {
@@ -22,15 +20,15 @@ function Career() {
         effect: "creative",
         creativeEffect: {
             prev: {
-            shadow: true,
-            origin: "left center",
-            translate: ["-5%", 0, -200],
-            rotate: [0, 100, 0],
+                shadow: true,
+                origin: "left center",
+                translate: ["-5%", 0, -200],
+                rotate: [0, 100, 0],
             },
             next: {
-            origin: "right center",
-            translate: ["5%", 0, -200],
-            rotate: [0, -100, 0],
+                origin: "right center",
+                translate: ["5%", 0, -200],
+                rotate: [0, -100, 0],
             },
         },
     });
@@ -49,7 +47,6 @@ function Career() {
     }, []);
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
                     <source
@@ -189,8 +186,8 @@ function Career() {
 
             <div className="w-100 padding career-services-wrapper">
                 <div className="container-lg">
-                    <div class="career-services-parent">
-                        <div class="career-serviceBox common-border crBox1" style={{'--clr':'#ecf6ff'}}>
+                    <div className="career-services-parent">
+                        <div className="career-serviceBox common-border crBox1" style={{ '--clr': '#ecf6ff' }}>
                             <div className='row g-0 h-100'>
                                 <div className='col-lg-6 crServImg'>
                                     <img src='assets/images/professional-growth-aspects.jpg' className='h-100 object-cover' alt='' />
@@ -205,7 +202,7 @@ function Career() {
                                 </div>
                             </div>
                         </div>
-                        <div class="career-serviceBox common-border crBox2" style={{'--clr':'#ecffee'}}>
+                        <div className="career-serviceBox common-border crBox2" style={{ '--clr': '#ecffee' }}>
                             <div className='row g-0 h-100'>
                                 <div className='col-md-12 crServImg'>
                                     <img src='assets/images/equality-at-work-place.jpg' className='h-100 object-cover' alt='' />
@@ -220,7 +217,7 @@ function Career() {
                                 </div>
                             </div>
                         </div>
-                        <div class="career-serviceBox common-border crBox3" style={{'--clr':'#ddd2f9'}}>
+                        <div className="career-serviceBox common-border crBox3" style={{ '--clr': '#ddd2f9' }}>
                             <div className='row g-0 h-100'>
                                 <div className='col-md-12 crServImg'>
                                     <img src='assets/images/incentives-n-perks.jpg' className='h-100 object-cover' alt='' />
@@ -235,7 +232,7 @@ function Career() {
                                 </div>
                             </div>
                         </div>
-                        <div class="career-serviceBox common-border crBox4" style={{'--clr':'#fffbec'}}>
+                        <div className="career-serviceBox common-border crBox4" style={{ '--clr': '#fffbec' }}>
                             <div className='row g-0 h-100'>
                                 <div className='col-md-12 crServImg'>
                                     <img src='assets/images/healthy-work-environment.jpg' className='h-100 object-cover' alt='' />
@@ -250,7 +247,7 @@ function Career() {
                                 </div>
                             </div>
                         </div>
-                        <div class="career-serviceBox common-border crBox5" style={{'--clr':'#ecf6ff'}}>
+                        <div className="career-serviceBox common-border crBox5" style={{ '--clr': '#ecf6ff' }}>
                             <div className='row g-0 h-100'>
                                 <div className='col-lg-6 crServImg'>
                                     <img src='assets/images/industry-standard-payouts.jpg' className='h-100 object-cover' alt='' />
@@ -265,7 +262,7 @@ function Career() {
                                 </div>
                             </div>
                         </div>
-                        <div class="career-serviceBox common-border crBox6" style={{'--clr':'#ecf6ff'}}>
+                        <div className="career-serviceBox common-border crBox6" style={{ '--clr': '#ecf6ff' }}>
                             <div className='row g-0 h-100'>
                                 <div className='col-md-12 crServImg'>
                                     <img src='assets/images/cognitive-diversity.jpg' className='h-100 object-cover' alt='' />
@@ -285,7 +282,7 @@ function Career() {
             </div>
 
 
-            <div className="w-100 position-relative overflow-hidden padding career-section2 bg-image" style={{backgroundImage: "url(assets/images/career-section-img.jpg)"}}>
+            <div className="w-100 position-relative overflow-hidden padding career-section2 bg-image" style={{ backgroundImage: "url(assets/images/career-section-img.jpg)" }}>
                 <div className="container-lg">
                     <div className='crDreamerWrapper bg-white shadow'>
                         <div className="heading">
@@ -403,7 +400,6 @@ function Career() {
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     )
 }

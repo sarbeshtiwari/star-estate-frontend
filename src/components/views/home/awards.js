@@ -104,21 +104,20 @@ function Awards() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source 
-                        media="(min-width: 992px)" 
-                        srcSet="assets/images/award.jpg" 
+                    <source
+                        media="(min-width: 992px)"
+                        srcSet="assets/images/award.jpg"
                     />
-                    <source 
-                        media="(min-width: 768px)" 
-                        srcSet="assets/images/award-m.jpg" 
+                    <source
+                        media="(min-width: 768px)"
+                        srcSet="assets/images/award-m.jpg"
                     />
-                    <img 
-                        src="assets/images/award-m.jpg" 
-                        className="h-100 object-cover object-position-bottom rounded" 
-                        alt="Star Estate" 
+                    <img
+                        src="assets/images/award-m.jpg"
+                        className="h-100 object-cover object-position-bottom rounded"
+                        alt="Star Estate"
                     />
                 </picture>
             </div>
@@ -187,8 +186,6 @@ function Awards() {
                     style={{ width: '70%', height: 'auto' }} // Adjust size if needed
                 />
             )}
-
-            {/* <Footer /> */}
         </div>
     );
 }

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import Header from '../widgets/header';
-import Footer from '../widgets/footer';
 
 function EmiCalculator() {
     const [loanAmount, setLoanAmount] = useState(5000000);
@@ -99,7 +97,6 @@ function EmiCalculator() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
                     <source
@@ -172,9 +169,9 @@ function EmiCalculator() {
 
                     <h6 className="form--title">Benefits of EMI Calculator</h6>
 
-                    <p className='mb-4'><ul className="list mb-0"><li>An EMI Calculator is a time-saving option to find the exact loan repayment value every month. Going by the pen and paper, or the manual way of calculations is time-consuming. Whereas, an EMI Calculator fetches values in the fields to formulate a solution and reflects the EMI value.</li>
+                    <ul className="list mb-0"><li>An EMI Calculator is a time-saving option to find the exact loan repayment value every month. Going by the pen and paper, or the manual way of calculations is time-consuming. Whereas, an EMI Calculator fetches values in the fields to formulate a solution and reflects the EMI value.</li>
                         <li>An EMI Calculator is easy to use as investors can check for EMI payment value while on the go. Thus, a dedicated place or time is not a requirement to assess the repayment value against a property purchase.</li>
-                        <li>The variable input option lets the investor select the loan amount, tenure, and rate of interest as per his/her preference.</li></ul></p>
+                        <li>The variable input option lets the investor select the loan amount, tenure, and rate of interest as per his/her preference.</li></ul>
 
                     <div className="form--section"></div>
                     <div className="row gap-form-row align-items-end">
@@ -287,7 +284,7 @@ function EmiCalculator() {
                         </div>
                     </div>
                 )}</div>
-            {/* <Footer /> */}
+          
         </div>
     )
 }

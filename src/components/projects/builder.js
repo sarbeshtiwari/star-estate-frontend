@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axiosInstance from '../views/utils/axiosInstance';
-import Header from '../widgets/header';
-import Footer from '../widgets/footer';
 import { Link, useParams } from 'react-router-dom';
 
 function Builder() {
@@ -165,7 +163,7 @@ function Builder() {
                             </div>
                         ) : cityProjects.length > 0 ? (
                             cityProjects.map((project) => (
-                                <div key={project.id} className="col-lg-4 col-sm-6 project_box">
+                                <div key={project._id} className="col-lg-4 col-sm-6 project_box">
                                     <Link to={`/${project.slugURL}`} className="project_box_inner">
                                         <div className="Project_box_img">
                                             <div className="reraBox position-absolute">
@@ -200,9 +198,9 @@ function Builder() {
                                                     <i className="fa fa-map-marker-alt"></i> {project.projectAddress || 'Location not available'}
                                                 </span>
                                                 <span className="project_box_status">
-                                                    <i className="fa-brands fa-font-awesome"></i> {Array.isArray(project.project_status) 
-                                                            ? project.project_status.join(', ') 
-                                                            : project.project_status}
+                                                    <i className="fa-brands fa-font-awesome"></i> {Array.isArray(project.project_status)
+                                                        ? project.project_status.join(', ')
+                                                        : project.project_status}
                                                 </span>
                                             </div>
                                         </div>

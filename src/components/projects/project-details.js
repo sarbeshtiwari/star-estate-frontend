@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import './style.css';
 import Swiper from 'swiper/bundle';
@@ -131,7 +131,6 @@ function ProjectDetails() {
     const [walkthrough, setWalkthrough] = useState(null);
     const [floorPlan, setFloorPlan] = useState([]);
     const [floorData, setFloorData] = useState([]);
-    const [galleryContent, setGalleryContent] = useState([]);
     const [galleryData, setGalleryData] = useState([]);
     const [amenities, setAmenities] = useState([]);
     const [amenitiesContent, setAmenitiesContent] = useState([]);
@@ -144,70 +143,10 @@ function ProjectDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const initializeSwipers = () => {
-            new Swiper('.ameninity-slider', {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                loop: true,
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                breakpoints: {
-                    280: { slidesPerView: 1 },
-                    375: { slidesPerView: 2 },
-                    640: { slidesPerView: 3, spaceBetween: 20 },
-                    1200: { slidesPerView: 4, spaceBetween: 30 },
-                    1400: { slidesPerView: 5, spaceBetween: 30 },
-                    1900: { slidesPerView: 6, spaceBetween: 30 },
-                }
-            });
-            new Swiper('.photo-slider', {
-                slidesPerView: 'auto',
-                spaceBetween: 10,
-                loop: true,
-                centeredSlides: true,
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                autoplay: {
-                    delay: 2000,
-                    disableOnInteraction: false,
-                },
-            });
-        };
-        initializeSwipers();
-    }, []);
-
-    useEffect(() => {
-        new Swiper('.project-slider', {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                280: {
-                    slidesPerView: 1,
-                },
-                640: {
-                    slidesPerView: 2,
-                },
-                1200: {
-                    slidesPerView: 3,
-                },
-                1600: {
-                    slidesPerView: 3,
-                },
-            }
-        });
-    }, []);
+   
 
 
+    // project details
     useEffect(() => {
         const fetchMainProjectData = async () => {
             try {
@@ -235,6 +174,8 @@ function ProjectDetails() {
         fetchMainProjectData();
     }, [slugURL]);
 
+    // quick details
+
     useEffect(() => {
         const fetchQuickDetails = async () => {
             try {
@@ -247,6 +188,8 @@ function ProjectDetails() {
         };
         fetchQuickDetails();
     }, [slugURL]);
+
+    // project overview
 
     useEffect(() => {
         const fetchProjectContent = async () => {
@@ -261,6 +204,8 @@ function ProjectDetails() {
         fetchProjectContent();
     }, [slugURL]);
 
+    // walkthrough
+
     useEffect(() => {
         const fetchWalkthrough = async () => {
             try {
@@ -274,6 +219,7 @@ function ProjectDetails() {
         fetchWalkthrough();
     }, [slugURL]);
 
+    // floor plan content
     useEffect(() => {
         const fetchFloorPlan = async () => {
             try {
@@ -286,7 +232,9 @@ function ProjectDetails() {
         };
         fetchFloorPlan();
     }, [slugURL]);
-    
+
+    // Floor plan
+
     useEffect(() => {
         const fetchFloorData = async () => {
             try {
@@ -301,23 +249,10 @@ function ProjectDetails() {
     }, [slugURL]);
 
     useEffect(() => {
-        const fetchGalleryContent = async () => {
-            try {
-                const response = await axiosInstance.get(`projectGallery/getGalleryContent/${slugURL}`);
-                setGalleryContent(response.data.data.length > 0 ? response.data.data[0] : null);
-            } catch (error) {
-                setError('Error fetching gallery content');
-                // console.error('Error fetching gallery content:', error);
-            }
-        };
-        fetchGalleryContent();
-    }, [slugURL]);
-
-    useEffect(() => {
         const fetchGalleryData = async () => {
             try {
                 const response = await axiosInstance.get(`projectGallery/getProjectGallery/${slugURL}`);
-                
+
                 setGalleryData(response.data);
             } catch (error) {
                 setError('Error fetching gallery data');
@@ -330,27 +265,7 @@ function ProjectDetails() {
     const [bannerImages, setBannerImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0); // State for current index
 
-    // useEffect(() => {
-    //     const fetchBannerImages = async () => {
-    //         try {
-    //             const response = await axiosInstance.get(`projectBannerImages/get/${slugURL}`);
-    //             if (Array.isArray(response.data) && response.data.length > 0) {
-    //                 // Filter images whose status is true
-    //                 const filteredImages = response.data.filter(image => image.status === true);
-    //                 setBannerImages(filteredImages);
-    //             } else {
-                    // console.error('Unexpected response structure or no images found:', response.data);
-    //                 setBannerImages([]);
-    //             }
-    //         } catch (error) {
-                // console.error('Error fetching banner images:', error);
-    //             setBannerImages([]);
-    //         }
-    //     };
-
-    //     fetchBannerImages();
-    // }, [slugURL]);
-
+    // banner
     useEffect(() => {
         const fetchBannerImages = async () => {
             try {
@@ -381,8 +296,8 @@ function ProjectDetails() {
         return () => clearInterval(interval); // Cleanup on unmount
     }, [bannerImages]);
 
-    // Fetch Project Amenities and All Amenities
-    useEffect(() => {
+     // Fetch Project Amenities and All Amenities
+     useEffect(() => {
         const fetchAmenities = async () => {
             try {
                 const [projectAmenitiesResponse, allAmenitiesResponse] = await Promise.all([
@@ -433,6 +348,7 @@ function ProjectDetails() {
         fetchLocationAdvantages();
     }, [slugURL]);
 
+    // Bank Details
     useEffect(() => {
         const fetchAccountDetails = async () => {
             try {
@@ -447,6 +363,7 @@ function ProjectDetails() {
         fetchAccountDetails();
     }, [slugURL]);
 
+    // FAQ
     useEffect(() => {
         const fetchFAQs = async () => {
             try {
@@ -460,7 +377,7 @@ function ProjectDetails() {
         };
         fetchFAQs();
     }, [slugURL]);
-    
+
     // Fetch projects by location from the API
     const fetchProjectsByLocation = async (cityLocation, currentProjectName) => {
         try {
@@ -482,16 +399,102 @@ function ProjectDetails() {
             // console.error('Error fetching projects:', error);
         }
     };
+
+    useEffect(() => {
+        // Swiper initialization inside this effect, once loading stops
+        if (!loading) {
+            const initializeSwipers = () => {
+                new Swiper('.ameninity-slider', {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                    loop: true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints: {
+                        280: { slidesPerView: 1 },
+                        375: { slidesPerView: 2 },
+                        640: { slidesPerView: 3, spaceBetween: 20 },
+                        1200: { slidesPerView: 4, spaceBetween: 30 },
+                        1400: { slidesPerView: 5, spaceBetween: 30 },
+                        1900: { slidesPerView: 6, spaceBetween: 30 },
+                    }
+                });
+
+                new Swiper('.photo-slider', {
+                    slidesPerView: 'auto',
+                    spaceBetween: 10,
+                    loop: true,
+                    centeredSlides: true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    autoplay: {
+                        delay: 2000,
+                        disableOnInteraction: false,
+                    },
+                });
+
+                new Swiper('.project-slider', {
+                    // slidesPerView: 1,
+                    slidesPerView: 'auto',
+                    spaceBetween: 0,
+                    loop: true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    autoplay: {
+                        delay: 2000,
+                        disableOnInteraction: false,
+                    },
+                    breakpoints: {
+                        280: { slidesPerView: 1 },
+                        640: { slidesPerView: 2 },
+                        1200: { slidesPerView: 3 },
+                        1600: { slidesPerView: 3 },
+                    }
+                });
+            };
+            initializeSwipers();
+        }
+    }, [loading]);
+
+    // Simulate data loading (replace with your actual data loading logic)
+    useEffect(() => {
+        setTimeout(() => setLoading(false), 2000); // Simulating a 2-second load time
+    }, []);
+
     
 
 
     return (
+        <>
         <div>
+            {
+            loading ? (  
+                            <div className="d-flex justify-content-center align-items-center" 
+                            style={{ 
+                               position: 'fixed', 
+                               top: '50%', 
+                               left: '50%', 
+                               transform: 'translate(-50%, -50%)', 
+                               zIndex: '9999'  // Ensure it's above other elements
+                            }}
+                            >
+                           <div className="spinner-border text-primary" role="status">
+                               <span className="visually-hidden">Loading...</span>
+                           </div>
+                       </div>
+                       
+                        ) : ( <>
             <header className="header">
                 <div className="main-header">
                     <div className="container-lg d-flex justify-content-between position-relative align-items-center">
                         {mainData.map((data, index) => (
-                            <div key={index} className="logo">
+                            <div key={data._id} className="logo">
                                 <Link to='/'><img src={`${axiosInstance.defaults.globalURL}${data.project_logo}`} alt='' /></Link>
                             </div>
                         ))}
@@ -529,7 +532,7 @@ function ProjectDetails() {
             <div id="projectBanner" className="carousel slide projectBanner" data-bs-pause="false" data-bs-ride="carousel">
                 <div className="reraBox d-flex d-lg-none mb-0 px-3 pt-2">
                     {mainData.map((data, index) => (
-                        <React.Fragment key={index} >
+                        <React.Fragment key={data._id} >
                             <div className="qr_img"><img src={`${axiosInstance.defaults.globalURL}${data.rera_qr}`} alt='' /></div>
                             <div className="rera_num">
                                 <small className="mb-0"><strong className="text-primary">RERA No: </strong> {data.rera_no}<br /><a href={data.reraWebsite} target="_blank" className="small text-primary"><i className="fa fa-link"></i> {data.reraWebsite}</a></small>
@@ -539,21 +542,23 @@ function ProjectDetails() {
                 </div>
                 <div className="carousel-inner h-100">
                     {loading ? (
-                        <div className="carousel-item h-100 active">
-                            <p>Loading images...</p>
+                        <div className="carousel-item h-100 active d-flex justify-content-center align-items-center bg-light" style={{ height: '934px' }}>
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
                         </div>
                     ) : bannerImages.length > 0 ? (
                         bannerImages.map((image, index) => (
-                            <div key={index} className={`carousel-item h-100 ${index === currentIndex ? 'active' : ''}`}>
+                            <div key={image._id} className={`carousel-item h-100 ${index === currentIndex ? 'active' : ''}`}>
                                 <picture>
-                                    <source media="(max-width: 520px)" srcSet={image.mobile_image_url} />
-                                    <source media="(min-width: 521px) and (max-width: 1024px)" srcSet={image.tablet_image_url} />
-                                    <img src={image.desktop_image_url} className="d-block w-100 h-100 object-cover" alt={image.alt_tag_desktop} />
+                                    <source media="(max-width: 520px)" srcSet={image.mobile_image_url} fetchpriority="high" loading="eager" />
+                                    <source media="(min-width: 521px) and (max-width: 1024px)" srcSet={image.tablet_image_url} fetchpriority="high" loading="eager" />
+                                    <img src={image.desktop_image_url} className="d-block w-100 h-100 object-cover" alt={image.alt_tag_desktop} fetchpriority="high" loading="eager" />
                                 </picture>
                             </div>
                         ))
                     ) : (
-                        <div className="carousel-item h-100 active">
+                        <div className="carousel-item h-100 active d-flex justify-content-center align-items-center bg-light" style={{ height: '934px' }}>
                             <p>No images available</p>
                         </div>
                     )}
@@ -561,7 +566,7 @@ function ProjectDetails() {
                 {/* <div className="carousel-inner h-100">
                     {bannerImages.length > 0 ? (
                         bannerImages.map((image, index) => (
-                            <div key={index} className={`carousel-item h-100 ${index === 0 ? 'active' : ''}`}>
+                            <div key={data._id} className={`carousel-item h-100 ${index === 0 ? 'active' : ''}`}>
                                 <picture>
                                     <source media="(max-width: 520px)" srcSet={image.mobile_image_url} />
                                     <source media="(min-width: 521px) and (max-width: 1024px)" srcSet={image.tablet_image_url} />
@@ -598,7 +603,7 @@ function ProjectDetails() {
                         }
                     });
                     return (
-                        <div key={index} className="container-lg hero-textbox d-none d-lg-flex">
+                        <div key={data._id} className="container-lg hero-textbox d-none d-lg-flex">
                             {projectType && (
                                 <div className="new-launch-badge">{projectType}</div>
                             )}
@@ -649,7 +654,6 @@ function ProjectDetails() {
                             <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" value={formData.phoneNumber}
                                 onChange={handleInputChange}
                                 required /></div>
-
                             <div className="col-12 form-group">
                                 <div className="custom-control d-flex ml-3 custom-checkbox">
                                     <input
@@ -664,7 +668,6 @@ function ProjectDetails() {
                                     </label>
                                 </div>
                             </div>
-
                         </div>
                         <div className="readmore mt-0 ml-lg-0">
                             <button className="button" type="submit" disabled={!isChecked}>
@@ -679,7 +682,7 @@ function ProjectDetails() {
             <div className="heroFormContainer shadow">
                 <div className="reraBox d-none d-lg-flex">
                     {mainData.map((data, index) => (
-                        <React.Fragment key={index}>
+                        <React.Fragment key={data._id}>
                             <div className="qr_img"><img src={`${axiosInstance.defaults.globalURL}${data.rera_qr}`} alt='' /></div>
                             <div className="rera_num">
                                 <small className="mb-0"><strong className="text-primary">RERA No: </strong>  {data.rera_no}<br /><a href={data.reraWebsite} target="_blank" className="small text-primary"><i className="fa fa-link"></i> {data.reraWebsite} </a></small>
@@ -710,7 +713,7 @@ function ProjectDetails() {
                         }
                     });
                     return (
-                        <div key={index} className="hero-textbox d-block d-lg-none">
+                        <div key={data._id} className="hero-textbox d-block d-lg-none">
                             <div className="inner">
                                 <div className="heading">
                                     <h1 className="h3 mb-0">{data.projectName}</h1>
@@ -745,7 +748,6 @@ function ProjectDetails() {
                         <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" value={formData.phoneNumber}
                             onChange={handleInputChange}
                             required /></div>
-
                         <div className="col-12 form-group">
                             <div className="custom-control custom-checkbox">
                                 <input
@@ -770,10 +772,10 @@ function ProjectDetails() {
             {/* -----------Mobile view--------------- */}
             <div id="overview" className="w-100 padding pb-0 projectDetails section-overview">
                 <div className="container-lg">
-                    <div className="section-details text-sm-center">
+                    <div className="section-details text-sm-center" style={{ minHeight: '300px' }}> {/* Set minHeight here */}
                         {project && Array.isArray(project) && project.length > 0 ? (
                             project.map((item, index) => (
-                                <div key={index}>
+                                <div key={item._id}>
                                     <div className="heading mx-auto text-center">
                                         <h2 className="mb-0">About The Project</h2>
                                     </div>
@@ -796,7 +798,11 @@ function ProjectDetails() {
                                 </div>
                             ))
                         ) : (
-                            <p>No project data available</p>
+                            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '300px' }}>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -810,10 +816,18 @@ function ProjectDetails() {
                                 <div className="heading mx-auto mb-0 text-sm-center w-100 text-white position-relative">
                                     <div className="row justify-content-center">
                                         <div className="col-11">
-                                            <h2 className="mb-3">Walkthrough</h2>
-                                            {walkthrough && walkthrough.map((item, index) => (
-                                                <p key={index} className="mb-0" dangerouslySetInnerHTML={{ __html: item.walkthrough }} />
-                                            ))}
+                                           <h2 className="mb-3">Walkthrough</h2>
+                                            {walkthrough && walkthrough.length > 0 ? (
+                                                walkthrough.map((item, index) => (
+                                                    <p key={item._id} className="mb-0" dangerouslySetInnerHTML={{ __html: item.walkthrough }} />
+                                                ))
+                                            ) : (
+                                                 <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '300px' }}>
+                                                    <div className="spinner-border text-primary" role="status">
+                                                        <span className="visually-hidden">Loading...</span>
+                                                    </div>
+                                                </div>
+                                            )}
                                             <div className="readmore mx-auto mt-4">
                                                 <a href="#formModal" onClick={handleShow} data-bs-toggle="modal" className="button light">View</a>
                                             </div>
@@ -821,50 +835,28 @@ function ProjectDetails() {
                                     </div>
                                 </div>
                                 {galleryData.length > 0 ? (
-                                    galleryData.find(data => data.displayHome) ? (
+                                    galleryData.find(data => data.displayHome && data.status) ? (
                                         <picture>
-                                        <source
-                                            media="(max-width: 520px)"
-                                            srcSet={`${axiosInstance.defaults.globalURL}${galleryData.find(data => data.displayHome).mobileImage}`}
-                                        />
-                                        <img
-                                            src={`${axiosInstance.defaults.globalURL}${galleryData.find(data => data.displayHome).desktopImage}`}
-                                            className="position-absolute"
-                                            alt=""
-                                        />
-                                        </picture>
-                                    ) : (
-                                        <img
-                                        src="/star-estate-react/assets/images/lodha-bellevue/gallery/1.webp"
-                                        className="position-absolute"
-                                        alt="Default"
-                                        />
-                                    )
-                                    ) : (
-                                    <div>No gallery data available</div>
-                                    )}
-
-
-                                {/* {galleryData.map((data, index) => (
-                                    data.displayHome === true ? (
-                                        <picture>
-                                            <source media="(max-width: 520px)" srcSet={`${axiosInstance.defaults.globalURL}${data.mobileImage}`} />
+                                            <source
+                                                media="(max-width: 520px)"
+                                                srcSet={`${axiosInstance.defaults.globalURL}${galleryData.find(data => data.displayHome).mobileImage}`}
+                                            />
                                             <img
-                                                key={index}
-                                                src={`${axiosInstance.defaults.globalURL}${data.desktopImage}`}
+                                                src={`${axiosInstance.defaults.globalURL}${galleryData.find(data => data.displayHome).desktopImage}`}
                                                 className="position-absolute"
                                                 alt=""
                                             />
                                         </picture>
                                     ) : (
                                         <img
-                                            key={index}
-                                            src="/star-estate-react/assets/images/lodha-bellevue/gallery/1.webp"
+                                            src="/star-estate-react/assets/images/walk_amen_back.webp"
                                             className="position-absolute"
                                             alt="Default"
                                         />
                                     )
-                                ))} */}
+                                ) : (
+                                    <div></div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -881,12 +873,16 @@ function ProjectDetails() {
                     </div>
                     {project && Array.isArray(project) && project.length > 0 ? (
                         project.map((item, index) => (
-                            <div key={index} className="projectOverview-details scroller">
+                            <div key={item._id} className="projectOverview-details scroller">
                                 <p dangerouslySetInnerHTML={{ __html: item.description }} />
                             </div>
                         ))
                     ) : (
-                        <p>No project data available</p>
+                        <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '300px' }}>
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
                     )}
                     <div className="readmore w-100 mt-0">
                         <a href="#formModal" data-bs-toggle="modal" className="button w-100">
@@ -895,15 +891,15 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div>
-                {/* amenities */}
-                <div
+            {/* amenities */}
+            <div
                 id="amenities"
                 className="w-100 padding position-relative overflow-hidden bg-image has-overlay section-amenities"
                 style={{
                     backgroundImage: `url(${
                     galleryData.some(data => data.amenityImage)
                         ? `${axiosInstance.defaults.globalURL}${galleryData.find(data => data.amenityImage).desktopImage}`
-                        : '/star-estate-react/assets/images/lodha-bellevue/gallery/1.webp' // Default image if no amenityImage is found
+                        : '/star-estate-react/assets/images/walk_amen_back.webp' // Default image if no amenityImage is found
                     })`
                 }}
                 >
@@ -972,9 +968,7 @@ function ProjectDetails() {
                     </div>
                 </div>
                 </div>
-
             {/* Floor plan */}
-
             <div id="floorplan" className="w-100 padding section-floorplan">
                 <div className="container-lg">
                     <div className="heading mx-auto text-center">
@@ -985,109 +979,116 @@ function ProjectDetails() {
                                 __html: floorPlan ? floorPlan.floorPlanContent : '',
                             }}
                         ></p>
-
                     </div>
                     <div className="fpContainer">
                         <div className="row gap-row justify-content-center">
-                            {floorData.map((floorPlan, index) => (
-                                <div key={index} className="col-xl-4 col-md-4 col-sm-6 fpBox">
-                                    <div className="inner">
-                                        <div className="img-fluid">
-                                            <img
-                                                src={`${axiosInstance.defaults.globalURL}${floorPlan.image}`}
-                                                alt="Floor Plan"
-                                                onError={(e) => e.target.src = '/star-estate-react/assets/images/generic-floorplan.jpg'}
-                                            />
-                                        </div>
-                                        <div className="planBase">
-                                            <div className="row justify-content-center justify-content-lg-start no-gutters">
-                                                <div className="col-12 fpDetails">
-                                                    <div className="icon">
-                                                        <img src="/star-estate-react/assets/images/icons/bed.png" alt="Beds" />
+                            {floorData.length > 0 ? (
+                                floorData.map((floorPlan, index) => (
+                                    <div key={floorPlan._id} className="col-xl-4 col-md-4 col-sm-6 fpBox">
+                                        <div className="inner">
+                                            {floorPlan.image ? (<div className="img-fluid">
+                                                <img
+                                                    src={`${axiosInstance.defaults.globalURL}${floorPlan.image}`}
+                                                    alt="Floor Plan"
+                                                    onError={(e) => e.target.src = '/star-estate-react/assets/images/generic-floorplan.jpg'}
+                                                />
+                                            </div>) : (<img src="/star-estate-react/assets/images/generic-floorplan.jpg" alt="Floor Plan" />)}
+                                            
+                                            <div className="planBase">
+                                                <div className="row justify-content-center justify-content-lg-start no-gutters">
+                                                    <div className="col-12 fpDetails">
+                                                        <div className="icon">
+                                                            <img src="/star-estate-react/assets/images/icons/bed.png" alt="Beds" />
+                                                        </div>
+                                                        <div className="fptypes">
+                                                            <small>Type</small>
+                                                            <h6 className="mb-0">{floorPlan.title || 'N/A'}</h6>
+                                                        </div>
                                                     </div>
-                                                    <div className="fptypes">
-                                                        <small>Type</small>
-                                                        <h6 className="mb-0">{floorPlan.title || 'N/A'}</h6>
+                                                    <div className="col-12 fpDetails">
+                                                        <div className="icon">
+                                                            <img src="/star-estate-react/assets/images/icons/area.png" alt="Area" />
+                                                        </div>
+                                                        <div className="fptypes">
+                                                            <small>Area</small>
+                                                            <small className="font-weight-bolder d-block">{floorPlan.areaRangeSqft || 'N/A'} Sqft</small>
+                                                            <small className="font-weight-bolder d-block">{floorPlan.areaRangeSqm || 'N/A'} Sqmt</small>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="col-12 fpDetails">
-                                                    <div className="icon">
-                                                        <img src="/star-estate-react/assets/images/icons/area.png" alt="Area" />
-                                                    </div>
-                                                    <div className="fptypes">
-                                                        <small>Area</small>
-                                                        <small className="font-weight-bolder d-block">{floorPlan.areaRangeSqft || 'N/A'} Sqft</small>
-                                                        <small className="font-weight-bolder d-block">{floorPlan.areaRangeSqm || 'N/A'} Sqmt</small>
-                                                    </div>
+                                                <div className="readmore">
+                                                    <a href="#formModal" onClick={handleShow} data-bs-toggle="modal" className="button gray border-green w-100">Price on request</a>
                                                 </div>
-                                            </div>
-                                            <div className="readmore">
-                                                <a href="#formModal" onClick={handleShow} data-bs-toggle="modal" className="button gray border-green w-100">Price on request</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <div className="text-center" style={{ minHeight: '300px' }}></div>  // Message if no data is present
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
             {/* Gallery */}
             <div id="gallery" className="w-100 padding bg-dark section-gallery">
-            <div className="container-lg">
-                <div className="heading mx-auto text-center text-white">
-                <h2 className="mb-3">Gallery</h2>
-                <p className="mb-0">
-                    {galleryContent ? galleryContent.projectGalleryContent : ''}
-                </p>
-                </div>
-                <div className="swiper photo-slider">
-                <div className="swiper-wrapper">
-                    {galleryData.map((galleryData, index) => (
-                    <div key={index} className="swiper-slide gal-slide">
-                        <picture>
-                        <source
-                            media="(max-width: 520px)"
-                            srcSet={`${axiosInstance.defaults.globalURL}${galleryData.mobileImage}`}
-                        />
-                        <img
-                            src={`${axiosInstance.defaults.globalURL}${galleryData.desktopImage}`}
-                            alt={galleryData.alt}
-                        />
-                        </picture>
-                        <div className="caption">{galleryData.alt}</div>
+                <div className="container-lg">
+                    <div className="heading mx-auto text-center text-white">
+                        <h2 className="mb-3">Gallery</h2>
                     </div>
-                    ))}
-                </div>
-                {/* Swiper navigation */}
-                <div className="swiper-button-prev fullcontrol"></div>
-                <div className="swiper-button-next fullcontrol"></div>
-                {/* Swiper pagination */}
-                <div className="swiper-pagination"></div>
+                    <div className="swiper photo-slider">
+                        <div className="swiper-wrapper">
+                            {galleryData.map((galleryData, index) => (
+                                <div key={galleryData._id} className="swiper-slide gal-slide">
+                                    <picture>
+                                        <source
+                                            media="(max-width: 520px)"
+                                            srcSet={`${axiosInstance.defaults.globalURL}${galleryData.mobileImage}`}
+                                        />
+                                        <img
+                                            src={`${axiosInstance.defaults.globalURL}${galleryData.desktopImage}`}
+                                            alt={galleryData.alt}
+                                        />
+                                    </picture>
+                                    <div className="caption">{galleryData.alt}</div>
+                                </div>
+                            ))}
+                        </div>
+                        {/* Swiper navigation */}
+                        <div className="swiper-button-prev fullcontrol"></div>
+                        <div className="swiper-button-next fullcontrol"></div>
+                        {/* Swiper pagination */}
+                        <div className="swiper-pagination"></div>
+                    </div>
                 </div>
             </div>
-            </div>
-
             {/* location */}
             <div id="location" className="w-100 padding section-location">
                 <div className="container-lg">
-                    <div className="heading mx-auto text-center">
+                    <div className="heading mx-auto text-sm-center">
                         <h2 className="mb-3">Location</h2>
-                        {details.length > 0 && (
-                            <p
-                                dangerouslySetInnerHTML={{
-                                    __html: details[0].locationContent,
-                                }}
-                            ></p>
+                        {loading ? (  // Check if data is still loading
+                            <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}> {/* Set a specific height for the loader */}
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        ) : (
+                            details.length > 0 && (
+                                <p
+                                    dangerouslySetInnerHTML={{
+                                        __html: details[0].locationContent,
+                                    }}
+                                ></p>
+                            )
                         )}
-
                     </div>
                     <div className="row gap-row flex-row-reverse">
                         <div className="col-lg-6">
                             <div className="mapBox bg-gray-gradient-box p-3 h-100">
                                 <div className="inner h-100">
                                     {mainData.map((data) => (
-                                        <a href="#formModal" onClick={handleShow} data-bs-toggle="modal">
+                                        <a href="#formModal" onClick={handleShow} data-bs-toggle="modal" key={data._id}>
                                             <img
                                                 src={`${axiosInstance.defaults.globalURL}${data.locationMap}`}
                                                 className="h-100 object-cover"
@@ -1100,12 +1101,19 @@ function ProjectDetails() {
                         </div>
                         <div className="col-lg-6">
                             <div className="hm-project-icons">
-                                <div className="row g-2 gap-form-row">
-                                    {locationAdvantages.length > 0 && details2.length > 0 && (
+                                <div className="row g-2 gap-form-row" style={{ minHeight: '300px' }}> {/* Set a min height */}
+                                    {loading ? (  // Check if data is still loading
+                                        <div className="d-flex justify-content-center align-items-center" style={{ height: '100%' }}>
+                                            <div className="spinner-border text-primary" role="status">
+                                                <span className="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        locationAdvantages.length > 0 && details2.length > 0 &&
                                         locationAdvantages.map((advantage, index) => {
                                             const details = details2[index];
                                             return (
-                                                <div key={index} className="col-sm-6 iconBox locationIconBox">
+                                                <div key={advantage._id} className="col-sm-6 iconBox locationIconBox">
                                                     <div className="bg-gray-gradient-box d-flex align-items-center">
                                                         <div className="img-fluid">
                                                             <img
@@ -1131,7 +1139,7 @@ function ProjectDetails() {
                             <div className="addressContainer bg-gray-gradient-box border-green">
                                 <div className="row g-0 gap-form-row">
                                     {mainData.map((data, index) => (
-                                        <React.Fragment key={index}>
+                                        <React.Fragment key={data._id}>
                                             <div className="col-sm-6 iconBox">
                                                 <p className="mb-0"><strong className="text-primary">Address: </strong> <span>{data.projectAddress}</span></p>
                                             </div>
@@ -1151,17 +1159,20 @@ function ProjectDetails() {
                                         </React.Fragment>
                                     ))}
                                 </div>
-                                <div className="readmore"><a href="#formModal" onClick={handleShow} data-bs-toggle="modal" className="button gray"><i className="fa fa-map-marker-alt"></i> View on Map</a></div>
+                                <div className="readmore">
+                                    <a href="#formModal" onClick={handleShow} data-bs-toggle="modal" className="button gray">
+                                        <i className="fa fa-map-marker-alt"></i> View on Map
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             {/* get in touch */}
             <div className="w-100 bg-gray-gradient-box padding section-getInTouch mb-1">
                 <div className="container-lg">
-                    <div className="heading mx-auto text-center">
+                    <div className="heading mx-auto text-sm-center">
                         <h2 className="mb-3">Get in Touch</h2>
                         <p className="mb-0">If you would like to know more details or something specific, feel free to contact us. <br />Our site representative will give you a call back.</p>
                     </div>
@@ -1206,7 +1217,6 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div >
-
             {/* FAQs */}
             <div className="w-100 padding bg-gray-gradient-box section-faq">
                 {Faqs.length > 0 && (
@@ -1255,10 +1265,7 @@ function ProjectDetails() {
                     </div>
                 )}
             </div>
-
-          
             {/* Similar Projects */}
-
             <div className="w-100 padding section-similar-projects">
                 <div className="container-lg">
                     {similarProjects.length > 0 && (
@@ -1269,7 +1276,7 @@ function ProjectDetails() {
                     <div className="swiper project-slider">
                         <div className="swiper-wrapper">
                             {similarProjects.map((project, index) => (
-                                <div className="swiper-slide project_box" key={index}>
+                                <div className="swiper-slide project_box" key={project._id}>
                                     <Link to={`/${project.slugURL}`} className="project_box_inner">
                                         <div className="Project_box_img">
                                             <div className="reraBox position-absolute">
@@ -1317,8 +1324,8 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div>
-  {/* Marketing Partner */}
-  <div className="w-100 padding bg-lightgray section-partner">
+            {/* Marketing Partner */}
+            <div className="w-100 padding bg-lightgray section-partner">
                 <div className="container-lg">
                     <div className="row">
                         <div className="col-md-6 partnerBox">
@@ -1332,7 +1339,7 @@ function ProjectDetails() {
                         </div>
                         <div className="col-md-6 partnerBox">
                             {mainData.map((data, index) => (
-                                <React.Fragment key={index}>
+                                <React.Fragment key={data._id}>
                                     <div className="heading text-center mb-0">
                                         <img src={`${axiosInstance.defaults.globalURL}${data.rera_qr}`} className="project-qr-img" alt="" />
                                     </div>
@@ -1351,7 +1358,7 @@ function ProjectDetails() {
                 <div className='container-lg'>
                     <div className='row '>
                         {bankDetails.map((detailBank, index) => (
-                            <React.Fragment key={index}>
+                            <React.Fragment key={data._id}>
                                 <div className='col-md-12'>
                                     <p className='text-right'>{detailBank.accountNumber}{detailBank.IFSCcode}{detailBank.CIFno}{detailBank.bankName}{detailBank.bankAddress}</p>
                                 </div>
@@ -1367,51 +1374,53 @@ function ProjectDetails() {
                 role="dialog"
                 data-bs-backdrop="true"
                 data-bs-keyboard="true"
-            >                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}>
+            >                 <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        {/* class to className */}
+                        <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}>
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <div class="modal-header">
-                            <h6 class="modal-title text-primary">Please fill the given form.</h6>
+                        <div className="modal-header">
+                            <h6 className="modal-title text-primary">Please fill the given form.</h6>
                             {successMessage && <div className="alert alert-success mt-3">{successMessage}</div>}
                         </div>
-                        <div class="modal-body">
-                            <div class="form">
-                                <form class="form-container" id="contact_form" method="post" onSubmit={handleSubmit}>
-                                    <p class="status mb-0 text-warning"></p>
-                                    <div class="form-row">
-                                        <div class="col-md-12 form-group">
-                                            <label for="name">Name<sup class="text-danger" >*</sup></label>
-                                            <input type="text" class="form-control bg-white" id="Name" name="Name" value={formData.Name}
+                        <div className="modal-body">
+                            <div className="form">
+                                <form className="form-container" id="contact_form" method="post" onSubmit={handleSubmit}>
+                                    <p className="status mb-0 text-warning"></p>
+                                    <div className="form-row">
+                                        <div className="col-md-12 form-group">
+                                            {/* for to htmlFor */}
+                                            <label htmlFor="name">Name<sup className="text-danger" >*</sup></label>
+                                            <input type="text" className="form-control bg-white" id="Name" name="Name" value={formData.Name}
                                                 onChange={handleInputChange}
                                                 required />
                                         </div>
-                                        <div class="col-md-12 form-group">
-                                            <label for="email">Email<sup class="text-danger">*</sup></label>
-                                            <input type="email" class="form-control bg-white" name="Email" id="Email" value={formData.Email}
+                                        <div className="col-md-12 form-group">
+                                            <label htmlFor="email">Email<sup className="text-danger">*</sup></label>
+                                            <input type="email" className="form-control bg-white" name="Email" id="Email" value={formData.Email}
                                                 onChange={handleInputChange}
                                                 required />
                                         </div>
-                                        <div class="col-md-12 form-group">
-                                            <label for="mobile">Mobile<sup class="text-danger">*</sup></label>
-                                            <input type="tel" class="form-control bg-white" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber}
+                                        <div className="col-md-12 form-group">
+                                            <label htmlFor="mobile">Mobile<sup className="text-danger">*</sup></label>
+                                            <input type="tel" className="form-control bg-white" name="phoneNumber" id="phoneNumber" value={formData.phoneNumber}
                                                 onChange={handleInputChange}
                                                 required />
                                         </div>
-                                        <div class="col-md-12 text-align-center w-auto formFooter readmore mt-0">
+                                        <div className="col-md-12 text-align-center w-auto formFooter readmore mt-0">
                                             <input type="hidden" name="contact_action" value="active" />
                                             <input type="hidden" id="pagename" name="pagename" value="" />
                                             <input type="hidden" name="utm_source" value="" />
                                             <input type="hidden" name="utm_medium" value="" />
                                             <input type="hidden" name="utm_campaign" value="" />
 
-                                            <button type="submit" class="button">Submit</button>
+                                            <button type="submit" className="button">Submit</button>
                                         </div>
-                                        <div class="col-md-12 modal-call text-center mt-4 d-flex align-items-center justify-content-center" style={{ gap: "24px" }}>
-                                            <h6 class="mb-0">Request a Call Back</h6>
+                                        <div className="col-md-12 modal-call text-center mt-4 d-flex align-items-center justify-content-center" style={{ gap: "24px" }}>
+                                            <h6 className="mb-0">Request a Call Back</h6>
                                             {mainData.map((data, index) => (
-                                                <div key={index} class="readmore ml-3 mt-0"><a href="#" class="button"><i class="fa fa-phone"></i><span id="ivrmodal">{data.ivr_no}</span></a></div>
+                                                <div key={index} className="readmore ml-3 mt-0"><a href="#" className="button"><i className="fa fa-phone"></i><span id="ivrmodal">{data.ivr_no}</span></a></div>
                                             ))}
                                         </div>
                                     </div>
@@ -1432,7 +1441,7 @@ function ProjectDetails() {
                     </>
                 ))}
             </div>
-            <Footer/>
+            <Footer />
             {/* <div className="footer-bottom">
                 <div className="container-lg justify-content-center">
                     <div className="copyrights">
@@ -1440,8 +1449,11 @@ function ProjectDetails() {
                     </div>
                 </div>
             </div> */}
+            </>)}
+            </div>
+
             <div className="button-top"><i className="fa fa-chevron-up"></i></div>
-        </div >
+        </>
     )
 }
 export default ProjectDetails

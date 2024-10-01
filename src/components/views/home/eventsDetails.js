@@ -4,9 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // Import CSS for lightbox
 
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
-
 function EventDetails() {
     const { slugURL } = useParams();
     const [eventDetails, setEventDetails] = useState([]);
@@ -41,21 +38,20 @@ function EventDetails() {
 
     return (
         <div>
-            <Header />
             <div className="insideBanner">
                 <picture>
-                    <source 
-                        media="(min-width: 992px)" 
-                        srcSet="/star-estate-react/assets/images/events.jpg" 
+                    <source
+                        media="(min-width: 992px)"
+                        srcSet="/star-estate-react/assets/images/events.jpg"
                     />
-                    <source 
-                        media="(min-width: 768px)" 
-                        srcSet="/star-estate-react/assets/images/events-m.jpg" 
+                    <source
+                        media="(min-width: 768px)"
+                        srcSet="/star-estate-react/assets/images/events-m.jpg"
                     />
-                    <img 
-                        src="/star-estate-react/assets/images/events-m.jpg" 
-                        className="h-100 object-cover object-position-bottom rounded" 
-                        alt="Star Estate" 
+                    <img
+                        src="/star-estate-react/assets/images/events-m.jpg"
+                        className="h-100 object-cover object-position-bottom rounded"
+                        alt="Star Estate"
                     />
                 </picture>
             </div>
@@ -82,11 +78,11 @@ function EventDetails() {
                         {eventImages.map((event, index) => (
                             <div key={index} className="col-lg-3 col-md-4 col-sm-6 mb-4">
                                 <div className="image-container" onClick={() => handleImageClick(index)} style={{ cursor: 'pointer' }}>
-                                    <img 
-                                        src={`${axiosInstance.defaults.globalURL}${event.imagePath}`} 
-                                        alt={event.eventId || 'Event Image'} 
-                                        className="img-fluid" 
-                                        style={{ width: '100%', height: '200px', objectFit: 'cover' }} 
+                                    <img
+                                        src={`${axiosInstance.defaults.globalURL}${event.imagePath}`}
+                                        alt={event.eventId || 'Event Image'}
+                                        className="img-fluid"
+                                        style={{ width: '100%', height: '200px', objectFit: 'cover' }}
                                     />
                                 </div>
                             </div>
@@ -116,8 +112,6 @@ function EventDetails() {
                     imageCaption={`Image ${currentIndex + 1} of ${eventImages.length}`}
                 />
             )}
-
-            <Footer />
         </div>
     );
 }

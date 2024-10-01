@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../widgets/header'
-import Footer from '../widgets/footer'
 
 function RealityCheck() {
 
@@ -48,7 +46,6 @@ tenure.`}
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
                     <source
@@ -113,7 +110,7 @@ tenure.`}
                                 <div className="img-fluid size-md"><img src="assets/images/icons/seal-certificate-stroke.svg" alt="Approvals and Certifications" /></div>
                                 <p className="mb-0 text-primary">Approvals and Certifications</p>
                                 <p className='mb-4 text-center '>Check the Government and RERA-notified certificates
-                                for properties to validate their legal compliance.</p>
+                                    for properties to validate their legal compliance.</p>
                             </div>
                         </div>
                         <div className="col-md-4 iconBox nri-iconBox">
@@ -121,7 +118,7 @@ tenure.`}
                                 <div className="img-fluid size-md"><img src="assets/images/icons/reputation-stroke.svg" alt="Builder’s Reputation" /></div>
                                 <p className="mb-0 text-primary">Builder's Reputation</p>
                                 <p className='mb-4 text-center'>Check for the developer's credibility, registration status, and
-                                other pivotal information necessary for expressing interest in their projects.</p>
+                                    other pivotal information necessary for expressing interest in their projects.</p>
                             </div>
                         </div>
                         <div className="col-md-4 iconBox nri-iconBox">
@@ -129,8 +126,8 @@ tenure.`}
                                 <div className="img-fluid size-md"><img src="assets/images/icons/map-stroke.svg" alt="Location and Infrastructure" /></div>
                                 <p className="mb-0 text-primary">Location and Infrastructure</p>
                                 <p className='mb-4 text-center'>For investment location matters and robust
-                            infrastructure with seamless connectivity to schools, offices, and party places
-                            increases property prices.</p>
+                                    infrastructure with seamless connectivity to schools, offices, and party places
+                                    increases property prices.</p>
                             </div>
                         </div>
                         <div className="col-md-4 iconBox nri-iconBox">
@@ -138,7 +135,7 @@ tenure.`}
                                 <div className="img-fluid size-md"><img src="assets/images/icons/legal-document.svg" alt="Legal Compliance" /></div>
                                 <p className="mb-0 text-primary">Legal Compliance</p>
                                 <p className='mb-4 text-center'>Each project listed on our website is RERA-compliant and ushers a
-                                fair investment in the real estate market.</p>
+                                    fair investment in the real estate market.</p>
                             </div>
                         </div>
                         <div className="col-md-4 iconBox nri-iconBox">
@@ -146,7 +143,7 @@ tenure.`}
                                 <div className="img-fluid size-md"><img src="assets/images/icons/financial-aspect.svg" alt="Financial Aspects" /></div>
                                 <p className="mb-0 text-primary">Financial Aspects</p>
                                 <p className='mb-4 text-center'>Assess the financial feasibility by exploring special payment plans,
-                                early bird offers, and other special offers.</p>
+                                    early bird offers, and other special offers.</p>
                             </div>
                         </div>
                         <div className="col-md-4 iconBox nri-iconBox">
@@ -154,7 +151,7 @@ tenure.`}
                                 <div className="img-fluid size-md"><img src="assets/images/icons/physical-verification.svg" alt="Physical Verification" /></div>
                                 <p className="mb-0 text-primary">Physical Verification</p>
                                 <p className='mb-4 text-center'>Plan a site visit to check the current work status and validate
-                                factors like construction quality, amenities, security, and other qualitative parameters.</p>
+                                    factors like construction quality, amenities, security, and other qualitative parameters.</p>
                             </div>
                         </div>
                     </div>
@@ -162,7 +159,7 @@ tenure.`}
                 </div>
 
             </div>
-            
+
             <div className="w-100 padding bg-gray-gradient-box section-faq">
                 {Faqs.length > 0 && (
                     <div className="container-lg">
@@ -209,7 +206,6 @@ tenure.`}
                     </div>
                 )}
             </div>
-            {/* <Footer /> */}
         </div>
     )
 }

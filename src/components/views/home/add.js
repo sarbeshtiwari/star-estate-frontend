@@ -28,8 +28,10 @@ const LandingWrapper = ({ handleAccept }) => {
                 </div>
             </div>
             <picture>
-                <source media="(max-width: 520px)" srcSet="/star-estate-react/assets/images/lp-img.jpg" />
-                <img src="/star-estate-react/assets/images/lp-img.jpg" className="h-100 object-cover" alt="" />
+                <source media="(min-width: 575px)" srcSet="/star-estate-react/assets/images/lp-img-hd.webp" />
+                <source media="(min-width: 992px)" srcSet="/star-estate-react/assets/images/lp-img-tab.webp" />
+                <source media="(min-width: 1400px)" srcSet="/star-estate-react/assets/images/lp-img.webp" />
+                <img src="/star-estate-react/assets/images/lp-img-mb.webp" className="h-100 object-cover" fetchPriority="high" alt="Disclaimer Star Estate" />
             </picture>
             <div className="lp-footer">
                 <b className="font-weight-bolder">Star Estate</b>

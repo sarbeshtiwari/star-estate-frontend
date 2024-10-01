@@ -14,7 +14,7 @@ export const sendChannelData = async (formData) => {
   }
 };
 
-const CPRegistration = ({ showModal, closeModal, title }) => {
+const CPRegistration = () => {
   const [formData, setFormData] = useState({
     broker_name: '',
     email: '',
@@ -214,14 +214,14 @@ const CPRegistration = ({ showModal, closeModal, title }) => {
   );
 };
 
-CPRegistration.propTypes = {
-  showModal: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  title: PropTypes.string
-};
+// CPRegistration.propTypes = {
+//   showModal: PropTypes.bool.isRequired,
+//   closeModal: PropTypes.func.isRequired,
+//   title: PropTypes.string
+// };
 
-CPRegistration.defaultProps = {
-  title: 'Fill the form to register as a Channel Partner'
-};
+// CPRegistration.defaultProps = {
+//   title: 'Fill the form to register as a Channel Partner'
+// };
 
 export default CPRegistration;

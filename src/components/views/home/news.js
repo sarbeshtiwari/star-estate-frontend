@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { Link } from 'react-router-dom';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
 
 function News() {
     const [news, setNews] = useState([]);
@@ -30,21 +28,20 @@ function News() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source 
-                        media="(min-width: 992px)" 
-                        srcSet="assets/images/news.jpg" 
+                    <source
+                        media="(min-width: 992px)"
+                        srcSet="assets/images/news.jpg"
                     />
-                    <source 
-                        media="(min-width: 768px)" 
-                        srcSet="assets/images/news-m.jpg" 
+                    <source
+                        media="(min-width: 768px)"
+                        srcSet="assets/images/news-m.jpg"
                     />
-                    <img 
-                        src="assets/images/news-m.jpg" 
-                        className="h-100 object-cover object-position-bottom rounded" 
-                        alt="Star Estate" 
+                    <img
+                        src="assets/images/news-m.jpg"
+                        className="h-100 object-cover object-position-bottom rounded"
+                        alt="Star Estate"
                     />
                 </picture>
             </div>
@@ -88,7 +85,7 @@ function News() {
 
                     {/* Render Blogs */}
                     <div className="heading mx-sm-auto text-sm-center mt-5">
-                        
+
                     </div>
                     <div className="row gap-row">
                         {blogs.map((item, index) => (
@@ -113,7 +110,6 @@ function News() {
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     );
 }

@@ -3,8 +3,8 @@ import { Carousel } from 'react-bootstrap';
 import Typed from 'typed.js';
 import { fetchCategories, fetchCities, fetchProjects } from '../../../apis/home-page-api';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '../../widgets/header';
 import axiosInstance from '../utils/axiosInstance';
+
 const Banner = () => {
   useEffect(() => {
     const scrollDown = document.querySelector('.scrollDown');
@@ -69,7 +69,7 @@ const Banner = () => {
       }
       return isNaN(numericPrice) ? '' : numericPrice;
     };
-  
+
     try {
       let minPrice = '';
       let maxPrice = '';
@@ -77,10 +77,10 @@ const Banner = () => {
       if (formData.projectPrice.includes('-')) {
         // Range case
         [minPrice, maxPrice] = formData.projectPrice.split('-').map(price => parsePrice(price.trim()));
-  
+
         // Log for debugging
         console.log('Range case:', { minPrice, maxPrice });
-  
+
         // Adjust for specific cases
         if (parseFloat(maxPrice) === 10000000) {
           maxPrice = 10000000; // Set maxPrice to 1 cr when it's exactly 1 cr
@@ -88,7 +88,7 @@ const Banner = () => {
       } else {
         // Single value case
         const singlePrice = parsePrice(formData.projectPrice.trim());
-  
+
         // Log for debugging
         console.log('Single value case:', { singlePrice });
 
@@ -99,10 +99,10 @@ const Banner = () => {
           minPrice = maxPrice = singlePrice; // Set both to the single value
         }
       }
-  
+
       // Log the final minPrice and maxPrice
       console.log('Final prices:', { minPrice, maxPrice });
-  
+
       // Create query parameters
       const queryParams = new URLSearchParams({
         projectType: formData.property_type,
@@ -144,138 +144,141 @@ const Banner = () => {
     };
   }, []);
   const [filter, setFilter] = useState([]);
-    useEffect(() => {
-        const fetchFilter = async () => {
-            try {
-                const response = await axiosInstance.get(`addProjects/projects`);
-                setFilter(response.data);
-            } catch (error) {
-                console.error('Failed to fetch Awards', error);
-            }
-        };
-        fetchFilter();
-    }, []);
+  useEffect(() => {
+    const fetchFilter = async () => {
+      try {
+        const response = await axiosInstance.get(`addProjects/projects`);
+        setFilter(response.data);
+      } catch (error) {
+        console.error('Failed to fetch Awards', error);
+      }
+    };
+    fetchFilter();
+  }, []);
   return (
     <div>
-      {/* <Header /> */}
-    <div id="banner" className="carousel slide carousel-fade banner" data-bs-pause="false" data-bs-ride="carousel">
-       <Carousel indicators={false} controls={false} activeIndex={index} className='h-100'>
-        <Carousel.Item>
-          <picture>
-            <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/new/banner-apartments-m.jpg" />
-            <img src="/star-estate-react/assets/images/homebanner/new/banner-apartments.jpg" alt="Star Estate" className="d-block w-100 carousel-img" />
-          </picture>
-          <span className="typing-text-in-carousel">Apartment</span>
-        </Carousel.Item>
-        <Carousel.Item>
-          <picture>
-            <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/new/banner-villa-m.jpg" />
-            <img src="/star-estate-react/assets/images/homebanner/new/banner-villa.jpg" alt="Star Estate" className="d-block w-100 carousel-img" />
-          </picture>
-          <span className="typing-text-in-carousel">Villa</span>
-        </Carousel.Item>
-        <Carousel.Item>
-          <picture>
-            <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/new/banner-mall-m.jpg" />
-            <img src="/star-estate-react/assets/images/homebanner/new/banner-mall.jpg" alt="Star Estate" className="d-block w-100 carousel-img" />
-          </picture>
-          <span className="typing-text-in-carousel">Mall</span>
-        </Carousel.Item>
-        <Carousel.Item>
-          <picture>
-            <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/new/banner-office-m.jpg" />
-            <img src="/star-estate-react/assets/images/homebanner/new/banner-office.jpg" alt="Star Estate" className="d-block w-100 carousel-img" />
-          </picture>
-          <span className="typing-text-in-carousel">Office Space</span>
-        </Carousel.Item>
-      </Carousel>
-      <div className="banner-overlay">
-        <div className="bannerContainer">
-          <div className="container-lg">
-            <div className="search-filter">
-              <span className="h4">
-                You deserve the best  <span id="typed" >Apartment</span><span className="typed-cursor" aria-hidden="true"></span>
-              </span>
-              <div className="filter-form">
-                <form id="categoryfilter" encType="multipart/form-data" onSubmit={handleSubmit}>
-                  <div className="row gx-2 gap-form-row">
-                    <div className="col-md-10">
-                      <div className="inner">
-                        <div className="row g-0">
-                          <div className="col mb-0 form-group">
-                            <select
-                              name="property_type"
-                              id="property_type"
-                              className="form-control bg-white my-0"
-                              value={formData.property_type}
-                              onChange={handleChange}
-                            >
-                              <option value="">Property Type</option>
-                              {categories
-                                .filter(category => category.status)
-                                .map(filteredCategory => (
-                                  <option key={filteredCategory._id} value={filteredCategory.slugURL}>
-                                    {filteredCategory.category}
+      <div id="banner" className="carousel slide carousel-fade banner" data-bs-pause="false" data-bs-ride="carousel">
+        <Carousel indicators={false} controls={false} activeIndex={index} className='h-100'>
+          <Carousel.Item>
+            <picture>
+              <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/banner-apartments-m.webp" />
+              <source media="(max-width: 1400px)" srcSet="/star-estate-react/assets/images/homebanner/banner-apartments-hd.webp" />
+              <img src="/star-estate-react/assets/images/homebanner/banner-apartments.webp" alt="Star Estate" className="d-block w-100 carousel-img" fetchpriority='high' />
+            </picture>
+            <span className="typing-text-in-carousel">Apartment</span>
+          </Carousel.Item>
+          <Carousel.Item>
+            <picture>
+              <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/banner-villa-m.webp" />
+              <source media="(max-width: 1400px)" srcSet="/star-estate-react/assets/images/homebanner/banner-villa-hd.webp" />
+              <img src="/star-estate-react/assets/images/homebanner/banner-villa.webp" alt="Star Estate" className="d-block w-100 carousel-img" fetchpriority='high' />
+            </picture>
+            <span className="typing-text-in-carousel">Villa</span>
+          </Carousel.Item>
+          <Carousel.Item>
+            <picture>
+              <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/banner-mall-m.webp" />
+              <source media="(max-width: 1400px)" srcSet="/star-estate-react/assets/images/homebanner/banner-mall-hd.webp" />
+              <img src="/star-estate-react/assets/images/homebanner/banner-mall.webp" alt="Star Estate" className="d-block w-100 carousel-img" fetchpriority='high' />
+            </picture>
+            <span className="typing-text-in-carousel">Mall</span>
+          </Carousel.Item>
+          <Carousel.Item>
+            <picture>
+              <source media="(max-width: 540px)" srcSet="/star-estate-react/assets/images/homebanner/banner-office-m.webp" />
+              <source media="(max-width: 1400px)" srcSet="/star-estate-react/assets/images/homebanner/banner-office-hd.webp" />
+              <img src="/star-estate-react/assets/images/homebanner/banner-office.webp" alt="Star Estate" className="d-block w-100 carousel-img" fetchpriority='high' />
+            </picture>
+            <span className="typing-text-in-carousel">Office Space</span>
+          </Carousel.Item>
+        </Carousel>
+        <div className="banner-overlay">
+          <div className="bannerContainer">
+            <div className="container-lg">
+              <div className="search-filter">
+                <span className="h4">
+                  You deserve the best  <span id="typed" >Apartment</span><span className="typed-cursor" aria-hidden="true"></span>
+                </span>
+                <div className="filter-form">
+                  <form id="categoryfilter" encType="multipart/form-data" onSubmit={handleSubmit}>
+                    <div className="row gx-2 gap-form-row">
+                      <div className="col-md-10">
+                        <div className="inner">
+                          <div className="row g-0">
+                            <div className="col mb-0 form-group">
+                              <select
+                                name="property_type"
+                                id="property_type"
+                                className="form-control bg-white my-0"
+                                value={formData.property_type}
+                                onChange={handleChange}
+                              >
+                                <option value="">Property Type</option>
+                                {categories
+                                  .filter(category => category.status)
+                                  .map(filteredCategory => (
+                                    <option key={filteredCategory._id} value={filteredCategory.slugURL}>
+                                      {filteredCategory.category}
+                                    </option>
+                                  ))}
+                              </select>
+                            </div>
+                            <div className="col mb-0 form-group">
+                              <select
+                                name="cityLocation"
+                                id="cityLocation"
+                                className="form-control bg-white my-0"
+                                value={formData.cityLocation}
+                                onChange={handleChange}
+                              >
+                                <option value="">Project Location</option>
+                                {cities.map(city => (
+                                  <option key={city._id} value={city.slugURL}>
+                                    {city.location}
                                   </option>
                                 ))}
-                            </select>
-                          </div>
-                          <div className="col mb-0 form-group">
-                            <select
-                              name="cityLocation"
-                              id="cityLocation"
-                              className="form-control bg-white my-0"
-                              value={formData.cityLocation}
-                              onChange={handleChange}
-                            >
-                              <option value="">Project Location</option>
-                              {cities.map(city => (
-                                <option key={city._id} value={city.slugURL}>
-                                  {city.location}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div className="col mb-0 form-group">
-                            <select
-                              name="projectPrice"
-                              id="projectPrice"
-                              className="form-control bg-white my-0"
-                              value={formData.projectPrice}
-                              onChange={handleChange}
-                            >
-                              <option value="">Budget</option>
-                              <option value="10000000">UpTo 1 Cr.</option>
-                              <option value="10000000-30000000">1 - 3 Cr.</option>
-                              <option value="30000000-50000000">3 - 5 Cr.</option>
-                              <option value="50000000">Above 5 Cr.</option>
-                            </select>
+                              </select>
+                            </div>
+                            <div className="col mb-0 form-group">
+                              <select
+                                name="projectPrice"
+                                id="projectPrice"
+                                className="form-control bg-white my-0"
+                                value={formData.projectPrice}
+                                onChange={handleChange}
+                              >
+                                <option value="">Budget</option>
+                                <option value="10000000">UpTo 1 Cr.</option>
+                                <option value="10000000-30000000">1 - 3 Cr.</option>
+                                <option value="30000000-50000000">3 - 5 Cr.</option>
+                                <option value="50000000">Above 5 Cr.</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-md-2">
-                      <div className='readmore w-auto mt-0 h-100'>
-                        <input type="hidden" name="projectfltr" value="active" />
-                        <button className="button w-100 h-100" type="submit">
-                          Search
-                        </button>
+                      <div className="col-md-2">
+                        <div className='readmore w-auto mt-0 h-100'>
+                          <input type="hidden" name="projectfltr" value="active" />
+                          <button className="button w-100 h-100" type="submit">
+                            Search
+                          </button>
+                        </div>
                       </div>
                     </div>
+                  </form>
+                  <div className="filter-property-type flex-column flex-sm-row">
+                    <Link to="/projects/new-launch">New Launches</Link>
+                    <Link to='/projects/commercial'>Commercial Properties</Link>
+                    <Link to='/projects/residential'>Residential Properties</Link>
                   </div>
-                </form>
-                <div className="filter-property-type flex-column flex-sm-row">
-                  <Link to="/projects/new-launch">New Launches</Link>
-                  <Link to='/projects/commercial'>Commercial Properties</Link>
-                  <Link to='/projects/residential'>Residential Properties</Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div className="scrollDown d-none d-md-block">Scroll<br /><i className="fa fa-chevron-down"></i></div>
       </div>
-      <div className="scrollDown d-none d-md-block">Scroll<br /><i className="fa fa-chevron-down"></i></div>
-    </div>
     </div>
   );
 };

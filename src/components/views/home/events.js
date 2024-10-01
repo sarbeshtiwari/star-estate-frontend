@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
 import axiosInstance from '../utils/axiosInstance';
 import { Link } from 'react-router-dom';
 
@@ -25,21 +23,20 @@ function Events() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source 
-                        media="(min-width: 992px)" 
-                        srcSet="assets/images/events.jpg" 
+                    <source
+                        media="(min-width: 992px)"
+                        srcSet="assets/images/events.jpg"
                     />
-                    <source 
-                        media="(min-width: 768px)" 
-                        srcSet="assets/images/events-m.jpg" 
+                    <source
+                        media="(min-width: 768px)"
+                        srcSet="assets/images/events-m.jpg"
                     />
-                    <img 
-                        src="assets/images/events-m.jpg" 
-                        className="h-100 object-cover object-position-bottom rounded" 
-                        alt="Star Estate" 
+                    <img
+                        src="assets/images/events-m.jpg"
+                        className="h-100 object-cover object-position-bottom rounded"
+                        alt="Star Estate"
                     />
                 </picture>
             </div>
@@ -92,7 +89,6 @@ function Events() {
                     )}
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     );
 }

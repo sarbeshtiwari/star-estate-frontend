@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2';
-import Header from '../../widgets/header'
-import Footer from '../../widgets/footer'
 function ContactUs() {
     const [formData, setFormData] = useState({
         cname: '',
@@ -43,7 +41,7 @@ function ContactUs() {
                 },
                 body: JSON.stringify(data)
             });
-        
+
             if (response.ok) {
                 const result = await response.json();
                 Swal.fire({
@@ -80,21 +78,20 @@ function ContactUs() {
     };
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source 
-                        media="(min-width: 992px)" 
-                        srcSet="assets/images/contact-us.jpg" 
+                    <source
+                        media="(min-width: 992px)"
+                        srcSet="assets/images/contact-us.jpg"
                     />
-                    <source 
-                        media="(min-width: 768px)" 
-                        srcSet="assets/images/contact-us-m.jpg" 
+                    <source
+                        media="(min-width: 768px)"
+                        srcSet="assets/images/contact-us-m.jpg"
                     />
-                    <img 
-                        src="assets/images/contact-us-m.jpg" 
-                        className="h-100 object-cover object-position-bottom rounded" 
-                        alt="Star Estate" 
+                    <img
+                        src="assets/images/contact-us-m.jpg"
+                        className="h-100 object-cover object-position-bottom rounded"
+                        alt="Star Estate"
                     />
                 </picture>
             </div>
@@ -130,7 +127,7 @@ function ContactUs() {
                                 </div>
                             </div>
                             <div className="col-md-6 address-map">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14024.9315316108!2d77.4057747!3d28.5026403!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce92e7888ad39%3A0x5fbddf859a1a6d25!2sStar%20Estate!5e0!3m2!1sen!2sin!4v1679917400487!5m2!1sen!2sin" width="100%" style={{ border: "0" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14024.9315316108!2d77.4057747!3d28.5026403!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce92e7888ad39%3A0x5fbddf859a1a6d25!2sStar%20Estate!5e0!3m2!1sen!2sin!4v1679917400487!5m2!1sen!2sin" width="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
@@ -150,7 +147,7 @@ function ContactUs() {
                                 </div>
                             </div>
                             <div className="col-md-6 address-map">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1754.6865948034872!2d77.07031442779356!3d28.40799411876178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d22692a4e3faf%3A0xeb5a2617558c5e55!2sSuncity%20Success%20Tower!5e0!3m2!1sen!2sus!4v1649841518406!5m2!1sen!2sus" width="100%" style={{ border: "0" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1754.6865948034872!2d77.07031442779356!3d28.40799411876178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d22692a4e3faf%3A0xeb5a2617558c5e55!2sSuncity%20Success%20Tower!5e0!3m2!1sen!2sus!4v1649841518406!5m2!1sen!2sus" width="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
@@ -170,7 +167,7 @@ function ContactUs() {
                                 </div>
                             </div>
                             <div className="col-md-6 address-map">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3548.386671121726!2d77.99405508315371!3d27.207007267304995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747767d7bda131%3A0x4049fac5aaafb1ad!2sShanti%20City%20Center!5e0!3m2!1sen!2sus!4v1649841734601!5m2!1sen!2sus" width="100%" style={{ border: "0" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3548.386671121726!2d77.99405508315371!3d27.207007267304995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747767d7bda131%3A0x4049fac5aaafb1ad!2sShanti%20City%20Center!5e0!3m2!1sen!2sus!4v1649841734601!5m2!1sen!2sus" width="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
@@ -190,7 +187,7 @@ function ContactUs() {
                                 </div>
                             </div>
                             <div className="col-md-6 address-map">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3888.922803746275!2d77.640839!3d12.912683!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15d20d05e88f%3A0x9bf70cb5762ace29!2sStar%20Estate!5e0!3m2!1sen!2sin!4v1679918223720!5m2!1sen!2sin" width="100%" style={{ border: "0" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3888.922803746275!2d77.640839!3d12.912683!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15d20d05e88f%3A0x9bf70cb5762ace29!2sStar%20Estate!5e0!3m2!1sen!2sin!4v1679918223720!5m2!1sen!2sin" width="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
@@ -210,7 +207,7 @@ function ContactUs() {
                                 </div>
                             </div>
                             <div className="col-md-6 address-map">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3782.220147882494!2d73.7664722!3d18.564111099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDMzJzUwLjgiTiA3M8KwNDUnNTkuMyJF!5e0!3m2!1sen!2sin!4v1679917674049!5m2!1sen!2sin" width="100%" style={{ border: "0" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3782.220147882494!2d73.7664722!3d18.564111099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDMzJzUwLjgiTiA3M8KwNDUnNTkuMyJF!5e0!3m2!1sen!2sin!4v1679917674049!5m2!1sen!2sin" width="100%" style={{ border: "0" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
@@ -288,7 +285,6 @@ function ContactUs() {
                     </div>
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     )
 }

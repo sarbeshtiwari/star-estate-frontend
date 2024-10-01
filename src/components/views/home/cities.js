@@ -28,7 +28,7 @@ const CitywiseContainer = () => {
           slugURL: city.slugURL
         }));
         displayedCities.push({
-          src: '/star-estate-react/assets/images/cities/new/other-cities.jpg',
+          src: '/star-estate-react/assets/images/cities/other-cities.webp',
           alt: 'Other Cities'
         });
         setCities(displayedCities);

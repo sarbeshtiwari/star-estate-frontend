@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../../widgets/header";
 import axiosInstance from "../utils/axiosInstance"; // Ensure axiosInstance is correctly imported
-import Footer from "../../widgets/footer";
 
 export const fetchCities = async () => {
     try {
@@ -107,7 +105,6 @@ export default function SiteMap() {
     return (
         <>
             <div>
-                {/* <Header /> */}
                 <div className="emptyBox"></div>
                 <div className="w-100">
                     <div className="container-lg">
@@ -127,7 +124,7 @@ export default function SiteMap() {
                         <div className="readmore mt-0 mb-4 w-100">
                             <Link to="/" className="button w-100">Home</Link>
                         </div>
-                        <div class="sitemapContainer">
+                        <div className="sitemapContainer">
                             <div className="row">
                                 <div className="col-lg-4 col-sm-6 sitemapBox">
                                     <ul className="list">
@@ -287,7 +284,6 @@ export default function SiteMap() {
 
                     </div>
                 </div>
-                {/* <Footer /> */}
             </div>
         </>
     );

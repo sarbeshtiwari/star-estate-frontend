@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../widgets/header'
-import Footer from '../widgets/footer'
 import axiosInstance from '../views/utils/axiosInstance';
-import axios from 'axios';
-
 
 export const sendNRIData = async (formData) => {
     try {
@@ -270,7 +266,7 @@ function NriGuidelines() {
                             <li>Credit check report</li>
                             <li>Property agreement or other related documents</li>
                         </ul>`
-            },
+        },
 
     ];
 
@@ -287,7 +283,6 @@ function NriGuidelines() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
                     <source
@@ -427,56 +422,54 @@ function NriGuidelines() {
                             </div>
                         </form>
                     </div>
-                </div>                
+                </div>
             </div>
 
             <div className="w-100 padding bg-gray-gradient-box section-faq">
-            {Faqs.length > 0 && (
-                <div className="container-lg">
-                    <div className="heading mx-auto text-center">
-                        <h2 className="mb-0">FAQs</h2>
-                    </div>
-                    <div className="">
-                        <div className="accordion-wrapper" id="myAccordion">
-                            {Faqs.map((faq, index) => {
-                                const faqIndex = index + 1;
-                                const isActive = activeIndex === faqIndex;
+                {Faqs.length > 0 && (
+                    <div className="container-lg">
+                        <div className="heading mx-auto text-center">
+                            <h2 className="mb-0">FAQs</h2>
+                        </div>
+                        <div className="">
+                            <div className="accordion-wrapper" id="myAccordion">
+                                {Faqs.map((faq, index) => {
+                                    const faqIndex = index + 1;
+                                    const isActive = activeIndex === faqIndex;
 
-                                return (
-                                    <div className="accordion-item" key={faqIndex}>
-                                        <div className="accordion-header" id={`heading${faqIndex}`}>
-                                            <button
-                                                className={`accordion-button ${isActive ? "" : "collapsed"}`}
-                                                type="button"
-                                                onClick={() => handleToggle(faqIndex)}
-                                                aria-expanded={isActive ? "true" : "false"}
-                                                aria-controls={`collapse${faqIndex}`}
+                                    return (
+                                        <div className="accordion-item" key={faqIndex}>
+                                            <div className="accordion-header" id={`heading${faqIndex}`}>
+                                                <button
+                                                    className={`accordion-button ${isActive ? "" : "collapsed"}`}
+                                                    type="button"
+                                                    onClick={() => handleToggle(faqIndex)}
+                                                    aria-expanded={isActive ? "true" : "false"}
+                                                    aria-controls={`collapse${faqIndex}`}
+                                                >
+                                                    <span className='text-primary'>Q{faqIndex}:</span> <div dangerouslySetInnerHTML={{ __html: faq.faqQuestion }} />
+                                                    <i className="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <div
+                                                id={`collapse${faqIndex}`}
+                                                className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
+                                                aria-labelledby={`heading${faqIndex}`}
+                                                data-bs-parent="#myAccordion"
                                             >
-                                                <span className='text-primary'>Q{faqIndex}:</span> <div dangerouslySetInnerHTML={{ __html: faq.faqQuestion }} />
-                                                <i className="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                        <div
-                                            id={`collapse${faqIndex}`}
-                                            className={`accordion-collapse collapse ${isActive ? "show" : ""}`}
-                                            aria-labelledby={`heading${faqIndex}`}
-                                            data-bs-parent="#myAccordion"
-                                        >
-                                            <div className="accordion-body">
-                                                <div className='card-body'>
-                                                    <div dangerouslySetInnerHTML={{ __html: faq.faqAnswer }} />
+                                                <div className="accordion-body">
+                                                    <div className='card-body'>
+                                                        <div dangerouslySetInnerHTML={{ __html: faq.faqAnswer }} />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}</div>
-
-            {/* <Footer /> */}
+                )}</div>
         </div>
     )
 }

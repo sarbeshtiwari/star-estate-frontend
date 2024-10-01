@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import Header from '../widgets/header';
-import Footer from '../widgets/footer';
 import axiosInstance from '../views/utils/axiosInstance';
 
 export const sendvaluationReport = async (formData) => {
@@ -36,29 +34,29 @@ function PropertyEvaluationReport() {
     });
     const Faqs = [
         {
-          faqQuestion: "What is a property valuation?",
-          faqAnswer: "A property valuation is the assessment of the property's age, floor plan, amenities, connectivity, and law and order in the area."
+            faqQuestion: "What is a property valuation?",
+            faqAnswer: "A property valuation is the assessment of the property's age, floor plan, amenities, connectivity, and law and order in the area."
         },
         {
-          faqQuestion: "For which states/Cities is this property valuation available?",
-          faqAnswer: "This property valuation is available for Tier I and Tier II cities in India."
+            faqQuestion: "For which states/Cities is this property valuation available?",
+            faqAnswer: "This property valuation is available for Tier I and Tier II cities in India."
         },
         {
-          faqQuestion: "On what types of Properties is valuation available?",
-          faqAnswer: "Here, property valuation is available for residential and commercial properties."
+            faqQuestion: "On what types of Properties is valuation available?",
+            faqAnswer: "Here, property valuation is available for residential and commercial properties."
         },
         {
-          faqQuestion: "What is the timeframe for receiving Property Valuation?",
-          faqAnswer: "It takes 1-2 business days to complete the property valuation process."
+            faqQuestion: "What is the timeframe for receiving Property Valuation?",
+            faqAnswer: "It takes 1-2 business days to complete the property valuation process."
         },
         {
-          faqQuestion: "Is Property Valuation on Star Estate Chargeable?",
-          faqAnswer: "No. The property valuation process on Star Estate is free of cost."
+            faqQuestion: "Is Property Valuation on Star Estate Chargeable?",
+            faqAnswer: "No. The property valuation process on Star Estate is free of cost."
         }
-        
-      ];
 
-      const [activeIndex, setActiveIndex] = useState(null);
+    ];
+
+    const [activeIndex, setActiveIndex] = useState(null);
 
     const handleToggle = (index) => {
         // If the clicked item is already active, deactivate it by setting the activeIndex to null
@@ -190,12 +188,12 @@ function PropertyEvaluationReport() {
                             <li><strong>Step 2 -</strong>  Choose the Property type you wish for valuation</li>
                             <li><strong>Step 3 -</strong>  Choose the configuration the area for the property valuation procedure</li>
                             <li><strong>Step 4 -</strong>  Share more details to receive an accurate property valuation report</li></ul></p>
-                            <div className="form--section"></div>
+                        <div className="form--section"></div>
                         <h6 className="form--title">Features of Property Valuation Procedure</h6>
 
                         <p className='mb-4'>There are three key features of the property valuation procedure that yield the accurate value of an
                             immovable asset.
-                          
+
                             <ul className="list mb-0"><li><strong>Property Details -</strong>It includes information about a property, including connectivity, amenities,
                                 floor plan, and year of construction. </li>
                                 <li><strong>Market Analysis -</strong>  The availability of open areas, parking spaces, and other spheres plays a

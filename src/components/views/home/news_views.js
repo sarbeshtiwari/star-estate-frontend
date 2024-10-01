@@ -14,7 +14,7 @@ function NewsViews() {
                                 <Link to='/awards' className="inner">
                                     <h5 className="card-title">Awards</h5>
                                     <div className="img-fluid">
-                                        <img src="/star-estate-react/assets/images/awards-th.jpg" alt="" />
+                                        <img src="/star-estate-react/assets/images/awards-th.webp" alt="" />
                                     </div>
                                     <div className="arrow"><i className="fa fa-arrow-right"></i></div>
                                 </Link>
@@ -23,7 +23,7 @@ function NewsViews() {
                                 <Link to='/news' className="inner">
                                     <h5 className="card-title">News</h5>
                                     <div className="img-fluid">
-                                        <img src="/star-estate-react/assets/images/news-th.jpg" alt="" />
+                                        <img src="/star-estate-react/assets/images/news-th.webp" alt="" />
                                     </div>
                                     <div className="arrow"><i className="fa fa-arrow-right"></i></div>
                                 </Link>
@@ -32,7 +32,7 @@ function NewsViews() {
                                 <Link to='/events' className="inner">
                                     <h5 className="card-title">Events</h5>
                                     <div className="img-fluid">
-                                        <img src="/star-estate-react/assets/images/events-th.jpg" alt="" />
+                                        <img src="/star-estate-react/assets/images/events-th.webp" alt="" />
                                     </div>
                                     <div className="arrow"><i className="fa fa-arrow-right"></i></div>
                                 </Link>
@@ -41,7 +41,7 @@ function NewsViews() {
                                 <Link to='/blogs' className="inner">
                                     <h5 className="card-title">Blogs</h5>
                                     <div className="img-fluid">
-                                        <img src="/star-estate-react/assets/images/blogs-th.jpg" alt="" />
+                                        <img src="/star-estate-react/assets/images/blogs-th.webp" alt="" />
                                     </div>
                                     <div className="arrow"><i className="fa fa-arrow-right"></i></div>
                                 </Link>

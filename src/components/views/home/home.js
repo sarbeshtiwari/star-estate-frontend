@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie'; // Import js-cookie
 import Banner from "./banner";
 import CitywiseContainer from "./cities";
 import InsightsTools from "./insight_tools";
@@ -12,9 +11,8 @@ export default function Home() {
     const [showLanding, setShowLanding] = useState(null); // Use null to indicate "loading"
 
     useEffect(() => {
-        // Cookies.remove('landingAccepted');
-        // Check if the user has already accepted the disclaimer
-        const hasAccepted = Cookies.get('landingAccepted');
+        // Check if the user has already accepted the disclaimer in the session
+        const hasAccepted = sessionStorage.getItem('landingAccepted');
         if (hasAccepted) {
             setShowLanding(false); // Hide LandingWrapper if accepted
         } else {
@@ -23,8 +21,8 @@ export default function Home() {
     }, []);
 
     const handleAccept = () => {
-        // Set a cookie that expires in 1 day
-        Cookies.set('landingAccepted', 'true', { expires: 1 }); // 1 day
+        // Set a flag in sessionStorage
+        sessionStorage.setItem('landingAccepted', 'true');
         setShowLanding(false); // Hide the LandingWrapper
     };
 

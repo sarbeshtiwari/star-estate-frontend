@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { Link } from 'react-router-dom';
-import Header from '../../widgets/header';
-import Footer from '../../widgets/footer';
 
 function Blogs() {
     const [blogs, setBlogs] = useState([]);
@@ -26,21 +24,20 @@ function Blogs() {
 
     return (
         <div>
-            {/* <Header /> */}
             <div className="insideBanner">
                 <picture>
-                    <source 
-                        media="(min-width: 992px)" 
-                        srcSet="assets/images/blog.jpg" 
+                    <source
+                        media="(min-width: 992px)"
+                        srcSet="assets/images/blog.jpg"
                     />
-                    <source 
-                        media="(min-width: 768px)" 
-                        srcSet="assets/images/blog-m.jpg" 
+                    <source
+                        media="(min-width: 768px)"
+                        srcSet="assets/images/blog-m.jpg"
                     />
-                    <img 
-                        src="assets/images/blog-m.jpg" 
-                        className="h-100 object-cover object-position-bottom rounded" 
-                        alt="Star Estate" 
+                    <img
+                        src="assets/images/blog-m.jpg"
+                        className="h-100 object-cover object-position-bottom rounded"
+                        alt="Star Estate"
                     />
                 </picture>
             </div>
@@ -61,12 +58,12 @@ function Blogs() {
                         <h3 className="mb-0">Blogs</h3>
                     </div>
                     {loading ? (
-                         <div className="d-flex justify-content-center align-items-center">
-                         <div className="spinner-border text-primary" role="status">
-                             <span className="sr-only">Loading blogs...</span>
-                         </div>
-                         <span className="ml-2">Loading blogs...</span>
-                     </div>
+                        <div className="d-flex justify-content-center align-items-center">
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="sr-only">Loading blogs...</span>
+                            </div>
+                            <span className="ml-2">Loading blogs...</span>
+                        </div>
                     ) : error ? (
                         <p>{error}</p>
                     ) : (
@@ -94,7 +91,6 @@ function Blogs() {
                     )}
                 </div>
             </div>
-            {/* <Footer /> */}
         </div>
     );
 }

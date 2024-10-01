@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import axiosInstance from '../views/utils/axiosInstance';
 
@@ -16,49 +15,49 @@ const SearchModal = ({ show, handleClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        // Send the searchTerm as a query parameter
-        // const response = await axiosInstance.get(`http://localhost:4000/addProjects/search`, { params: { searchTerm }
-        // });
-        
-        const response = await axiosInstance.get(`/addProjects/search`, {
-            params: { searchTerm }
+      // Send the searchTerm as a query parameter
+      // const response = await axiosInstance.get(`http://localhost:4000/addProjects/search`, { params: { searchTerm }
+      // });
+
+      const response = await axiosInstance.get(`/addProjects/search`, {
+        params: { searchTerm }
+      });
+
+      const results = response.data;
+
+      if (results.length > 0) {
+        // Check the first result for the relevant fields
+        const firstResult = results[0];
+
+        if (firstResult.projectBy) {
+          // Navigate to builder page
+          navigate(`/builder/${encodeURIComponent(firstResult.projectBy.value)}`);
+
+          // navigate(`/builder?name=${encodeURIComponent(firstResult.projectBy.value)}`);
+        } else if (firstResult.cityLocation) {
+          // Navigate to city page
+          navigate(`/city/${encodeURIComponent(firstResult.cityLocation.value)}`);
+        } else if (firstResult.slugURL) {
+          // Navigate to projects page
+          navigate(`${firstResult.slugURL}`);
+        }
+      } else {
+        // No results found
+        Swal.fire({
+          icon: 'info',
+          title: 'No Results Found',
+          text: 'We are unable to find details for the current query.',
+          confirmButtonText: 'OK'
         });
-
-        const results = response.data;
-
-        if (results.length > 0) {
-            // Check the first result for the relevant fields
-            const firstResult = results[0];
-
-            if (firstResult.projectBy) {
-                // Navigate to builder page
-                navigate(`/builder/${encodeURIComponent(firstResult.projectBy.value)}`);
-                
-                // navigate(`/builder?name=${encodeURIComponent(firstResult.projectBy.value)}`);
-            } else if (firstResult.cityLocation) {
-                // Navigate to city page
-                navigate(`/city/${encodeURIComponent(firstResult.cityLocation.value)}`);
-            } else if (firstResult.slugURL) {
-                // Navigate to projects page
-                navigate(`${firstResult.slugURL}`);
-            }
-        } else {
-          // No results found
-          Swal.fire({
-              icon: 'info',
-              title: 'No Results Found',
-              text: 'We are unable to find details for the current query.',
-              confirmButtonText: 'OK'
-          });
       }
 
-        setSearchTerm(''); // Clear the search term
-        handleClose(); // Close the modal
+      setSearchTerm(''); // Clear the search term
+      handleClose(); // Close the modal
     } catch (error) {
-        // console.error('Error fetching projects:', error);
-        // alert('An error occurred while fetching data.');
+      // console.error('Error fetching projects:', error);
+      // alert('An error occurred while fetching data.');
     }
-};
+  };
 
 
   const closeModal = () => {

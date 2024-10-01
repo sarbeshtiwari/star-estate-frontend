@@ -75,32 +75,32 @@ const Header = () => {
 
     const { slugURL } = useParams();
     const [cityDetails, setCityDetails] = useState(null);
-    useEffect(() => {
-        const fetchCityDetails = async () => {
-            try {
-                const response = await axiosInstance.get(`/city/getCityBySlugURL/${slugURL}`);
-                setCityDetails(response.data);
-            } catch (error) {
-                setCityDetails(null);
-                setErrorMessage(null);
-            }
-        };
-        fetchCityDetails();
-    }, [slugURL]);
+    // useEffect(() => {
+    //     const fetchCityDetails = async () => {
+    //         try {
+    //             const response = await axiosInstance.get(`/city/getCityBySlugURL/${slugURL}`);
+    //             setCityDetails(response.data);
+    //         } catch (error) {
+    //             setCityDetails(null);
+    //             setErrorMessage(null);
+    //         }
+    //     };
+    //     fetchCityDetails();
+    // }, [slugURL]);
 
     const [builderDetails, setBuilderDetails] = useState(null);
-    useEffect(() => {
-        const fetchBuilderDetails = async () => {
-            try {
-                const response = await axiosInstance.get(`addProjects/getProjectByDeveloper/${slugURL}`);
-                setBuilderDetails(response.data);
-            } catch (error) {
-                setBuilderDetails(null);
-                setErrorMessage(null);
-            }
-        };
-        fetchBuilderDetails();
-    }, [slugURL]);
+    // useEffect(() => {
+    //     const fetchBuilderDetails = async () => {
+    //         try {
+    //             const response = await axiosInstance.get(`addProjects/getProjectByDeveloper/${slugURL}`);
+    //             setBuilderDetails(response.data);
+    //         } catch (error) {
+    //             setBuilderDetails(null);
+    //             setErrorMessage(null);
+    //         }
+    //     };
+    //     fetchBuilderDetails();
+    // }, [slugURL]);
 
     // State for Search Modal
     const [showSearchModal, setShowSearchModal] = useState(false);
@@ -110,7 +110,7 @@ const Header = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-    
+
     return (
         <>
             <header className="header">
@@ -125,7 +125,7 @@ const Header = () => {
                             <div className="menu d-none d-lg-block">
                                 <ul className="list-inline">
                                     <li className="haschild">
-                                        <Link to="javascript:;">
+                                        <Link to="#">
                                             City <i className="fa fa-caret-down"></i>
                                         </Link>
                                         <div className="dropdown dropdown-lg scroller">
@@ -140,7 +140,7 @@ const Header = () => {
                                         </div>
                                     </li>
                                     <li className="haschild">
-                                        <Link to="javascript:;">
+                                        <Link to="#">
                                             Builder <i className="fa fa-caret-down"></i>
                                         </Link>
                                         <div className="dropdown dropdown-lg scroller">
@@ -177,7 +177,7 @@ const Header = () => {
                                 <i className="fa fa-user"></i>
                             </Link>
 
-                           
+
                             <button className="searchBtn" title="Search Property" onClick={handleShowSearchModal}>
                                 <span className="d-none d-lg-inline">Search Property</span>
                                 <i className="fa fa-search"></i>
@@ -205,7 +205,7 @@ const Header = () => {
                         <li><Link to='/' onClick={closeMenu}>Home</Link></li>
                         <li className="hasDropChild"><Link to='/about-us' onClick={closeMenu}>About Us</Link></li>
                         <li className="hasDropChild d-block d-sm-none">
-                            <Link to="javascript:;">
+                            <Link to="#">
                                 City <i className="fa fa-caret-down"></i>
                             </Link>
                             <div className="dropdown">
@@ -219,19 +219,20 @@ const Header = () => {
                             </div>
                         </li>
                         <li className="hasDropChild d-block d-sm-none">
-                            <a href="javascript:;">Builder <i className="fa fa-caret-down"></i></a>
+                            <a href="#">Builder <i className="fa fa-caret-down"></i></a>
                             <div className="dropdown">
                                 <ul className="list-inline">
                                     {developers.map((developer, index) => (
                                         <li key={index}>
-                                            <Link to={`/builder/${developer.slugURL}` } onClick={closeMenu}>{developer.developerName}</Link>
+                                            <Link to={`/builder/${developer.slugURL}`} onClick={closeMenu}>{developer.developerName}</Link>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                         </li>
+                        {/* # with # */}
                         <li className="hasDropChild d-block d-sm-none">
-                            <a href="javascript:;">Projects <i className="fa fa-caret-down"></i></a>
+                            <a href="#">Projects <i className="fa fa-caret-down"></i></a>
                             <div className="dropdown">
                                 <ul className="list-inline">
                                     <li><Link to="/projects/luxury" onClick={closeMenu}>Luxury</Link></li>
@@ -241,7 +242,7 @@ const Header = () => {
                                 </ul>
                             </div>
                         </li>
-                        <li className="hasDropChild"><a href="javascript:;">Media <i className="fa fa-caret-down"></i></a>
+                        <li className="hasDropChild"><a href="#">Media <i className="fa fa-caret-down"></i></a>
                             <div className="dropdown">
                                 <ul className="list-inline">
                                     <li><Link to='/awards' onClick={closeMenu}>Awards</Link></li>
@@ -259,13 +260,69 @@ const Header = () => {
                 </div>
                 <div className="socialIcons stroke">
                     <ul className="list-inline">
-                        <li style={{ '--i': 1 }}><a href="https://www.facebook.com/starestate.in" target="_blank" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Facebook"><i className="fab fa-facebook-f"></i></a></li>
-                        <li style={{ '--i': 2 }}><a href="https://www.instagram.com/starestate_official/" target="_blank" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Instagram"><i className="fab fa-instagram"></i></a></li>
-                        <li style={{ '--i': 3 }}><a href="https://www.linkedin.com/company/star-estate" target="_blank" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="LinkedIn"><i className="fab fa-linkedin-in"></i></a></li>
-                        <li style={{ '--i': 4 }}><a href="https://twitter.com/starestate2" target="_blank" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Twitter"><i className="fab fa-twitter"></i></a></li>
-                        <li style={{ '--i': 5 }}><a href="https://www.youtube.com/channel/UCwfDf7Ut8jrkjiBeRnbZUPw" target="_blank" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="YouTube"><i className="fab fa-youtube"></i></a></li>
+                        <li style={{ '--i': 1 }}>
+                            <a
+                                href="https://www.facebook.com/starestate.in"
+                                target="_blank"
+                                rel="noreferrer"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="Facebook"
+                            >
+                                <i className="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li style={{ '--i': 2 }}>
+                            <a
+                                href="https://www.instagram.com/starestate_official/"
+                                target="_blank"
+                                rel="noreferrer"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="Instagram"
+                            >
+                                <i className="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li style={{ '--i': 3 }}>
+                            <a
+                                href="https://www.linkedin.com/company/star-estate"
+                                target="_blank"
+                                rel="noreferrer"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="LinkedIn"
+                            >
+                                <i className="fab fa-linkedin-in"></i>
+                            </a>
+                        </li>
+                        <li style={{ '--i': 4 }}>
+                            <a
+                                href="https://twitter.com/starestate2"
+                                target="_blank"
+                                rel="noreferrer"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="Twitter"
+                            >
+                                <i className="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li style={{ '--i': 5 }}>
+                            <a
+                                href="https://www.youtube.com/channel/UCwfDf7Ut8jrkjiBeRnbZUPw"
+                                target="_blank"
+                                rel="noreferrer"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="YouTube"
+                            >
+                                <i className="fab fa-youtube"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
+
             </div>
         </>
     );

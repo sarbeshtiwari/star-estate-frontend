@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../views/utils/axiosInstance';
-import Header from '../widgets/header';
-import Footer from '../widgets/footer';
 import { Link, useLocation } from 'react-router-dom';
 
 function AllProjects() {

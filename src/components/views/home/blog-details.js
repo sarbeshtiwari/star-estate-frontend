@@ -37,23 +37,23 @@ function BlogDetails() {
     }, [slugURL]);
 
     // useEffect(() => {
-        const fetchRecentBlogs = async () => {
-            try {
-                console.log('blog')
-                const response = await axiosInstance.get('/blogs/getBlog');
-                const fetchedBlogs = response.data;
-                const recentBlogsFiltered = fetchedBlogs
-                    .filter(blog => blog.slugURL !== slugURL && blog.status !== false && blog.blogsCategory === 'blog')
-                    .slice(0, 5);
-                setRecentBlogs(recentBlogsFiltered);
-            } catch (error) {
-                setError('Error fetching recent blogs');
-                console.error('Error fetching recent blogs:', error);
-            } finally {
-                setLoadingRecent(false);
-            }
-        };
-        // fetchRecentBlogs();
+    const fetchRecentBlogs = async () => {
+        try {
+            console.log('blog')
+            const response = await axiosInstance.get('/blogs/getBlog');
+            const fetchedBlogs = response.data;
+            const recentBlogsFiltered = fetchedBlogs
+                .filter(blog => blog.slugURL !== slugURL && blog.status !== false && blog.blogsCategory === 'blog')
+                .slice(0, 5);
+            setRecentBlogs(recentBlogsFiltered);
+        } catch (error) {
+            setError('Error fetching recent blogs');
+            console.error('Error fetching recent blogs:', error);
+        } finally {
+            setLoadingRecent(false);
+        }
+    };
+    // fetchRecentBlogs();
     // }, [slugURL]);
 
     const fetchRecentNews = async () => {
@@ -96,11 +96,11 @@ function BlogDetails() {
                 <div className="container-lg">
                     {loadingBlog ? (
                         <div className="d-flex justify-content-center align-items-center">
-                        <div className="spinner-border text-primary" role="status">
-                            <span className="sr-only">Loading...</span>
+                            <div className="spinner-border text-primary" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                            <span className="ml-2">Loading...</span>
                         </div>
-                        <span className="ml-2">Loading...</span>
-                    </div>
                     ) : error ? (
                         <div className="alert alert-danger">{error}</div>
                     ) : (
@@ -122,12 +122,12 @@ function BlogDetails() {
                 <div className="container-lg">
                     <div className="row gap-row">
                         {loadingBlog ? (
-                           <div className="d-flex justify-content-center align-items-center">
-                           <div className="spinner-border text-primary" role="status">
-                               <span className="sr-only">Loading...</span>
-                           </div>
-                           <span className="ml-2">Loading...</span>
-                       </div>
+                            <div className="d-flex justify-content-center align-items-center">
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <span className="ml-2">Loading...</span>
+                            </div>
                         ) : blogDetails.map((blogs, index) => (
                             <React.Fragment key={index}>
                                 <div className="col-xl-8 col-lg-7 blogTextContainer">
@@ -160,11 +160,11 @@ function BlogDetails() {
                                 >
                                     {loadingRecent ? (
                                         <div className="d-flex justify-content-center align-items-center">
-                                        <div className="spinner-border text-primary" role="status">
-                                            <span className="sr-only">Loading...</span>
+                                            <div className="spinner-border text-primary" role="status">
+                                                <span className="sr-only">Loading...</span>
+                                            </div>
+                                            <span className="ml-2">Loading...</span>
                                         </div>
-                                        <span className="ml-2">Loading...</span>
-                                    </div>
                                     ) : recentBlogs.length > 0 && (
                                         <div className="aside-inner" style={{ top: "60px" }}>
                                             <aside className="topRatedProjectShowcase common-border mt-0">
@@ -196,10 +196,6 @@ function BlogDetails() {
                     </div>
                 </div>
             </div>
-
-            <footer ref={footerRef}>
-                {/* Footer content goes here */}
-            </footer>
         </div>
     );
 }
