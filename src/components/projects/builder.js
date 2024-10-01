@@ -84,19 +84,19 @@ function Builder() {
                     <img src="/star-estate-react/assets/images/banner-commercial.jpg" className="h-100 object-cover" alt="Star Estate" />
                 </picture>
                 <div className="bannerContainer" style={{
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    textAlign: 'center'
-  }}>
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    textAlign: 'center'
+                }}>
                     <div className="container-lg">
-                    <div className="stats-in">
-                                            <span className="h2 text-texture" style={{ color: '#00000' }}><span className="counter">{cityProjectsDetail.developerName}</span></span>
-                                            
-                                        </div>
+                        <div className="stats-in">
+                            <span className="h2 text-texture" style={{ color: '#00000' }}><span className="counter">{cityProjectsDetail.developerName}</span></span>
+
                         </div>
-                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className="w-100">
@@ -115,15 +115,15 @@ function Builder() {
                 <div className="container-lg">
                     <div className="heading mx-auto">
                         <h3 className="mb-3 text-center">{cityProjectsDetail.developerName || 'Developer'}</h3>
-                        
+
                         {/* Builder Details Loading */}
                         {loadingDetails ? (
                             <div className="d-flex justify-content-center align-items-center">
-                            <div className="spinner-border text-primary" role="status">
-                                <span className="sr-only">Loading...</span>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <span className="ml-2">Loading...</span>
                             </div>
-                            <span className="ml-2">Loading...</span>
-                        </div>
                         ) : (
                             <div key={cityProjectsDetail._id} className="text-center">
                                 <article
@@ -131,7 +131,7 @@ function Builder() {
                                         __html: showMore ? description : briefContent
                                     }}
                                 ></article>
-                                {description ?  <button onClick={openDetailModal} className="project-readmore-button">
+                                {description ? <button onClick={openDetailModal} className="project-readmore-button">
                                     {showMore ? 'Read less' : 'Read more'}
                                 </button> : ''}
                                 {/* <button onClick={openDetailModal} className="project-readmore-button">
@@ -158,11 +158,11 @@ function Builder() {
                     <div className="row gap-row">
                         {loadingProjects ? (
                             <div className="d-flex justify-content-center align-items-center">
-                            <div className="spinner-border text-primary" role="status">
-                                <span className="sr-only">Loading...</span>
+                                <div className="spinner-border text-primary" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                                <span className="ml-2">Loading...</span>
                             </div>
-                            <span className="ml-2">Loading...</span>
-                        </div>
                         ) : cityProjects.length > 0 ? (
                             cityProjects.map((project) => (
                                 <div key={project.id} className="col-lg-4 col-sm-6 project_box">
@@ -200,7 +200,9 @@ function Builder() {
                                                     <i className="fa fa-map-marker-alt"></i> {project.projectAddress || 'Location not available'}
                                                 </span>
                                                 <span className="project_box_status">
-                                                    <i className="fa-brands fa-font-awesome"></i> {project.project_status || 'Status not available'}
+                                                    <i className="fa-brands fa-font-awesome"></i> {Array.isArray(project.project_status) 
+                                                            ? project.project_status.join(', ') 
+                                                            : project.project_status}
                                                 </span>
                                             </div>
                                         </div>

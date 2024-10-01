@@ -593,7 +593,9 @@ function CommercialProjects() {
                                 </div>
                                 <div className="project_status_detail">
                                     <span className="project_box_location"><i className="fa fa-map-marker-alt"></i>{project.projectAddress}</span>
-                                    <span className="project_box_status"><i className="fa-brands fa-font-awesome"></i> {project.project_status}</span>
+                                    <span className="project_box_status"><i className="fa-brands fa-font-awesome"></i> {Array.isArray(project.project_status) 
+                                                            ? project.project_status.join(', ') 
+                                                            : project.project_status}</span>
                                 </div>
                             </div>
                         </Link>
@@ -627,7 +629,9 @@ function CommercialProjects() {
                                     </div>
                                     <div className="project_status_detail">
                                         <span className="project_box_location"><i className="fa fa-map-marker-alt"></i>{project.projectAddress}</span>
-                                        <span className="project_box_status"><i className="fa-brands fa-font-awesome"></i> {project.project_status}</span>
+                                        <span className="project_box_status"><i className="fa-brands fa-font-awesome"></i> {Array.isArray(project.project_status) 
+                                                            ? project.project_status.join(', ') 
+                                                            : project.project_status}</span>
                                     </div>
                                 </div>
                             </Link>

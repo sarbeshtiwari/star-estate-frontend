@@ -113,6 +113,12 @@ function ProjectDetails() {
             }, 2000);
         } catch (error) {
             setSuccessMessage('Failed to submit the form.');
+            setFormData({
+                Name: '',
+                Email: '',
+                phoneNumber: '',
+                projectName: slugURL,
+            });
         }
     };
 
@@ -730,13 +736,13 @@ function ProjectDetails() {
                 })}
                 <form onSubmit={handleSubmit}>
                     <div className="row g-2">
-                        <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name"
+                        <div className="col-lg-12 col-md-4 col-sm-4 col form-group"><input type="text" className="form-control" placeholder="Name*" name="Name" value={formData.Name}
                             onChange={handleInputChange}
                             required /></div>
-                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email"
+                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="email" className="form-control" placeholder="Your email address*" name="Email" value={formData.Email}
                             onChange={handleInputChange}
                             required /></div>
-                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber"
+                        <div className="col-lg-12 col-md-4 col-sm-4 form-group"><input type="number" className="form-control" placeholder="Your phone number*" name="phoneNumber" value={formData.phoneNumber}
                             onChange={handleInputChange}
                             required /></div>
 

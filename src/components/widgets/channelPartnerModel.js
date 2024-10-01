@@ -23,22 +23,22 @@ const CPRegistrationModal = ({ showModal, closeModal, title }) => {
 
   const [successMessage, setSuccessMessage] = useState('');
 
-  useEffect(() => {
-    const body = document.body;
-    if (showModal) {
-      body.classList.add('blur-background');
-      // Reset form data when modal opens
-      setFormData({
-        broker_name: '',
-        email: '',
-        phoneNumber: '',
-        company_name: '',
-        registration_no: '',
-      });
-    } else {
-      body.classList.remove('blur-background');
-    }
-  }, [showModal]);
+  // useEffect(() => {
+  //   const body = document.body;
+  //   if (showModal) {
+  //     body.classList.add('blur-background');
+  //     // Reset form data when modal opens
+  //     setFormData({
+  //       broker_name: '',
+  //       email: '',
+  //       phoneNumber: '',
+  //       company_name: '',
+  //       registration_no: '',
+  //     });
+  //   } else {
+  //     body.classList.remove('blur-background');
+  //   }
+  // }, [showModal]);
 
   const handleChange = (e) => {
     setFormData({
@@ -57,36 +57,36 @@ const CPRegistrationModal = ({ showModal, closeModal, title }) => {
       }, 2000);
   };
 
-  const modalStyle = {
-    display: showModal ? 'block' : 'none',
-    paddingRight: showModal ? '18px' : '0'
-  };
+  // const modalStyle = {
+  //   display: showModal ? 'block' : 'none',
+  //   paddingRight: showModal ? '18px' : '0'
+  // };
 
-  const contentStyle = {
-    backgroundImage: 'url(..assets/images/card-bg.jpg)', // Replace with your image path
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    color: 'black', // Text color updated to black
-    padding: '20px', // Added padding to ensure content doesn't touch the edges
-  };
+  // const contentStyle = {
+  //   backgroundImage: 'url(..assets/images/card-bg.jpg)', // Replace with your image path
+  //   backgroundSize: 'cover',
+  //   backgroundPosition: 'center',
+  //   color: 'black', // Text color updated to black
+  //   padding: '20px', // Added padding to ensure content doesn't touch the edges
+  // };
 
-  const titleStyle = {
-    textAlign: 'left', // Aligns the title to the left
-    margin: 0 // Optional: Adjusts margin to fit design
-  };
+  // const titleStyle = {
+  //   textAlign: 'left', // Aligns the title to the left
+  //   margin: 0 // Optional: Adjusts margin to fit design
+  // };
 
   return (
     <div
-      className={`modal fade ${showModal ? 'show' : ''}`}
-      style={modalStyle}
-      role="dialog"
-      aria-modal={showModal}
+      // className={`modal fade ${showModal ? 'show' : ''}`}
+      // style={modalStyle}
+      // role="dialog"
+      // aria-modal={showModal}
       
     >
       <div className="modal-dialog modal-dialog-centered" role="document">
         <div className="modal-content" style={contentStyle}>
           <button type="button" className="close" onClick={closeModal} aria-label="Close">
-            <span aria-hidden="true">×</span>
+            {/* <span aria-hidden="true">×</span> */}
           </button>
           <div className="modal-header">
             <h8 className="modal-title" style={titleStyle}>{title}</h8>

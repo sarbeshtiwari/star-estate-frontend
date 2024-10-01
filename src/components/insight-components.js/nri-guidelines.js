@@ -34,11 +34,11 @@ function NriGuidelines() {
         // Extract UTM parameters from the URL
         const params = new URLSearchParams(window.location.search);
         const utmParams = {
-            utm_source: params.get('utm_source') || '',
-            utm_medium: params.get('utm_medium') || '',
-            utm_campaign: params.get('utm_campaign') || '',
-            utm_term: params.get('utm_term') || '',
-            utm_content: params.get('utm_content') || ''
+            utm_source: params.get('utm_source') || ' ',
+            utm_medium: params.get('utm_medium') || ' ',
+            utm_campaign: params.get('utm_campaign') || ' ',
+            utm_term: params.get('utm_term') || ' ',
+            utm_content: params.get('utm_content') || ' '
         };
 
         setFormData(prevData => ({
@@ -59,11 +59,23 @@ function NriGuidelines() {
         try {
             await sendNRIData(formData);
             setSuccessMessage('Form submitted successfully!');
+            setFormData({
+                Name: '',
+                Email: '',
+                phoneNumber: '',
+                user_query: ''
+            });
             setTimeout(() => {
                 setSuccessMessage(''); // Clear message after some time
             }, 2000);
         } catch (error) {
             setSuccessMessage('Failed to submit the form.');
+            setFormData({
+                Name: '',
+                Email: '',
+                phoneNumber: '',
+                user_query: ''
+            });
         }
     };
 
