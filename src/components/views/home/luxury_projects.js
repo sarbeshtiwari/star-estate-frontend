@@ -37,7 +37,7 @@ const ProjectsCarousel = () => {
             const fallbackCities = ['noida', 'delhi', 'gurugram', 'ghaziabad'];
 
             try {
-                console.log('Trying by location:', location);
+                // console.log('Trying by location:', location);
                 const lowerCaseLocation = location.toLowerCase();
 
                 const data = await axiosInstance.get(`addProjects/getProjectByLocation/${lowerCaseLocation}`);
@@ -46,7 +46,7 @@ const ProjectsCarousel = () => {
                 if (filteredProjects.length > 0) {
                     setAllProjects(filteredProjects);
                 } else {
-                    console.log('No projects found for the selected city, fetching fallback cities.');
+                    // console.log('No projects found for the selected city, fetching fallback cities.');
                     const allProjectsData = await Promise.all(fallbackCities.map(async (city) => {
                         const response = await axiosInstance.get(`addProjects/getProjectByLocation/${city}`);
                         return response.data.filter(project => project.status === true);
@@ -56,7 +56,7 @@ const ProjectsCarousel = () => {
                     setAllProjects(allFilteredProjects);
                 }
             } catch (error) {
-                console.error('Error fetching data by location:', error);
+                // console.error('Error fetching data by location:', error);
             }
 
         };
@@ -70,7 +70,7 @@ const ProjectsCarousel = () => {
 
     const fetchAllProjects = async () => {
         try {
-            console.log('Fetching all projects');
+            // console.log('Fetching all projects');
             const response = await axiosInstance.get(`/addProjects/getProject`);
             const filteredProjects = response.data.filter(project => project.status === true);
             setAllProjects(filteredProjects);
@@ -78,7 +78,7 @@ const ProjectsCarousel = () => {
             
         } catch (error) {
             setError('Error fetching project details');
-            console.error('Error fetching project details:', error);
+            // console.error('Error fetching project details:', error);
             setLoading(false);
             
         }
@@ -89,7 +89,7 @@ const ProjectsCarousel = () => {
             
             navigator.geolocation.getCurrentPosition(success, error);
         } else {
-            console.log("Geolocation not supported");
+            // console.log("Geolocation not supported");
             fetchAllProjects();
             setLoading(false);
            
@@ -101,13 +101,13 @@ const ProjectsCarousel = () => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         setLocation({ latitude, longitude });
-        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
         fetchAddressFromCoordinates(latitude, longitude);
     }
 
     function error() {
-        console.log("Unable to retrieve your location");
+        // console.log("Unable to retrieve your location");
         fetchAllProjects();
         setLoading(false);
     }
@@ -124,15 +124,15 @@ const ProjectsCarousel = () => {
                 const state = components.state || '';
                 setAddress({ city, state });
                 setSelectedLocation(city);
-                console.log(`City: ${city}, State: ${state}`);
+                // console.log(`City: ${city}, State: ${state}`);
             } else {
-                console.log('No results found');
+                // console.log('No results found');
                 setAddress({ city: '', state: '' });
             }
             setLoading(false);
         } 
         catch (error) {
-            console.error('Error fetching address:', error);
+            // console.error('Error fetching address:', error);
             setAllProjects([]);
             setLoading(false);
         }
@@ -160,11 +160,15 @@ const ProjectsCarousel = () => {
                             className=".project-slider"
                             slidesPerView={1}
                             spaceBetween={0}
-                            loop={true}
+                            // loop={allProjects.length > 1}
                             navigation={{
                                 nextEl: '.swiper-button-next',
                                 prevEl: '.swiper-button-prev',
                             }}
+                            autoplay={{
+                                delay: 2000,
+                                disableOnInteraction: false,
+                              }}
                             breakpoints={{
                                 280: { slidesPerView: 1 },
                                 640: { slidesPerView: 2 },
@@ -173,7 +177,7 @@ const ProjectsCarousel = () => {
                             }}
                         >
                             {allProjects.length > 0 ? (
-                                allProjects.slice(0, 10).map((project) => (
+                                allProjects.concat(allProjects).slice(0, 10).map((project) => (
                                     <SwiperSlide key={project._id} className="project_box">
                                         <Link to={`/${project.slugURL}`} className="project_box_inner">
                                             <div className="Project_box_img">

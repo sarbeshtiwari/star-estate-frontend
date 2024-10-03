@@ -8,34 +8,34 @@ import SocialMediaFeed from "./social_media";
 import LandingWrapper from "./add"; // Landing page wrapper
 
 export default function Home() {
-    const [showLanding, setShowLanding] = useState(null); // Use null to indicate "loading"
+    // const [showLanding, setShowLanding] = useState(null); // Use null to indicate "loading"
 
-    useEffect(() => {
-        // Check if the user has already accepted the disclaimer in the session
-        const hasAccepted = sessionStorage.getItem('landingAccepted');
-        if (hasAccepted) {
-            setShowLanding(false); // Hide LandingWrapper if accepted
-        } else {
-            setShowLanding(true); // Show LandingWrapper if not accepted
-        }
-    }, []);
+    // useEffect(() => {
+    //     // Check if the user has already accepted the disclaimer in the session
+    //     const hasAccepted = sessionStorage.getItem('landingAccepted');
+    //     if (hasAccepted) {
+    //         setShowLanding(false); // Hide LandingWrapper if accepted
+    //     } else {
+    //         setShowLanding(true); // Show LandingWrapper if not accepted
+    //     }
+    // }, []);
 
-    const handleAccept = () => {
-        // Set a flag in sessionStorage
-        sessionStorage.setItem('landingAccepted', 'true');
-        setShowLanding(false); // Hide the LandingWrapper
-    };
+    // const handleAccept = () => {
+    //     // Set a flag in sessionStorage
+    //     sessionStorage.setItem('landingAccepted', 'true');
+    //     setShowLanding(false); // Hide the LandingWrapper
+    // };
 
-    // Don't render anything until showLanding is determined
-    if (showLanding === null) {
-        return null; // Or you can return a loader/spinner if desired
-    }
+    // // Don't render anything until showLanding is determined
+    // if (showLanding === null) {
+    //     return null; // Or you can return a loader/spinner if desired
+    // }
 
     return (
         <>
-            {showLanding ? (
+            {/* {showLanding ? (
                 <LandingWrapper handleAccept={handleAccept} />
-            ) : (
+            ) : ( */}
                 <>
                     <Banner />
                     <InsightsTools />
@@ -44,7 +44,7 @@ export default function Home() {
                     <NewsViews />
                     <SocialMediaFeed />
                 </>
-            )}
+            {/* )} */}
         </>
     );
 }

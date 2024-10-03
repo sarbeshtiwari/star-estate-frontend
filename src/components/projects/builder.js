@@ -28,7 +28,7 @@ function Builder() {
         try {
             setLoadingProjects(true); // Start loading
             const response = await axiosInstance.get(`addProjects/getProjectByDeveloper/${slugURL}`);
-            console.log(response.data);
+           
             if (response.data) {
                 setCityProjects(response.data);
                 setLocation(response.data.projectBy || '');
@@ -37,7 +37,7 @@ function Builder() {
                 setLocation('');
             }
         } catch (error) {
-            console.error('Error fetching projects:', error);
+            // console.error('Error fetching projects:', error);
             setCityProjects([]);
             setLocation('');
         } finally {
@@ -54,7 +54,7 @@ function Builder() {
                 setBuilderName(response.data.developerName || '');
             }
         } catch (err) {
-            console.error('Unexpected error:', err);
+            // console.error('Unexpected error:', err);
         } finally {
             setLoadingDetails(false); // Stop loading
         }

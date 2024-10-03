@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axiosInstance from '../views/utils/axiosInstance';
-import logo from '../../assets/images/logo-starestate.png';
+// import logo from '../../assets/images/logo-starestate.png';
 import SearchModal from './searchmodal';
 
 export const fetchCities = async () => {
@@ -73,8 +73,8 @@ const Header = () => {
         fetchDeveloperDetails();
     }, []);
 
-    const { slugURL } = useParams();
-    const [cityDetails, setCityDetails] = useState(null);
+    // const { slugURL } = useParams();
+    // const [cityDetails, setCityDetails] = useState(null);
     // useEffect(() => {
     //     const fetchCityDetails = async () => {
     //         try {
@@ -88,7 +88,7 @@ const Header = () => {
     //     fetchCityDetails();
     // }, [slugURL]);
 
-    const [builderDetails, setBuilderDetails] = useState(null);
+    // const [builderDetails, setBuilderDetails] = useState(null);
     // useEffect(() => {
     //     const fetchBuilderDetails = async () => {
     //         try {
@@ -108,8 +108,8 @@ const Header = () => {
     const handleCloseSearchModal = () => setShowSearchModal(false);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    // const openModal = () => setIsModalOpen(true);
+    // const closeModal = () => setIsModalOpen(false);
 
     return (
         <>
@@ -119,7 +119,7 @@ const Header = () => {
                         <nav className="navi">
                             <div className="logo">
                                 <Link to='/'>
-                                    <img src={logo} alt="Star Estate" />
+                                    <img src='/star-estate-react/assets/images/logo-starestate.png' alt="Star Estate" />
                                 </Link>
                             </div>
                             <div className="menu d-none d-lg-block">
@@ -161,7 +161,7 @@ const Header = () => {
                                         <div className="dropdown dropdown-lg">
                                             <div className="dropdown-title">Projects</div>
                                             <ul className="list-inline">
-                                                <li><Link to="/projects/luxury">Luxury</Link></li>
+                                                {/* <li><Link to="/projects/luxury">Luxury</Link></li> */}
                                                 <li><Link to='/projects/residential'>Residential</Link></li>
                                                 <li><Link to='/projects/commercial'>Commercial</Link></li>
                                                 <li><Link to="/projects/new-launch">New Launches</Link></li>

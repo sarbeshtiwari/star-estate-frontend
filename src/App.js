@@ -80,7 +80,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './props.css';
-import './assets/css/swiper.bundle.css';
+// import './assets/css/swiper.bundle.css';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Home from './components/views/home/home';
 import EmiCalculator from './components/insight-components.js/emi-calculator';
@@ -96,7 +96,7 @@ import AllProjects from './components/projects/all-projects';
 import ProjectDetails from './components/projects/project-details';
 import ScrollToTop from './scrollToTop';
 import Advertisement from './components/views/home/advertisement';
-import './assets/css/responsive.css';
+// import './assets/css/responsive.css';
 import Awards from './components/views/home/awards';
 import Blogs from './components/views/home/blogs';
 import BlogDetails from './components/views/home/blog-details';
@@ -115,6 +115,9 @@ import CPRegistration from './components/widgets/channelPartner';
 import Faq from './components/views/home/faq';
 import PrivacyPolicy from './components/views/home/privacy-policy';
 import NewScreen from './components/views/home/desclaimer.js';
+import { useEffect, useState } from 'react';
+import LandingWrapper from './components/views/home/add.js';
+import NotFound from './components/widgets/404NotFound.js';
 
 function AppContent() {
   const location = useLocation();
@@ -141,11 +144,40 @@ function AppContent() {
     '/channel-partner-registration',
     '/faq',
     '/privacy-policy',
-    '/desclaimer'
+    '/desclaimer',
+    '/404NotFound'
   ].includes(location.pathname);
+
+  const [showLanding, setShowLanding] = useState(null); // Use null to indicate "loading"
+
+    useEffect(() => {
+        // Check if the user has already accepted the disclaimer in the session
+        const hasAccepted = sessionStorage.getItem('landingAccepted');
+        if (hasAccepted) {
+            setShowLanding(false); // Hide LandingWrapper if accepted
+        } else {
+            setShowLanding(true); // Show LandingWrapper if not accepted
+        }
+    }, []);
+
+    const handleAccept = () => {
+        // Set a flag in sessionStorage
+        sessionStorage.setItem('landingAccepted', 'true');
+        setShowLanding(false); // Hide the LandingWrapper
+    };
+
+    // Don't render anything until showLanding is determined
+    if (showLanding === null) {
+        return null; // Or you can return a loader/spinner if desired
+    }
 
   return (
     <>
+    {showLanding ? (
+      <LandingWrapper handleAccept={handleAccept} />
+  ) : (
+    <>
+    
       {!isProjectDetailsPage && <Header />}
       <Routes>
         <Route path='/' element={<Home />} />
@@ -178,9 +210,10 @@ function AppContent() {
         <Route path='/faq' element={<Faq />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
         <Route path= '/desclaimer' element={<NewScreen/>}/>
+        <Route path='/404NotFound' element={<NotFound/>}/>
       </Routes>
       {!isProjectDetailsPage && <Footer />}
-    </>
+    </>)}</>
   );
 }
 

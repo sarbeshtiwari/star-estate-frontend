@@ -17,12 +17,12 @@ const LandingWrapper = ({ handleAccept }) => {
                     <p>
                         The Company expressly disclaims all liability in respect to actions taken or not taken based on any or all the contents of this website. The Company will in no circumstance be liable for any expense, loss or damage including, without limitation, indirect or consequential loss or damage, or any expense, loss or damage whatsoever arising from the use of data, arising out of or in connection with the use of this website.
                     </p>
-                    <p className="mb-0">
+                    <p>
                         In no event, the Company will be liable to any party for any direct, indirect, special or other consequential damages for any use of this website, or any other hyperlinked website, including without limitation, any lost profits, business interruption, loss of programs or other data on your information handling system or otherwise, even if we are expressly advised of the possibility of such damages.
                     </p>
                 </div>
                 <div className="readmore mt-3">
-                    <button role="button" className="button go-home-btn" onClick={handleAccept}>
+                    <button className="button go-home-btn" onClick={handleAccept}>
                         Accept & Enter
                     </button>
                 </div>
@@ -31,7 +31,7 @@ const LandingWrapper = ({ handleAccept }) => {
                 <source media="(min-width: 575px)" srcSet="/star-estate-react/assets/images/lp-img-hd.webp" />
                 <source media="(min-width: 992px)" srcSet="/star-estate-react/assets/images/lp-img-tab.webp" />
                 <source media="(min-width: 1400px)" srcSet="/star-estate-react/assets/images/lp-img.webp" />
-                <img src="/star-estate-react/assets/images/lp-img-mb.webp" className="h-100 object-cover" fetchPriority="high" alt="Disclaimer Star Estate" />
+                <img src="/star-estate-react/assets/images/lp-img-mb.webp" className="h-100 object-cover" fetchpriority="high" alt="Disclaimer Star Estate" />
             </picture>
             <div className="lp-footer">
                 <b className="font-weight-bolder">Star Estate</b>

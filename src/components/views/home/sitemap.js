@@ -213,7 +213,7 @@ export default function SiteMap() {
                             </div>
                             <div className="sitemapBox">
                                 <ul className="list d-flex">
-                                    <li><Link to="/projects/luxury">Luxury</Link></li>
+                                    {/* <li><Link to="/projects/luxury">Luxury</Link></li> */}
                                     <li><Link to="/projects/residential">Residential</Link></li>
                                     <li><Link to="/projects/commercial">Commercial</Link></li>
                                     <li><Link to="/projects/new-launch">New Launches</Link></li>

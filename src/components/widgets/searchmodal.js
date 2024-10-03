@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2';
@@ -6,6 +6,7 @@ import axiosInstance from '../views/utils/axiosInstance';
 
 const SearchModal = ({ show, handleClose }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [multipleResults, setMultipleResults] = useState([]); // State for multiple project results
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,10 +16,6 @@ const SearchModal = ({ show, handleClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send the searchTerm as a query parameter
-      // const response = await axiosInstance.get(`http://localhost:4000/addProjects/search`, { params: { searchTerm }
-      // });
-
       const response = await axiosInstance.get(`/addProjects/search`, {
         params: { searchTerm }
       });
@@ -26,44 +23,67 @@ const SearchModal = ({ show, handleClose }) => {
       const results = response.data;
 
       if (results.length > 0) {
-        // Check the first result for the relevant fields
         const firstResult = results[0];
 
+        // Handle navigation based on the first result's fields
         if (firstResult.projectBy) {
-          // Navigate to builder page
+          closeModal();
           navigate(`/builder/${encodeURIComponent(firstResult.projectBy.value)}`);
-
-          // navigate(`/builder?name=${encodeURIComponent(firstResult.projectBy.value)}`);
         } else if (firstResult.cityLocation) {
-          // Navigate to city page
+          closeModal();
           navigate(`/city/${encodeURIComponent(firstResult.cityLocation.value)}`);
         } else if (firstResult.slugURL) {
-          // Navigate to projects page
-          navigate(`${firstResult.slugURL}`);
+          if (results.length === 1) {
+            // Navigate to the single project
+            navigate(`${firstResult.slugURL}`);
+          } else if (results.length > 1) {
+            // Set the multiple results to be displayed for user selection
+            setMultipleResults(results);
+          }
         }
       } else {
-        // No results found
         Swal.fire({
           icon: 'info',
           title: 'No Results Found',
-          text: 'We are unable to find details for the current query.',
+          text: `We are unable to find details for ${searchTerm}.`,
           confirmButtonText: 'OK'
         });
       }
 
-      setSearchTerm(''); // Clear the search term
-      handleClose(); // Close the modal
+      setSearchTerm(''); // Clear search term
+      // handleClose(); // Only close modal if no multiple results are found
     } catch (error) {
-      // console.error('Error fetching projects:', error);
-      // alert('An error occurred while fetching data.');
+      console.error('Error fetching projects:', error);
     }
   };
 
-
   const closeModal = () => {
-    setSearchTerm(''); // Clear the search term
-    handleClose(); // Close the modal
+    setSearchTerm(''); // Clear search term
+    setMultipleResults([]); // Clear the multiple results when modal is closed
+    handleClose(); // Close modal
   };
+
+  const handleProjectSelection = (slugURL) => {
+    navigate(`${slugURL}`); // Navigate to the selected project
+    closeModal(); // Close the modal after selection
+  };
+
+    // Disable back button by overriding popstate event
+    useEffect(() => {
+      const handleBackButton = (event) => {
+        event.preventDefault();
+        // Push the current page again to the history, preventing back navigation
+        window.history.pushState(null, null, window.location.href);
+      };
+  
+      // Add event listener for popstate (back button)
+      window.addEventListener('popstate', handleBackButton);
+  
+      return () => {
+        // Clean up the event listener when the component unmounts
+        window.removeEventListener('popstate', handleBackButton);
+      };
+    }, []);
 
   return (
     <div className={`modal fade ${show ? 'show d-block' : ''}`} id="searchModal" tabIndex="-1" aria-labelledby="searchModalLabel" aria-hidden={!show} style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
@@ -97,6 +117,19 @@ const SearchModal = ({ show, handleClose }) => {
                   </div>
                 </form>
               </div>
+
+              {multipleResults.length > 1 && (
+                <div className="project-selection">
+                  <h6>Select a Project:</h6>
+                  <ul className="list-group">
+                    {multipleResults.map((result) => (
+                      <li key={result._id} className="list-group-item list-group-item-action" onClick={() => handleProjectSelection(result.slugURL)} style={{ cursor: 'pointer' }}>
+                        {result.projectName.value}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>

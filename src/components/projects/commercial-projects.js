@@ -576,9 +576,9 @@ function CommercialProjects() {
                                         </div>
                                         <div className="project_box_details">
                                             <div className="project_developer_detail">
-                                                <Link to={`/${project.slugURL}`} className="project_name">
+                                                {/* <Link to={`/${project.slugURL}`} className="project_name"> */}
                                                     <h4 className="mb-0 project_name">{project.projectName}</h4>
-                                                </Link>
+                                                {/* </Link> */}
                                                 <h6 className="mb-0 project_price">
                                                     {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon'
                                                         ? `${project.projectPrice}`
@@ -612,9 +612,9 @@ function CommercialProjects() {
                                             </div>
                                             <div className="project_box_details">
                                                 <div className="project_developer_detail">
-                                                    <Link to={`/${project.slugURL}`} className="project_name">
+                                                    {/* <Link to={`/${project.slugURL}`} className="project_name"> */}
                                                         <h4 className="mb-0 project_name">{project.projectName}</h4>
-                                                    </Link>
+                                                    {/* </Link> */}
                                                     <h6 className="mb-0 project_price">
                                                         {project.projectPrice === 'On Request' || project.projectPrice === 'Revealing Soon'
                                                             ? `${project.projectPrice}`

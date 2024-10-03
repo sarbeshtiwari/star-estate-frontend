@@ -1,0 +1,70 @@
+
+/* Landing Page */
+.landing-wrapper{
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background-color: var(--body-color);
+    transition: all 500ms ease-in-out;
+}
+
+.landing-wrapper.vanish{
+    transform: translateY(-100%);
+}
+  
+.lp-desc-box{
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    text-align: justify; 
+    transform: translateX(-50%);
+    font-size: 0.875rem;
+    padding: 2rem;
+    background-color: rgb(255 255 255 / 70%);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 10px 2rem rgb(0 0 0 / 10%);
+}
+
+.lp-desc-box .scroller{
+    height: 140px;
+    padding-right: 1rem;
+}
+
+.lp-footer{
+    position: absolute;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.lp-footer span{
+    font-size: .875em;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid rgb(0 0 0 / 50%);
+}
+
+@media(max-width: 1400px){
+    .lp-desc-box{top: -100%; padding: 1rem;}
+    .load-animate-2{top: 1rem;
+        transition: all 800ms;}
+}
+/* Landing Page */
+
+@media(max-width: 600px){
+.lp-footer {
+    left: 0;
+    bottom: 0;
+    padding-bottom: 10px;
+    width: 100%;
+    transform: none;
+    font-size: 1.2rem;
+    background:linear-gradient(0deg, #ffffff, #ffffff7a);
+}
+}
