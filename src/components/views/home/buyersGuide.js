@@ -62,13 +62,13 @@ function BuyerGuide() {
                         >
                             How to Buy
                         </button>
-                        <button
+                        {/* <button
                             className={`toggleBtn buyerToggleBtn ${activeSection === 'financials' ? 'active' : ''}`}
                             onClick={() => handleToggle('financials')}
                             style={{ '--clr': 'var(--primary-color)' }}
                         >
                             Financials
-                        </button>
+                        </button> */}
                     </div>
 
                     <div className={`buyers-container toggleWrapper ${activeSection === 'what' ? 'show' : ''}`} id="toggleWrapper-what">

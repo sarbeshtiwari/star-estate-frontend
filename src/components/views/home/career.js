@@ -77,22 +77,13 @@ function Career() {
             <div className="w-100 padding">
                 <div className="container-lg">
                     <div className="heading mx-auto text-center">
-                        <h3 className="mb-0">We practice holistic growth approach competitively</h3>
+                        <h3 className="mb-0">We practice a holistic growth approach competitively</h3>
                     </div>
                     <p className='text-center'>Step into the ecosystem of the competitive ecosystem that nurtures professional growth aspirations with collaboration, and camaraderie moments. Our workplace embraces the synergy to learn, share, ideate, and build long-term and sturdy partnerships. We have a work culture at respects every voiced perception. Join us to experience mega-growth opportunities and embrace continuous growth.</p>
                     <p className='mb-0 text-center'>Our talent pool addresses real estate apprehensions and resolves investors’ asymmetrical problems across India. Our experienced, expert, and considerate team answers the searches for exclusive and elite immovable assets across segments and budgets.</p>
                 </div>
             </div>
-            <div className="w-100 position-relative overflow-hidden career-section1 bg-image">
-                <div className='career-random-text px-1 text-center text-white container-lg'>
-                    <p className='mb-0 h4 fw-light'>
-                        <i className='fa fa-quote-left'></i>
-                        Our talent pool address real estate apprehensions and resolve investors’ asymmetrical problems across India. Our experienced, expert, and considerate team answer search for exclusive and elite immovable assets across segments and budgets.
-                        <i className='fa fa-quote-right'></i>
-                    </p>
-                </div>
-                <img src='assets/images/Do-work-that-matters.jpg' alt='Career' />
-            </div>
+           
 
 
             {/* <div className="w-100 padding">
@@ -399,6 +390,16 @@ function Career() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="w-100 position-relative overflow-hidden career-section1 bg-image">
+                <div className='career-random-text px-1 text-center text-white container-lg'>
+                    <p className='mb-0 h4 fw-light'>
+                        <i className='fa fa-quote-left'></i>
+                        Our talent pool address real estate apprehensions and resolve investors’ asymmetrical problems across India. Our experienced, expert, and considerate team answer search for exclusive and elite immovable assets across segments and budgets.
+                        <i className='fa fa-quote-right'></i>
+                    </p>
+                </div>
+                <img src='assets/images/Do-work-that-matters.jpg' alt='Career' />
             </div>
         </div>
     )
