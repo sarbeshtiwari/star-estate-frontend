@@ -391,7 +391,7 @@ function Career() {
                     </div>
                 </div>
             </div>
-            <div className="w-100 position-relative overflow-hidden career-section1 bg-image">
+            {/* <div className="w-100 position-relative overflow-hidden career-section1 bg-image">
                 <div className='career-random-text px-1 text-center text-white container-lg'>
                     <p className='mb-0 h4 fw-light'>
                         <i className='fa fa-quote-left'></i>
@@ -400,7 +400,7 @@ function Career() {
                     </p>
                 </div>
                 <img src='assets/images/Do-work-that-matters.jpg' alt='Career' />
-            </div>
+            </div> */}
         </div>
     )
 }

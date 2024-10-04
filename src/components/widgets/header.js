@@ -24,7 +24,7 @@ const Header = () => {
         const getCities = async () => {
             try {
                 const data = await fetchCities();
-                const sortedData = data.sort((a, b) => a.location.trim().localeCompare(b.location.trim()));
+                const sortedData = data.filter(city => city.status === true).sort((a, b) => a.location.trim().localeCompare(b.location.trim()));
                 setCities(sortedData);
             } catch (error) {
                 console.error('Error fetching cities:', error);
@@ -63,7 +63,7 @@ const Header = () => {
         const fetchDeveloperDetails = async () => {
             try {
                 const response = await axiosInstance.get(`/developers/getDeveloper`);
-                const sortedData = response.data.sort((a, b) => a.developerName.trim().localeCompare(b.developerName.trim()));
+                const sortedData = response.data.filter(developer => developer.status === true).sort((a, b) => a.developerName.trim().localeCompare(b.developerName.trim()));
                 setDevelopers(sortedData);
             } catch (error) {
                 setErrorMessage(null);
@@ -203,7 +203,7 @@ const Header = () => {
                 <div className="bigMenuList">
                     <ul className="list-inline">
                         <li><Link to='/' onClick={closeMenu}>Home</Link></li>
-                        <li className="hasDropChild"><Link to='/about-us' onClick={closeMenu}>About Us</Link></li>
+                        <li><Link to='/about-us' onClick={closeMenu}>About Us</Link></li>
                         <li className="hasDropChild d-block d-sm-none">
                             <Link to="#">
                                 City <i className="fa fa-caret-down"></i>

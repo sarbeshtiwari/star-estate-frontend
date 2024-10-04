@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axiosInstance from '../views/utils/axiosInstance';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 function Builder() {
     const { slugURL } = useParams();
@@ -10,6 +10,7 @@ function Builder() {
     const [location, setLocation] = useState('');
     const [loadingProjects, setLoadingProjects] = useState(true); // Loading state for projects
     const [loadingDetails, setLoadingDetails] = useState(true); // Loading state for builder details
+    const navigate =useNavigate();
 
     const modalRef = useRef(null);
 
@@ -49,11 +50,15 @@ function Builder() {
         try {
             setLoadingDetails(true); // Start loading
             const response = await axiosInstance.get(`developers/getDeveloperBySlugURL/${slugURL}`);
-            if (response.data) {
+            if (response.data && response.data.status) {
                 setCityProjectsDetail(response.data);
                 setBuilderName(response.data.developerName || '');
             }
+            else {
+                navigate('/404NotFound');
+            }
         } catch (err) {
+            navigate('/404NotFound');
             // console.error('Unexpected error:', err);
         } finally {
             setLoadingDetails(false); // Stop loading

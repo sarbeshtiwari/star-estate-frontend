@@ -4,9 +4,34 @@ import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import './App.css';
 import axiosInstance from '../utils/axiosInstance';
+
+// Function to preload images
+const preloadImages = (imageUrls) => {
+    imageUrls.forEach((url) => {
+        const img = new Image();
+        img.src = url;
+    });
+};
+
+
 function AboutUs() {
     useEffect(() => {
-        var swiper3 = new Swiper(".awards-slider", {
+        // Preload images
+        const imageUrls = [
+            'assets/images/about-us.jpg',
+            'assets/images/about-us-m.jpg',
+            'assets/images/card-bg.jpg',
+            'assets/images/Mr-Vijay-Jain-MD-Star-Estate.jpg',
+            'assets/images/star/s.png',
+            'assets/images/star/t.png',
+            'assets/images/star/a.png',
+            'assets/images/star/r.png'
+           
+        ];
+        preloadImages(imageUrls);
+
+        // Initialize Swiper after images are preloaded
+        const swiper = new Swiper(".awards-slider", {
             slidesPerView: "auto",
             centeredSlides: true,
             loop: true,
@@ -29,6 +54,11 @@ function AboutUs() {
                 prevEl: ".swiper-button-prev",
             },
         });
+
+        // Cleanup on component unmount
+        return () => {
+            swiper.destroy();
+        };
     }, []);
     const [awards, setAwards] = useState([]);
     useEffect(() => {
@@ -78,11 +108,18 @@ function AboutUs() {
                     <div className="row gy-4">
                         <div className="col-xl-8 overview-box text-justify">
                             <div className="inner">
-                                <div className="heading mx-auto">
-                                    <h3 className="mb-0">Dreams don't turn into reality by chance it takes determination and courage to pursue them.</h3>
+                                <div className="">
+                                    <h3 className="">Dreams don't turn into reality by chance it takes determination and courage to pursue them.</h3>
                                 </div>
-                                <p>To realize dreams, it is important to accelerate the pedal of competence. Even after completing 12 successful years in the business of unlocking prosperity, we dream and dream it big. To appraise aspirational dreams in the real estate realm, we a team of assertive professionals confers tailored solutions to investors under the leadership of Mr. Vijay Jain, Founder and Managing Director, Star Estate.</p>
-                                <p className="mb-0">We work with the synergy to meet the pursuit of structural excellence in the property market across India. With experience and expertise in our armory, we shoot to attain goals. We don’t just exhibit concrete structures, but we unveil exclusive architectural masterpieces close to whims and fancies.</p>
+                                <p>When an artist creates a masterpiece, a writer pens a novel, an actor takes center stage, and a sculptor
+                                    chisels a statue, a sublime story unfolds with time and admiration. Similarly, in the realm of Mr. Vijay
+                                    Jain, we embarked on a journey in 2012 to curate India's most exceptional real estate investments.</p>
+                                <p className='mb-0'>We understand the aspirations of the new-age royals, thus, we assist them with handpicked bouquets
+                                    of premium properties to accomplish a regal lifestyle. For us, contented clients are the biggest
+                                    testaments as we sense accomplishment in unlocking the right real estate asset via the client-centric
+                                    work approach.</p>
+                                {/* <p>To realize dreams, it is important to accelerate the pedal of competence. Even after completing 12 successful years in the business of unlocking prosperity, we dream and dream it big. To appraise aspirational dreams in the real estate realm, we a team of assertive professionals confers tailored solutions to investors under the leadership of Mr. Vijay Jain, Founder and Managing Director, Star Estate.</p>
+                                <p className="mb-0">We work with the synergy to meet the pursuit of structural excellence in the property market across India. With experience and expertise in our armory, we shoot to attain goals. We don’t just exhibit concrete structures, but we unveil exclusive architectural masterpieces close to whims and fancies.</p> */}
                             </div>
                         </div>
                         <div className="col-xl-4 overview-stats">
@@ -129,8 +166,14 @@ function AboutUs() {
                             {/* <div className="heading mx-auto">
                                 <h3 className="mb-0"></h3>
                             </div> */}
-                            <p>Our in-house think tank streamlines promising practices to ascend performance in the competitive market to maintain the benchmark work standard. With real estate giants and investors counting on us, we are elated to be a catalyst of refined real estate investment experience provider across India.</p>
-                            <p className="mb-0">With exceptional talent as the backbone, we become more ambitious and delimit boundaries to ascertain benchmarks in the Indian property market.</p>
+                            <p>Our in-house group of experts streamlines promising practices to ascend performance in the
+                                competitive market to maintain the benchmark work standard. With real estate giants and investors
+                                counting on us, we are elated to be a catalyst of refined real estate investment experience provider
+                                across India.</p>
+                            <p className="mb-0">With passionate real estate professionals from top B-schools as the backbone, we are becoming more
+                                ambitious and are zestful to push boundaries leaving no stone unturned to establish a benchmark in
+                                the Indian property market.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -141,9 +184,10 @@ function AboutUs() {
                         <div className="col-lg-12 vmBox">
                             <div className="inner pl-lg-4">
                                 <div className="heading mx-auto"><h3 className='mb-0'>Vision</h3></div>
-                                <p className="mb-0 text-justify">For us, the sky is not the limit and global expansion is the next milestone we are working to
-                                    achieve in the future. From taking off in India to flying into international property markets
-                                    across continents is an aspiration and we are confident of nurturing it seamlessly.
+                                <p className="mb-0 text-justify">For us, the sky is not the limit. Our next milestone is global expansion, which we are working to achieve
+                                    in the coming years. From our Indian roots to global property market expansion across continents, we
+                                    confidently envision a seamless growth journey.
+
                                 </p>
                             </div>
                         </div>
@@ -158,10 +202,29 @@ function AboutUs() {
                         <i className="fa fa-quote-right"></i>
                         <div className="img-fluid"><img src="assets/images/Mr-Vijay-Jain-MD-Star-Estate.jpg" alt="Direct Vijay Jain" /></div>
                         <div className="director-content">
-                            <div className="director-quote">My parameter of success is rendering dreams to investors in a pragmatic way possible.</div>
+                            <p className="mb-0 text-justify">Mr. Vijay Jain is a visionary leader with the fortitude to make the real estate experience fantastic for
+                                every investor. His intuitive understanding of evolving demands in the property market attributable
+                                to diverse reasons is the secret to fulfilling promises.
+
+                            </p>
+                            <p className='mb-0 text justify'>He is the pillar of strength, inspiration, and a guiding light for the entire organisation which has a
+                                mammoth presence across India. Our go-getter approach paves the way to win against all the odds to
+                                overcome opportunities and set a benchmark of success in the market.
+                            </p>
+                            <p className="mb-0 text-justify">Mr. Vijay Jain's empathetic leadership inspires achievers and serves as a guiding light for our team.
+                                We are thankful to our stakeholders, employees, and clients for believing in us and being a part of our
+                                growth story.
+
+                            </p>
+                            <p className='mb-0 text justify'>Over the decade-long journey, we won many accolades that propel us to be more determined and
+                                disciplined to delivering real estate services while adhering to our uncompromising values.
+                            </p>
+                            {/* <div className="director-quote">Mr. Vijay Jain is a visionary leader with the fortitude to make the real estate experience fantastic for
+                                                                every investor. His intuitive understanding of evolving demands in the property market attributable
+                                                                    to diverse reasons is the secret to fulfilling promises. </div> */}
                             <div className="director-title">
                                 <h6>Mr. Vijay Jain<br />
-                                    <small>Founder and Managing Director, Star Estate</small></h6>
+                                    <small>Managing Director, Star Estate</small></h6>
                             </div>
                         </div>
                     </div>

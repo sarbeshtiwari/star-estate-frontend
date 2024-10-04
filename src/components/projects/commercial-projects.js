@@ -10,6 +10,7 @@ function CommercialProjects() {
     const [cityProjects, setCityProjects] = useState([]);
     const [cityProjectsDetail, setCityProjectsDetail] = useState([]);
     const [configurationDetails, setConfigurationDetails] = useState([]);
+    const [starRera, setStarRera] = useState([]);
     const [location, setLocation] = useState();
     const [breadcrumbName, setBreadcrumbName] = useState('');
     const { id } = useParams();
@@ -19,6 +20,7 @@ function CommercialProjects() {
         const fetchCommercialDetails = async () => {
             try {
                 const response = await axiosInstance.get(`/categories/getCategoryDetails/${id}`);
+
                 const filteredCommercialProjectsDetails = response.data.filter(award => award.status === true);
                 setCommercialDetails(filteredCommercialProjectsDetails ? filteredCommercialProjectsDetails : ' ');
             } catch (error) {
@@ -54,21 +56,38 @@ function CommercialProjects() {
         const fetchCityProjects = async () => {
             try {
                 const response = await axiosInstance.get(`city/getCityBySlugURL/${slugURL}`);
+                if (response.data.status === false) {
+                     navigate('/404NotFound');
+                }
                 if (response.data && response.data.data) {
                     setLocation(response.data.location || '');
                     setBreadcrumbName(response.data.location || '');
                     setCityProjects(response.data.data);
-                    // console.log('City Projects content:', response.data.data);
+                    fetchStarRera(response.data.state);
+                    // console.log('City Projects content:', response.data.state);
+
                 } else {
                     setCityProjects([]);
                     setLocation('');
                 }
             } catch (error) {
-                console.error('Error fetching projects:', error);
+                
+                // console.error('Error fetching City:', error);
                 setCityProjects([]);
                 setLocation('');
+                navigate('/404NotFound');
             }
         };
+
+        const fetchStarRera = async (state) => {
+            try {
+                const response = await axiosInstance.get(`starRera/getStarReraByState/${state}`);
+                setStarRera([response.data]);
+            } catch {
+                // console.log('Error fetching star rera details')
+            }
+        }
+
         const fetchCityProjectsDetail = async () => {
             try {
                 const response = await axiosInstance.get(`addProjects/getProjectByLocation/${slugURL}`);
@@ -91,7 +110,7 @@ function CommercialProjects() {
         const fetchNewProjects = async () => {
             try {
                 const response = await axiosInstance.get(`/addProjects/getNewProject`);
-                console.log(response.data);
+                // console.log(response.data);
                 const filteredCommercialProjects = response.data.filter(award => award.status === true);
                 if (filteredCommercialProjects.length > 0) {
                     const projectName = filteredCommercialProjects[0].property_type;
@@ -161,10 +180,15 @@ function CommercialProjects() {
             fetchCityProjectsDetail();
         }
         const fetch = async (id) => {
+            try{
             const response = await fetchProjectsByConfig(id);
+            console.log(response)
             setBreadcrumbName(id)
             setConfigurationDetails(response.cityData ? response.cityData : ' ')
-            setCommercialProjects(response.projects ? response.projects : ' ')
+            setCommercialProjects(response.projects ? response.projects : ' ')}
+            catch{
+                navigate('/404NotFound');
+            }
 
         }
         if (id !== 'commercial' && id !== 'residential' && id !== 'luxury' && id !== 'new-launch' && id !== undefined) {
@@ -636,8 +660,41 @@ function CommercialProjects() {
                             )
                         )}
                     </div>
+                    
                 </div>
             </div>
+            {slugURL ? (
+                <div className="w-100 padding bg-lightgray section-partner">
+                    <div className="container-lg d-flex justify-content-center align-items-center">
+                    <div className="col-md-6 partnerBox text-center" style={slugURL ? { borderRight: 'none' } : {}}>
+                            <div className="heading mb-0">
+                                <h6 className="text-uppercase mb-3">Marketing Partner</h6>
+                                <img src="/star-estate-react/assets/images/logo-starestate.png" className="partner-logo" alt="" />
+                            </div>
+                            <div className="partner-rera">
+                            {Array.isArray(starRera) && starRera.length > 0 ? (
+                                            starRera.map((data, index) => (
+                                                <div key={data._id} className="partner-rera-item">
+                                                    <p className="mb-0">
+                                                        <b>RERA No.: {data.reraNO}</b> <br />
+                                                        {data.reraWebsite}
+                                                    </p>
+                                                </div>
+                                            ))
+                                        ) : (
+                                <div className="partner-rera-item">
+                                    <p className="mb-0">
+                                        <b>RERA No.: UPRERAAGT10202</b> <br />
+                                        <a href="https://up-rera.in/Agents" target="_blank" rel="noopener noreferrer">
+                                            https://up-rera.in/Agents
+                                        </a>
+                                    </p>
+                                </div>)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ) : ('')}
         </div>
     )
 }

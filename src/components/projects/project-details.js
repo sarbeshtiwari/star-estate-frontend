@@ -17,6 +17,7 @@ import {
 import Footer from '../widgets/footer';
 import './responsive.css';
 import './style.css';
+import axios from 'axios';
 
 
 
@@ -141,6 +142,7 @@ function ProjectDetails() {
     const [details, setDetails] = useState([]);
     const [details2, setDetails2] = useState([]);
     const [bankDetails, setBankDetails] = useState([]);
+    const [starRera, setStarRera] = useState([]);
     const [Faqs, setFaqs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -164,6 +166,9 @@ function ProjectDetails() {
                     // Fetch similar projects if necessary
                     if (mainProject.showSimilarProperties === true) {
                         fetchProjectsByLocation(mainProject.cityLocation, mainProject.projectName);
+                        fetchStarRera(mainProject.state);
+                    }
+                    if (mainProject.status === false) {navigate('/404NotFound');
                     }
                 } else {
                     throw new Error('No project data found');
@@ -171,7 +176,7 @@ function ProjectDetails() {
             } catch (error) {
                 setError('Error fetching main project data');
                 navigate('/404NotFound');
-                
+
                 // console.error('Error fetching main project data:', error);
             }
         };
@@ -404,6 +409,17 @@ function ProjectDetails() {
             // console.error('Error fetching projects:', error);
         }
     };
+
+    // star rera details
+    const fetchStarRera = async (state) => {
+        try {
+            const response = await axiosInstance.get(`starRera/getStarReraByState/${state}`);
+            setStarRera([response.data]);
+        } catch {
+            // console.log('Error fetching star rera details')
+        }
+    }
+
 
     useEffect(() => {
         // Swiper initialization inside this effect, once loading stops
@@ -903,8 +919,8 @@ function ProjectDetails() {
                             className="w-100 padding position-relative overflow-hidden bg-image has-overlay section-amenities"
                             style={{
                                 backgroundImage: `url(${galleryData.some(data => data.amenityImage)
-                                        ? `${axiosInstance.defaults.globalURL}${galleryData.find(data => data.amenityImage).desktopImage}`
-                                        : '/star-estate-react/assets/images/walk_amen_back.webp' // Default image if no amenityImage is found
+                                    ? `${axiosInstance.defaults.globalURL}${galleryData.find(data => data.amenityImage).desktopImage}`
+                                    : '/star-estate-react/assets/images/walk_amen_back.webp' // Default image if no amenityImage is found
                                     })`
                             }}
                         >
@@ -1339,8 +1355,27 @@ function ProjectDetails() {
                                             <img src="/star-estate-react/assets/images/logo-starestate.png" className="partner-logo" alt="" />
                                         </div>
                                         <div className="partner-rera">
-                                            <p className="mb-0"><b>RERA No.: UPRERAAGT10202</b> <br />https://up-rera.in/Agents</p>
+                                            {Array.isArray(starRera) && starRera.length > 0 ? (
+                                                starRera.map((data, index) => (
+                                                    <div key={data._id} className="partner-rera-item">
+                                                        <p className="mb-0">
+                                                            <b>RERA No.: {data.reraNO}</b> <br />
+                                                            {data.reraWebsite}
+                                                        </p>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <div className="partner-rera-item">
+                                                    <p className="mb-0">
+                                                        <b>RERA No.: UPRERAAGT10202</b> <br />
+                                                        <a href="https://up-rera.in/Agents" target="_blank" rel="noopener noreferrer">
+                                                            https://up-rera.in/Agents
+                                                        </a>
+                                                    </p>
+                                                </div>
+                                            )}
                                         </div>
+
                                     </div>
                                     <div className="col-md-6 partnerBox">
                                         {mainData.map((data, index) => (
